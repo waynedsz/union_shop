@@ -4,28 +4,26 @@
 
 | Feature | Description | Marks (%) | Reference |
 |---------|-------------|-----------|-----------|
-| **BASIC FUNCTIONALITY (30% total)** |
-| Static Homepage | Homepage layout with hero section and static content | 5% | [Homepage](https://shop.upsu.net/) |
-| Navigation | Top navigation bar with menu items and routing | 5% | [Homepage](https://shop.upsu.net/) |
-| About Us Page | Static content page with company information | 3% | [About Us](https://shop.upsu.net/pages/about-us) |
-| Footer Content | Footer with social links, opening hours, and information | 4% | [Homepage](https://shop.upsu.net/) |
-| Collections Overview | Grid display of all collections (hardcoded data acceptable) | 4% | [Collections](https://shop.upsu.net/collections/) |
-| Collection Overview | Grid display of all items within each collection (hardcoded data acceptable) | 4% | [Collection Example](https://shop.upsu.net/collections/clothing-2) |
-| Product Display | Product page showing image, name, and price (hardcoded data acceptable) | 5% | [Product Exmple](https://shop.upsu.net/collections/clothing-2/products/classic-hoodie) |
-| **INTERMEDIATE FUNCTIONALITY (45% total)** |
-| Dynamic Collections | Collections overview populated from data models or services | 5% | [Collections](https://shop.upsu.net/collections/) |
-| Dynamic Product Listings | Product listings within collections populated from data models or services | 8% | [Collection Example](https://shop.upsu.net/collections/autumn-favourites) |
-| Individual Product Pages | Product detail pages with images, descriptions, and information | 10% | [Product Example](https://shop.upsu.net/collections/autumn-favourites/products/classic-sweatshirt-1) |
-| Shopping Cart UI | Add items to cart, view cart contents, cart interface | 8% | [Cart](https://shop.upsu.net/cart) |
-| Authentication UI | Login/signup forms and authentication interface (UI only) | 4% | [Sign In](https://shopify.com/authentication/22645997643/login) |
-| Sale Collection | Sale items with discount display and promotional messaging | 4% | [Sale Items](https://shop.upsu.net/collections/sale-items) |
-| Print Shack Forms UI | Dynamic form interface with changing input fields (UI only) | 3% | [Personalisation](https://shop.upsu.net/products/personalise-text) |
-| Image Gallery & Zoom | Product image thumbnails with hover zoom functionality | 3% | [Product Example](https://shop.upsu.net/collections/autumn-favourites/products/classic-sweatshirt-1) |
-| **ADVANCED FUNCTIONALITY (25% total)** |
-| Authentication System | Full user authentication, session management, account dashboard | 8% | [Account](https://shopify.com/22645997643/account/orders) |
-| Data Management | Product filtering, sorting, variants, dynamic data handling | 7% | [Autumn Favourites](https://shop.upsu.net/collections/autumn-favourites) |
+| **Basic (38%)** |
+| Static Homepage | Homepage layout and widgets with static content (hardcoded data acceptable, it does not have to be responsive so aim for mobile view) | 5% | [Homepage](https://shop.upsu.net/) |
+| Static Navbar | Top navigation bar with menu (the links do not have to work at this stage, it does not have to be responsive either so aim for mobile view) | 5% | [Homepage](https://shop.upsu.net/) |
+| About Us Page | Static about us page with company information (a separate page to the home page) | 4% | [About Us](https://shop.upsu.net/pages/about-us) |
+| Footer | Footer with dummy links and other information present in at least one of your pages | 3% | [Homepage](https://shop.upsu.net/) |
+| Dummy collections page | A separate page displaying various collections of products(hardcoded dummy data acceptable) | 3% | [Collections](https://shop.upsu.net/collections/) |
+| Dummy collection page | At least one separate page displaying all the products within one collection including the relevant dropdowns and filters (hardcoded dummy data acceptable, the widgets do not have to function at this stage) | 5% | [Collection Example](https://shop.upsu.net/collections/clothing-2) |
+| Dummy product | At least one separate product page showing details and images of a product alongside the relevant dropdowns, buttons and other widgets (hardcoded dummy data acceptable, , the widgets do not have to function at this stage) | 5% | [Product Exmple](https://shop.upsu.net/collections/clothing-2/products/classic-hoodie) |
+| Sale Collection | A separate page showing the products on sale with their discounted prices and other relevant widgets and promotional messaging (hardcoded dummy data acceptable, the widgets do not have to function at this stage) | 4% | [Sale Items](https://shop.upsu.net/collections/sale-items) |
+| Authentication UI | A separate page for login/signup (the widgets do not have to function at this stage) | 4% | [Sign In](https://shop.upsu.net/account/login) |
+| **Intermediate (34%)** |
+| Dynamic Collections | The collections page shoudl now be dynamically populated from data models or services. The sorting, filtering, pagination and other widgets must function also.  | 5% | [Collections](https://shop.upsu.net/collections/) |
+| Dynamic Product Listings | The page listing products for each collection should now be populated from data models or services. The sorting, filtering, pagination and other widgets must function also. | 8% | [Collection Example](https://shop.upsu.net/collections/autumn-favourites) |
+| Individual Product Pages | The images and information on individual product pages populated from data models or services. All the widgets (e.g., the dropdowns and counters) must also function based on the data/services. (The add to cart/buy buttons do not have to work yet.) | 8% | [Product Example](https://shop.upsu.net/collections/autumn-favourites/products/classic-sweatshirt-1) |
+| Shopping cart | The ability to add items to cart, view the cart in a separate page, and all the relevant cart functionality (the checkout buttons should place the order without handling real monetary transactions) | 10% | [Cart](https://shop.upsu.net/cart) |
+| Print Shack | Implement [the text-personalistion page](https://shop.upsu.net/products/personalise-text) in addition to [the associated about page](https://shop.upsu.net/pages/personalisation). The displayed form must dynamically updated based on the selected fields. | 3% | [Personalisation](https://shop.upsu.net/products/personalise-text) |
+| **Advanced (25% total)** |
+| Authentication system | Full user authentication and account management (you can implement this with other externatl authentications, not just Shop). Try signing up with the website and view the account dashboard to gather the full list of functionalities. | 8% | [Account](https://shopify.com/22645997643/account/orders) |
 | Cart Management | Full cart functionality - quantity editing, removal, calculations, persistence | 6% | [Cart](https://shop.upsu.net/cart) |
-| Search System | Complete search functionality with multiple access points and results | 4% | [Search](https://shop.upsu.net/search) |
+| Search System | Complete search functionality (the search button should also be available from both the navbar and the footer). | 4% | [Search](https://shop.upsu.net/search) |
 
 ## Additional Considerations
 
@@ -46,7 +44,11 @@
 - **Advanced Level**: Full functionality with proper data management and state handling
 
 ### Terminology
-**Hardcoded data*** = Data that is written directly into your Flutter code (e.g., creating List<Product> with fixed values in your Dart files) rather than loading from external sources like APIs, databases, or JSON files.
+**Hardcoded data*** = Data that is written directly into your Flutter code. These are fixed values rather than data loaded from external sources like APIs, databases, or other services.
+
+**Dummy data** = Data that is often hardcoded or (AI) generated for display or testing purposes. It's not meant to represent real-world data stored in your services.
+
+**Responsive** = Design that adapts to different screen sizes for example different layouts on mobile and desktop targets. For the purpose of this coursework, you are primarily developing a web application on mobile view.
 
 ### Mark Distribution Summary
 - **Basic (30%)**: Essential pages, navigation, static content (hardcoded data* acceptable)
