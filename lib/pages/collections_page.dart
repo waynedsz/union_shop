@@ -88,12 +88,7 @@ class _CollectionTile extends StatelessWidget {
   const _CollectionTile({required this.label});
 
   void _openCollection(BuildContext context) {
-    final routeName = '/collection/${label.toLowerCase().replaceAll(' ', '-')}';
-    Navigator.pushNamed(
-      context,
-      routeName,
-      arguments: {'collection': label},
-    );
+    Navigator.pushNamed(context, '/collection');
   }
 
   @override

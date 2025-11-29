@@ -94,12 +94,7 @@ class _ProductTile extends StatelessWidget {
   const _ProductTile({required this.name});
 
   void _openProduct(BuildContext context) {
-    final routeName = '/product/${name.toLowerCase().replaceAll(' ', '-')}';
-    Navigator.pushNamed(
-      context,
-      routeName,
-      arguments: {'productName': name},
-    );
+    Navigator.pushNamed(context, '/product');
   }
 
   @override
