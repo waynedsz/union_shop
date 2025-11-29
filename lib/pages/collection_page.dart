@@ -54,12 +54,48 @@ class _CollectionPageState extends State<CollectionPage> {
             ),
           ),
           const SizedBox(height: 16),
-          const Expanded(
-            child: Center(
-              child: Text('Welcome to the Collections Page!'),
+          Expanded(
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 12,
+              mainAxisSpacing: 12,
+              padding: const EdgeInsets.all(16),
+              children: const [
+                _ProductTile(name: 'Product 1'),
+                _ProductTile(name: 'Product 2'),
+                _ProductTile(name: 'Product 3'),
+                _ProductTile(name: 'Product 4'),
+              ],
             ),
           ),
         ],
+      ),
+    );
+  }
+}
+
+class _ProductTile extends StatelessWidget {
+  final String name;
+
+  const _ProductTile({required this.name});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(12),
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: Center(
+        child: Text(
+          name,
+          textAlign: TextAlign.center,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+        ),
       ),
     );
   }
