@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/widgets/header.dart';
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
@@ -19,6 +20,26 @@ class _CollectionsPageState extends State<CollectionsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
+              Header(
+                onNavigateHome: () {
+                  Navigator.pushNamedAndRemoveUntil(
+                      context, '/', (route) => false);
+                },
+                onSearchPressed: () {},
+                onAboutPressed: () {
+                  Navigator.pushNamed(context, '/about');
+                },
+                onLoginPressed: () {
+                  Navigator.pushNamed(context, '/login');
+                },
+                onCartPressed: () {
+                  Navigator.pushNamed(context, '/cart');
+                },
+                onMenuPressed: () {
+                  Navigator.pushNamed(context, '/collections');
+                },
+              ),
+              const SizedBox(height: 16),
               const Text(
                 "Collections",
                 textAlign: TextAlign.center,
