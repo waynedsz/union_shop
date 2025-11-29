@@ -82,22 +82,34 @@ class _CollectionTile extends StatelessWidget {
 
   const _CollectionTile({required this.label});
 
+  void _openCollection(BuildContext context) {
+    final routeName = '/collection/${label.toLowerCase().replaceAll(' ', '-')}';
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: {'collection': label},
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(color: Colors.grey.shade400),
-      ),
-      child: Text(
-        label,
-        style: const TextStyle(
-          fontSize: 16,
-          fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () => _openCollection(context),
+      child: Container(
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(8),
+          border: Border.all(color: Colors.grey.shade400),
         ),
-        textAlign: TextAlign.center,
+        child: Text(
+          label,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.w500,
+          ),
+          textAlign: TextAlign.center,
+        ),
       ),
     );
   }
