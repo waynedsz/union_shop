@@ -33,7 +33,7 @@ class _CollectionPageState extends State<CollectionPage> {
                 ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Center(
               child: DropdownButton<String>(
                 value: _selectedSort,
@@ -55,7 +55,7 @@ class _CollectionPageState extends State<CollectionPage> {
                 },
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 24),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
