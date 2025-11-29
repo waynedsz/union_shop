@@ -49,6 +49,15 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   fontWeight: FontWeight.w600,
                 ),
               ),
+              const SizedBox(height: 8),
+              const Text(
+                "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black54,
+                ),
+              ),
               const SizedBox(height: 20),
               Center(
                 child: DropdownButton<String>(
@@ -77,7 +86,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
               ),
               const SizedBox(height: 20),
               const Text(
-                "Collections Page",
+                "Browse Our Collections",
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
               ),
