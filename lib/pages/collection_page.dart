@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/header.dart';
+import 'package:union_shop/widgets/footer.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
@@ -101,6 +102,8 @@ class _CollectionPageState extends State<CollectionPage> {
                 ],
               ),
             ),
+            const SizedBox(height: 16),
+            const Footer(),
           ],
         ),
       ),
