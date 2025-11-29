@@ -13,70 +13,75 @@ class _CollectionsPageState extends State<CollectionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text(
-              "Collections",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 28,
-                fontWeight: FontWeight.w600,
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              const Text(
+                "Collections",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 28,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
-            const SizedBox(height: 16),
-            DropdownButton<String>(
-              value: _selectedSort,
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() {
-                  _selectedSort = value;
-                });
-              },
-              items: const [
-                DropdownMenuItem(
-                  value: 'Featured',
-                  child: Text('Sort by: Featured'),
+              const SizedBox(height: 20),
+              Center(
+                child: DropdownButton<String>(
+                  value: _selectedSort,
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() {
+                      _selectedSort = value;
+                    });
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'Featured',
+                      child: Text('Sort by: Featured'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Price: Low to High',
+                      child: Text('Sort by: Price (Low to High)'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Price: High to Low',
+                      child: Text('Sort by: Price (High to Low)'),
+                    ),
+                  ],
                 ),
-                DropdownMenuItem(
-                  value: 'Price: Low to High',
-                  child: Text('Sort by: Price (Low to High)'),
-                ),
-                DropdownMenuItem(
-                  value: 'Price: High to Low',
-                  child: Text('Sort by: Price (High to Low)'),
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            const Text(
-              "Collections Page",
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                mainAxisSpacing: 12,
-                crossAxisSpacing: 12,
-                padding: const EdgeInsets.all(16),
-                children: const [
-                  _CollectionTile(label: 'Hoodies'),
-                  _CollectionTile(label: 'T-Shirts'),
-                  _CollectionTile(label: 'Accessories'),
-                  _CollectionTile(label: 'New Arrivals'),
-                ],
               ),
-            ),
-          ],
+              const SizedBox(height: 20),
+              const Text(
+                "Collections Page",
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  mainAxisSpacing: 16,
+                  crossAxisSpacing: 16,
+                  padding: const EdgeInsets.only(top: 8),
+                  children: const [
+                    _CollectionTile(label: 'Hoodies'),
+                    _CollectionTile(label: 'T-Shirts'),
+                    _CollectionTile(label: 'Accessories'),
+                    _CollectionTile(label: 'New Arrivals'),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-// simple placeholder tile widget
 class _CollectionTile extends StatelessWidget {
   final String label;
 
