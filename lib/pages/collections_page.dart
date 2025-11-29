@@ -7,9 +7,23 @@ class CollectionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       body: Center(
-        child: Text(
-          "Collections Page",
-          style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: const [
+            Text(
+              "Collections",
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 28,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+            SizedBox(height: 16),
+            Text(
+              "Collections Page",
+              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+            ),
+          ],
         ),
       ),
     );
