@@ -54,8 +54,50 @@ class _CollectionsPageState extends State<CollectionsPage> {
               "Collections Page",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
+            const SizedBox(height: 16),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                mainAxisSpacing: 12,
+                crossAxisSpacing: 12,
+                padding: const EdgeInsets.all(16),
+                children: const [
+                  _CollectionTile(label: 'Hoodies'),
+                  _CollectionTile(label: 'T-Shirts'),
+                  _CollectionTile(label: 'Accessories'),
+                  _CollectionTile(label: 'New Arrivals'),
+                ],
+              ),
+            ),
           ],
         ),
+      ),
+    );
+  }
+}
+
+// simple placeholder tile widget
+class _CollectionTile extends StatelessWidget {
+  final String label;
+
+  const _CollectionTile({required this.label});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      alignment: Alignment.center,
+      decoration: BoxDecoration(
+        color: Colors.grey.shade200,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(color: Colors.grey.shade400),
+      ),
+      child: Text(
+        label,
+        style: const TextStyle(
+          fontSize: 16,
+          fontWeight: FontWeight.w500,
+        ),
+        textAlign: TextAlign.center,
       ),
     );
   }
