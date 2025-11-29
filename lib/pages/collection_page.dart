@@ -16,59 +16,62 @@ class _CollectionPageState extends State<CollectionPage> {
       appBar: AppBar(
         title: const Text('Collections'),
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.start,
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          const SizedBox(height: 24),
-          const Center(
-            child: Text(
-              'Collection Page',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w600,
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 24),
+            const Center(
+              child: Text(
+                'Collection Page',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Center(
-            child: DropdownButton<String>(
-              value: _selectedSort,
-              items: const [
-                DropdownMenuItem(
-                  value: 'Sort A-Z',
-                  child: Text('Sort A-Z'),
-                ),
-                DropdownMenuItem(
-                  value: 'Sort Z-A',
-                  child: Text('Sort Z-A'),
-                ),
-              ],
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() {
-                  _selectedSort = value;
-                });
-              },
+            const SizedBox(height: 16),
+            Center(
+              child: DropdownButton<String>(
+                value: _selectedSort,
+                items: const [
+                  DropdownMenuItem(
+                    value: 'Sort A-Z',
+                    child: Text('Sort A-Z'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Sort Z-A',
+                    child: Text('Sort Z-A'),
+                  ),
+                ],
+                onChanged: (value) {
+                  if (value == null) return;
+                  setState(() {
+                    _selectedSort = value;
+                  });
+                },
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          Expanded(
-            child: GridView.count(
-              crossAxisCount: 2,
-              crossAxisSpacing: 12,
-              mainAxisSpacing: 12,
-              padding: const EdgeInsets.all(16),
-              children: const [
-                _ProductTile(name: 'Product 1'),
-                _ProductTile(name: 'Product 2'),
-                _ProductTile(name: 'Product 3'),
-                _ProductTile(name: 'Product 4'),
-              ],
+            const SizedBox(height: 16),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                padding: const EdgeInsets.all(16),
+                children: const [
+                  _ProductTile(name: 'Product 1'),
+                  _ProductTile(name: 'Product 2'),
+                  _ProductTile(name: 'Product 3'),
+                  _ProductTile(name: 'Product 4'),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
