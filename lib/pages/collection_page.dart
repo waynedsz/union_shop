@@ -33,6 +33,17 @@ class _CollectionPageState extends State<CollectionPage> {
                 ),
               ),
             ),
+            const SizedBox(height: 8),
+            const Center(
+              child: Text(
+                'Browse a curated selection of products from this collection.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
             const SizedBox(height: 24),
             Center(
               child: DropdownButton<String>(
