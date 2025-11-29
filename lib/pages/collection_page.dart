@@ -79,21 +79,33 @@ class _ProductTile extends StatelessWidget {
 
   const _ProductTile({required this.name});
 
+  void _openProduct(BuildContext context) {
+    final routeName = '/product/${name.toLowerCase().replaceAll(' ', '-')}';
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: {'productName': name},
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: Colors.grey.shade200,
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: Center(
-        child: Text(
-          name,
-          textAlign: TextAlign.center,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
+    return GestureDetector(
+      onTap: () => _openProduct(context),
+      child: Container(
+        padding: const EdgeInsets.all(12),
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(8),
+        ),
+        child: Center(
+          child: Text(
+            name,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 16,
+              fontWeight: FontWeight.w500,
+            ),
           ),
         ),
       ),
