@@ -156,6 +156,7 @@ class _CollectionTile extends StatelessWidget {
       onTap: () => _openCollection(context),
       child: Container(
         alignment: Alignment.center,
+        padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
           borderRadius: BorderRadius.circular(12),
