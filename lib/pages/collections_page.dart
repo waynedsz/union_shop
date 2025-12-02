@@ -24,8 +24,6 @@ class _CollectionsPageState extends State<CollectionsPage> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              const SizedBox(height: 16),
-              const SizedBox(height: 8),
               const Text(
                 "Collections",
                 textAlign: TextAlign.center,
