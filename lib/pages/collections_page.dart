@@ -184,7 +184,8 @@ class _CollectionTile extends StatelessWidget {
               label,
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w500,
+                fontWeight: FontWeight.w600, // slightly heavier
+                letterSpacing: 0.3, // subtle spacing
               ),
               textAlign: TextAlign.center,
             ),
