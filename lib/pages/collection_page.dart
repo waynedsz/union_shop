@@ -23,6 +23,7 @@ class _CollectionPageState extends State<CollectionPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            const SizedBox(height: 16),
             const SizedBox(height: 24),
             const Center(
               child: Text(
