@@ -25,7 +25,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const Text(
-                "Collections",
+                "Collection Items",
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 28,
