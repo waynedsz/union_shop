@@ -71,15 +71,15 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   items: const [
                     DropdownMenuItem(
                       value: 'Featured',
-                      child: Text('Sort by: Featured'),
+                      child: Text('Sort collections: Featured'),
                     ),
                     DropdownMenuItem(
                       value: 'Price: Low to High',
-                      child: Text('Sort by: Price (Low to High)'),
+                      child: Text('Sort collections: Price (Low to High)'),
                     ),
                     DropdownMenuItem(
                       value: 'Price: High to Low',
-                      child: Text('Sort by: Price (High to Low)'),
+                      child: Text('Sort collections: Price (High to Low)'),
                     ),
                   ],
                 ),
