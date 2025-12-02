@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/footer.dart';
 
 class CollectionPage extends StatefulWidget {
@@ -18,100 +17,75 @@ class _CollectionPageState extends State<CollectionPage> {
       appBar: AppBar(
         title: const Text('Collections'),
       ),
-      body: Column(
-        children: [
-          Header(
-            onNavigateHome: () {
-              Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-            },
-            onSearchPressed: () {},
-            onAboutPressed: () {
-              Navigator.pushNamed(context, '/about');
-            },
-            onLoginPressed: () {
-              Navigator.pushNamed(context, '/login');
-            },
-            onCartPressed: () {
-              Navigator.pushNamed(context, '/cart');
-            },
-            onMenuPressed: () {
-              Navigator.pushNamed(context, '/collections');
-            },
-          ),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 24),
-                    const Center(
-                      child: Text(
-                        'Collection Page',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w600,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Center(
-                      child: Text(
-                        'Browse a curated selection of products from this collection.',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          fontSize: 14,
-                          color: Colors.black54,
-                        ),
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    Center(
-                      child: DropdownButton<String>(
-                        value: _selectedSort,
-                        items: const [
-                          DropdownMenuItem(
-                            value: 'Sort A-Z',
-                            child: Text('Sort A-Z'),
-                          ),
-                          DropdownMenuItem(
-                            value: 'Sort Z-A',
-                            child: Text('Sort Z-A'),
-                          ),
-                        ],
-                        onChanged: (value) {
-                          if (value == null) return;
-                          setState(() {
-                            _selectedSort = value;
-                          });
-                        },
-                      ),
-                    ),
-                    const SizedBox(height: 24),
-                    GridView.count(
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 12,
-                      mainAxisSpacing: 12,
-                      padding: const EdgeInsets.all(16),
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      children: const [
-                        _ProductTile(name: 'Product 1'),
-                        _ProductTile(name: 'Product 2'),
-                        _ProductTile(name: 'Product 3'),
-                        _ProductTile(name: 'Product 4'),
-                      ],
-                    ),
-                  ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            const SizedBox(height: 24),
+            const Center(
+              child: Text(
+                'Collection Page',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w600,
                 ),
               ),
             ),
-          ),
-          const Footer(),
-        ],
+            const SizedBox(height: 8),
+            const Center(
+              child: Text(
+                'Browse a curated selection of products from this collection.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 14,
+                  color: Colors.black54,
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            Center(
+              child: DropdownButton<String>(
+                value: _selectedSort,
+                items: const [
+                  DropdownMenuItem(
+                    value: 'Sort A-Z',
+                    child: Text('Sort A-Z'),
+                  ),
+                  DropdownMenuItem(
+                    value: 'Sort Z-A',
+                    child: Text('Sort Z-A'),
+                  ),
+                ],
+                onChanged: (value) {
+                  if (value == null) return;
+                  setState(() {
+                    _selectedSort = value;
+                  });
+                },
+              ),
+            ),
+            const SizedBox(height: 24),
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 12,
+                mainAxisSpacing: 12,
+                padding: const EdgeInsets.all(16),
+                children: const [
+                  _ProductTile(name: 'Product 1'),
+                  _ProductTile(name: 'Product 2'),
+                  _ProductTile(name: 'Product 3'),
+                  _ProductTile(name: 'Product 4'),
+                ],
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Footer(),
+          ],
+        ),
       ),
     );
   }
@@ -123,7 +97,12 @@ class _ProductTile extends StatelessWidget {
   const _ProductTile({required this.name});
 
   void _openProduct(BuildContext context) {
-    Navigator.pushNamed(context, '/product');
+    final routeName = '/product/${name.toLowerCase().replaceAll(' ', '-')}';
+    Navigator.pushNamed(
+      context,
+      routeName,
+      arguments: {'productName': name},
+    );
   }
 
   @override
