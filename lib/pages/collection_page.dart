@@ -115,7 +115,7 @@ class _ProductTile extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(8),
+          borderRadius: BorderRadius.circular(16), // Increased borderRadius
         ),
         child: Center(
           child: Text(
