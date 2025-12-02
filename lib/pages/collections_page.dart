@@ -133,13 +133,15 @@ class _CollectionTile extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(12),
+                borderRadius:
+                    BorderRadius.circular(16), // Increased border radius
                 border: Border.all(color: Colors.grey.shade300),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black.withOpacity(0.05),
-                    blurRadius: 6,
-                    offset: const Offset(0, 2),
+                    color: Colors.black
+                        .withOpacity(0.06), // Slightly stronger shadow
+                    blurRadius: 8, // Increased blur radius
+                    offset: const Offset(0, 3), // Adjusted offset
                   ),
                 ],
               ),
