@@ -182,9 +182,11 @@ class _CollectionTile extends StatelessWidget {
           const SizedBox(height: 8),
           Text(
             label,
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
             textAlign: TextAlign.center,
             style: const TextStyle(
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.w600,
               letterSpacing: 0.3,
             ),
