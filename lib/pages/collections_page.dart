@@ -135,6 +135,21 @@ class _CollectionTile extends StatelessWidget {
     Navigator.pushNamed(context, '/collection');
   }
 
+  String _imageForLabel() {
+    switch (label) {
+      case 'Hoodies':
+        return 'assets/images/collections/hoodies.png';
+      case 'T-Shirts':
+        return 'assets/images/collections/tshirts.png';
+      case 'Accessories':
+        return 'assets/images/collections/accessories.png';
+      case 'New Arrivals':
+        return 'assets/images/collections/new_arrivals.png';
+      default:
+        return 'assets/images/collections/default.png';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -153,13 +168,26 @@ class _CollectionTile extends StatelessWidget {
             ),
           ],
         ),
-        child: Text(
-          label,
-          style: const TextStyle(
-            fontSize: 16,
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            SizedBox(
+              height: 72,
+              child: Image.asset(
+                _imageForLabel(),
+                fit: BoxFit.contain,
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              style: const TextStyle(
+                fontSize: 16,
+                fontWeight: FontWeight.w500,
+              ),
+              textAlign: TextAlign.center,
+            ),
+          ],
         ),
       ),
     );
