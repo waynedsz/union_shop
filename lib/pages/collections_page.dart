@@ -89,6 +89,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                 ),
               ),
               const SizedBox(height: 16),
+              const SizedBox(height: 16),
               const Footer(),
             ],
           ),
@@ -133,15 +134,13 @@ class _CollectionTile extends StatelessWidget {
             child: Container(
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
-                borderRadius:
-                    BorderRadius.circular(16), // Increased border radius
+                borderRadius: BorderRadius.circular(16),
                 border: Border.all(color: Colors.grey.shade300),
                 boxShadow: [
                   BoxShadow(
-                    color: Colors.black
-                        .withOpacity(0.06), // Slightly stronger shadow
-                    blurRadius: 8, // Increased blur radius
-                    offset: const Offset(0, 3), // Adjusted offset
+                    color: Colors.black.withOpacity(0.06),
+                    blurRadius: 8,
+                    offset: const Offset(0, 3),
                   ),
                 ],
               ),
