@@ -160,7 +160,6 @@ class _CollectionTile extends StatelessWidget {
           AspectRatio(
             aspectRatio: 1,
             child: Container(
-              padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
                 color: Colors.grey.shade200,
                 borderRadius: BorderRadius.circular(12),
@@ -173,11 +172,10 @@ class _CollectionTile extends StatelessWidget {
                   ),
                 ],
               ),
+              clipBehavior: Clip.antiAlias,
               child: Image.asset(
                 _imageForLabel(),
                 fit: BoxFit.cover,
-                width: double.infinity,
-                height: double.infinity,
               ),
             ),
           ),
