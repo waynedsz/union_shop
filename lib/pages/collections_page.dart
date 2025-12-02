@@ -40,7 +40,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   Navigator.pushNamed(context, '/collections');
                 },
               ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 32),
               const Text(
                 "Collections",
                 textAlign: TextAlign.center,
