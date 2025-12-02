@@ -170,22 +170,25 @@ class _CollectionTile extends StatelessWidget {
           ],
         ),
         child: Column(
-          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            SizedBox(
-              height: 72,
-              child: Image.asset(
-                _imageForLabel(),
-                fit: BoxFit.contain,
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 8.0),
+                child: Image.asset(
+                  _imageForLabel(),
+                  fit: BoxFit.contain,
+                  width: double.infinity,
+                ),
               ),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 4),
             Text(
               label,
               style: const TextStyle(
                 fontSize: 16,
-                fontWeight: FontWeight.w600, // slightly heavier
-                letterSpacing: 0.3, // subtle spacing
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.3,
               ),
               textAlign: TextAlign.center,
             ),
