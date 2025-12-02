@@ -157,7 +157,8 @@ class _CollectionTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(
+          AspectRatio(
+            aspectRatio: 1,
             child: Container(
               padding: const EdgeInsets.all(12),
               decoration: BoxDecoration(
