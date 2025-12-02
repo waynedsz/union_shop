@@ -28,7 +28,7 @@ class _CollectionPageState extends State<CollectionPage> {
             const SizedBox(height: 24),
             const Center(
               child: Text(
-                'Collection Page',
+                'Selected Collection',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 24,
