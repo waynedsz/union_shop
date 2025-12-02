@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/header.dart';
 import 'package:union_shop/widgets/footer.dart';
 
 class CollectionsPage extends StatefulWidget {
@@ -15,43 +14,22 @@ class _CollectionsPageState extends State<CollectionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Collections'),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Header(
-                onNavigateHome: () {
-                  Navigator.pushNamedAndRemoveUntil(
-                      context, '/', (route) => false);
-                },
-                onSearchPressed: () {},
-                onAboutPressed: () {
-                  Navigator.pushNamed(context, '/about');
-                },
-                onLoginPressed: () {
-                  Navigator.pushNamed(context, '/login');
-                },
-                onCartPressed: () {
-                  Navigator.pushNamed(context, '/cart');
-                },
-                onMenuPressed: () {
-                  Navigator.pushNamed(context, '/collections');
-                },
-              ),
-              const SizedBox(height: 16),
-              Align(
-                alignment: Alignment.centerLeft,
-                child: IconButton(
-                  icon: const Icon(Icons.arrow_back),
-                  color: Colors.black87,
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                ),
-              ),
-              const SizedBox(height: 16),
+              const SizedBox(height: 8),
               const Text(
                 "Collections",
                 textAlign: TextAlign.center,
