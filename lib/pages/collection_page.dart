@@ -56,9 +56,6 @@ class _CollectionPageState extends State<CollectionPage> {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
-        onMenuPressed: () {
-          Navigator.pushNamed(context, '/collections');
-        },
       ),
       body: Column(
         children: [
