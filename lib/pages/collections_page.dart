@@ -39,9 +39,6 @@ class CollectionsPage extends StatelessWidget {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
-        onMenuPressed: () {
-          Navigator.pushNamed(context, '/collections');
-        },
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
