@@ -1,23 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/cart_state.dart';
+import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
-  const ProductPage({super.key});
+  final Product product;
+
+  const ProductPage({
+    Key? key,
+    required this.product,
+  }) : super(key: key);
+
+  static Route routeWithArgs(RouteSettings settings) {
+    final product = settings.arguments as Product;
+    return MaterialPageRoute(
+      settings: settings,
+      builder: (_) => ProductPage(product: product),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final args = ModalRoute.of(context)?.settings.arguments;
-
-    final Product product = args is Product
-        ? args
-        : Product(
-            name: 'Product',
-            price: 0.0,
-            imagePath: 'assets/images/placeholder.png',
-            description: 'A high-quality product from our collection.',
-          );
-
     return Scaffold(
       appBar: AppBar(
         title: Text(product.name),
@@ -86,6 +90,8 @@ class ProductPage extends StatelessWidget {
                     const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
+                        Provider.of<CartState>(context, listen: false)
+                            .addToCart(product);
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content: Text('${product.name} added to cart')),
