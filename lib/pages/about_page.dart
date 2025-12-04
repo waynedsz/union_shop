@@ -1,15 +1,35 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
+import 'package:union_shop/reusable_content/header.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
 
+  void navigateToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
+  void placeholderCallback() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('About Us'),
-        automaticallyImplyLeading: true,
+      appBar: Header(
+        onNavigateHome: () => navigateToHome(context),
+        onSearchPressed: placeholderCallback,
+        onAboutPressed: () {
+          // Already on About; you can keep this or no-op.
+          Navigator.pushNamed(context, '/about');
+        },
+        onLoginPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
+        onCartPressed: () {
+          Navigator.pushNamed(context, '/cart');
+        },
+        onMenuPressed: () {
+          Navigator.pushNamed(context, '/collections');
+        },
       ),
       body: Column(
         children: [
