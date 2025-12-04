@@ -39,6 +39,9 @@ class _CollectionPageState extends State<CollectionPage> {
         List<Product>.from(collectionProducts[collectionName] ?? []);
 
     products.sort((a, b) {
+      DateTime normalizeDate(DateTime? d) =>
+          d ?? DateTime.fromMillisecondsSinceEpoch(0);
+
       switch (_selectedSort) {
         case 'Sort Z-A':
           return b.name.toLowerCase().compareTo(a.name.toLowerCase());
@@ -47,12 +50,12 @@ class _CollectionPageState extends State<CollectionPage> {
         case 'Price: High → Low':
           return b.price.compareTo(a.price);
         case 'Newest First':
-          final aDate = a.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
-          final bDate = b.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+          final aDate = normalizeDate(a.createdAt);
+          final bDate = normalizeDate(b.createdAt);
           return bDate.compareTo(aDate);
         case 'Oldest First':
-          final aDate = a.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
-          final bDate = b.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+          final aDate = normalizeDate(a.createdAt);
+          final bDate = normalizeDate(b.createdAt);
           return aDate.compareTo(bDate);
         case 'Sort A-Z':
         default:
