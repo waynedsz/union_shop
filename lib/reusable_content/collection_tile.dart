@@ -29,7 +29,7 @@ class CollectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final double tileHeight = constraints.maxWidth * 1.2;
+        final double tileHeight = constraints.maxWidth * 0.9;
 
         return GestureDetector(
           onTap: onTap,
