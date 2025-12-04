@@ -1,4 +1,7 @@
 class Product {
+  // Default "oldest" date used when no createdAt is provided or parsing fails.
+  static const DateTime defaultCreatedAt = DateTime(2000);
+
   final String name;
   final String imagePath;
   final double price;
@@ -15,10 +18,10 @@ class Product {
     this.isOnSale = false,
     this.discountPercent,
     DateTime? createdAt,
-  }) : createdAt = createdAt ?? DateTime(2000);
+  }) : createdAt = createdAt ?? defaultCreatedAt;
 
   /// Always returns a non-null createdAt (defaults to year 2000).
-  DateTime get safeCreatedAt => createdAt ?? DateTime(2000);
+  DateTime get safeCreatedAt => createdAt ?? defaultCreatedAt;
 
   factory Product.fromMap(Map<String, dynamic> map) {
     final dynamic rawImage = map['imagePath'] ?? map['image'];
@@ -29,10 +32,10 @@ class Product {
         try {
           return DateTime.parse(value);
         } catch (_) {
-          return DateTime(2000);
+          return Product.defaultCreatedAt;
         }
       }
-      return DateTime(2000);
+      return Product.defaultCreatedAt;
     }
 
     return Product(
