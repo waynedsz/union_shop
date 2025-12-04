@@ -98,9 +98,26 @@ class Cart extends StatelessWidget {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       final cartItem = items[index];
-                      return CartItemTile(
-                        cartItem: cartItem,
-                        cartState: cartState,
+                      return AnimatedSwitcher(
+                        duration: const Duration(milliseconds: 250),
+                        transitionBuilder: (child, animation) {
+                          final offsetAnimation = Tween<Offset>(
+                            begin: const Offset(0, 0.05),
+                            end: Offset.zero,
+                          ).animate(animation);
+                          return FadeTransition(
+                            opacity: animation,
+                            child: SlideTransition(
+                              position: offsetAnimation,
+                              child: child,
+                            ),
+                          );
+                        },
+                        child: CartItemTile(
+                          key: ValueKey(cartItem.product),
+                          cartItem: cartItem,
+                          cartState: cartState,
+                        ),
                       );
                     },
                   ),
