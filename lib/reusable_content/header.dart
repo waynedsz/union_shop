@@ -62,53 +62,53 @@ class Header extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Flexible(
-                    child: SingleChildScrollView(
-                      scrollDirection: Axis.horizontal,
-                      child: Row(
-                        children: [
-                          TextButton(
-                            onPressed: onNavigateHome,
-                            child: const Text(
-                              'Home',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                  Expanded(
+                    child: Wrap(
+                      spacing: 8,
+                      runSpacing: 4,
+                      alignment: WrapAlignment.start,
+                      children: [
+                        TextButton(
+                          onPressed: onNavigateHome,
+                          child: const Text(
+                            'Home',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          TextButton(
-                            onPressed: onCartPressed,
-                            child: const Text(
-                              'Collections',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                        ),
+                        TextButton(
+                          onPressed: onCartPressed,
+                          child: const Text(
+                            'Collections',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          TextButton(
-                            onPressed: onAboutPressed,
-                            child: const Text(
-                              'About',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                        ),
+                        TextButton(
+                          onPressed: onAboutPressed,
+                          child: const Text(
+                            'About',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                          TextButton(
-                            onPressed: onCartPressed,
-                            child: const Text(
-                              'Sale',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
+                        ),
+                        TextButton(
+                          onPressed: onCartPressed,
+                          child: const Text(
+                            'Sale',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                   const Spacer(),
