@@ -25,8 +25,6 @@ class _CollectionsPageState extends State<CollectionsPage> {
         title: const Text('Collections'),
         automaticallyImplyLeading: true,
       ),
-
-      // ⭐ FIX: LayoutBuilder + ConstrainedBox removes ALL pixel overflow
       body: LayoutBuilder(
         builder: (context, constraints) {
           return SingleChildScrollView(
@@ -45,9 +43,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-
                     const SizedBox(height: 8),
-
                     const Text(
                       "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
                       textAlign: TextAlign.center,
@@ -56,9 +52,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         color: Colors.black54,
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
                     const Text(
                       "Browse Our Collections",
                       textAlign: TextAlign.center,
@@ -67,10 +61,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-
                     const SizedBox(height: 20),
-
-                    // ⭐ Grid stays scroll-free but expands correctly
                     GridView.count(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
@@ -96,9 +87,7 @@ class _CollectionsPageState extends State<CollectionsPage> {
                         ),
                       ],
                     ),
-
                     const SizedBox(height: 20),
-
                     const Footer(),
                   ],
                 ),

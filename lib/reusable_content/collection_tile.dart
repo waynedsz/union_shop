@@ -29,10 +29,8 @@ class CollectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-
-      // ⭐ THIS WRAPS THE WHOLE TILE IN A SAFE HEIGHT RATIO — NO OVERFLOW EVER
       child: AspectRatio(
-        aspectRatio: 0.75, // adjust between 0.7–0.85 depending on your images
+        aspectRatio: 0.75,
         child: Column(
           children: [
             Expanded(
