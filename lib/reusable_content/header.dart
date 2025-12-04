@@ -62,7 +62,7 @@ class Header extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(width: 12),
-                  Expanded(
+                  Flexible(
                     child: SingleChildScrollView(
                       scrollDirection: Axis.horizontal,
                       child: Row(
