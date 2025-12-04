@@ -5,9 +5,16 @@ import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/cart_item_tile.dart';
 import 'package:union_shop/reusable_content/cart_bottom_bar.dart';
 import 'package:union_shop/reusable_content/empty_cart_view.dart';
+import 'package:union_shop/reusable_content/header.dart';
 
-class Cart extends StatelessWidget {
-  const Cart({Key? key}) : super(key: key);
+class CartPage extends StatelessWidget {
+  const CartPage({super.key});
+
+  void navigateToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
+  void placeholderCallback() {}
 
   @override
   Widget build(BuildContext context) {
@@ -19,15 +26,22 @@ class Cart extends StatelessWidget {
     );
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Cart'),
-        actions: [
-          if (items.isNotEmpty)
-            IconButton(
-              icon: const Icon(Icons.delete_outline),
-              onPressed: cartState.clearCart,
-            ),
-        ],
+      appBar: Header(
+        onNavigateHome: () => navigateToHome(context),
+        onSearchPressed: placeholderCallback,
+        onAboutPressed: () {
+          Navigator.pushNamed(context, '/about');
+        },
+        onLoginPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
+        onCartPressed: () {
+          // Already on cart; keep or no-op as you like.
+          Navigator.pushNamed(context, '/cart');
+        },
+        onMenuPressed: () {
+          Navigator.pushNamed(context, '/collections');
+        },
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
