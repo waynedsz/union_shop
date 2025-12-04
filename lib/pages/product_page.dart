@@ -8,110 +8,130 @@ class ProductPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
-    final Product product;
-    if (rawArgs is Product) {
-      product = rawArgs;
-    } else {
-      product = Product(
-        name: 'Unknown Product',
-        imagePath: 'assets/images/placeholder.png',
-        price: 0.00,
-        description: 'No description available.',
+
+    // Ensure we always have a Product object
+    if (rawArgs is! Product) {
+      return const Scaffold(
+        body: Center(
+          child: Text("Error: Product not found"),
+        ),
       );
     }
+
+    final Product product = rawArgs;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(product.name),
-        automaticallyImplyLeading: true,
       ),
       body: Column(
         children: [
           Expanded(
             child: SingleChildScrollView(
+              padding: const EdgeInsets.all(20),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Container(
-                    padding: const EdgeInsets.all(24),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Container(
-                          height: 300,
-                          width: double.infinity,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(12),
-                            color: Colors.grey[200],
-                          ),
-                          child: ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Hero(
-                              tag: product.name,
-                              child: Image.asset(
-                                product.imagePath,
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
+                  /// PRODUCT IMAGE — Responsive and polished
+                  Hero(
+                    tag: product.name,
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: AspectRatio(
+                        aspectRatio: 1, // Perfect square; no cropping
+                        child: Image.asset(
+                          product.imagePath,
+                          fit: BoxFit.contain, // Shows the full image cleanly
                         ),
-                        const SizedBox(height: 20),
-                        Text(
-                          product.name,
-                          style: const TextStyle(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          '£${product.price.toStringAsFixed(2)}',
-                          style: const TextStyle(
-                            fontSize: 24,
-                            color: Color(0xFF4d2963),
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 24),
-                        const Text(
-                          "Description",
-                          style: TextStyle(
-                            fontSize: 20,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          product.description,
-                          style: const TextStyle(
-                            fontSize: 16,
-                            color: Colors.black54,
-                            height: 1.5,
-                          ),
-                        ),
-                        const SizedBox(height: 28),
-                        ElevatedButton(
-                          onPressed: () {
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content: Text("${product.name} added to cart"),
-                              ),
-                            );
-                          },
-                          style: ElevatedButton.styleFrom(
-                            padding: const EdgeInsets.symmetric(
-                              vertical: 14,
-                              horizontal: 32,
-                            ),
-                          ),
-                          child: const Text("Add to Cart"),
-                        ),
-                      ],
+                      ),
                     ),
                   ),
+
+                  const SizedBox(height: 20),
+
+                  /// PRODUCT NAME
+                  Text(
+                    product.name,
+                    style: const TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  /// PRICE
+                  Text(
+                    "£${product.price.toStringAsFixed(2)}",
+                    style: const TextStyle(
+                      fontSize: 22,
+                      fontWeight: FontWeight.bold,
+                      color: Color(0xFF4d2963),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
+
+                  /// DESCRIPTION TITLE
+                  const Text(
+                    "Description",
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
+
+                  const SizedBox(height: 10),
+
+                  /// DESCRIPTION CONTENT
+                  Text(
+                    product.description,
+                    style: const TextStyle(
+                      fontSize: 15,
+                      height: 1.5,
+                      color: Colors.black87,
+                    ),
+                  ),
+
+                  const SizedBox(height: 25),
+
+                  /// ADD TO CART BUTTON
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFF4d2963),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                      ),
+                      onPressed: () {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(
+                            content: Text("${product.name} added to cart"),
+                            duration: const Duration(seconds: 2),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        "Add to Cart",
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 20),
                 ],
               ),
             ),
           ),
+
+          /// FOOTER
           const Footer(),
         ],
       ),
