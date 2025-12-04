@@ -72,6 +72,14 @@ class _CollectionPageState extends State<CollectionPage> {
             items: const [
               DropdownMenuItem(value: 'Sort A-Z', child: Text('Sort A-Z')),
               DropdownMenuItem(value: 'Sort Z-A', child: Text('Sort Z-A')),
+              DropdownMenuItem(
+                  value: 'Price: Low → High', child: Text('Price: Low → High')),
+              DropdownMenuItem(
+                  value: 'Price: High → Low', child: Text('Price: High → Low')),
+              DropdownMenuItem(
+                  value: 'Newest First', child: Text('Newest First')),
+              DropdownMenuItem(
+                  value: 'Oldest First', child: Text('Oldest First')),
             ],
             onChanged: (value) {
               if (value == null) return;
