@@ -2,15 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/collection_tile.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
+import 'package:union_shop/reusable_content/header.dart';
 
-class CollectionsPage extends StatefulWidget {
+class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
 
-  @override
-  State<CollectionsPage> createState() => _CollectionsPageState();
-}
+  void navigateToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
 
-class _CollectionsPageState extends State<CollectionsPage> {
+  void placeholderCallback() {}
+
   void _open(BuildContext context, String label) {
     Navigator.pushNamed(
       context,
@@ -25,9 +27,21 @@ class _CollectionsPageState extends State<CollectionsPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Collections'),
-        automaticallyImplyLeading: true,
+      appBar: Header(
+        onNavigateHome: () => navigateToHome(context),
+        onSearchPressed: placeholderCallback,
+        onAboutPressed: () {
+          Navigator.pushNamed(context, '/about');
+        },
+        onLoginPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
+        onCartPressed: () {
+          Navigator.pushNamed(context, '/cart');
+        },
+        onMenuPressed: () {
+          Navigator.pushNamed(context, '/collections');
+        },
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
