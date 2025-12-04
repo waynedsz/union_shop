@@ -9,7 +9,6 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
 
-    // Ensure we always have a Product object
     if (rawArgs is! Product) {
       return const Scaffold(
         body: Center(
@@ -32,24 +31,20 @@ class ProductPage extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  /// PRODUCT IMAGE — Responsive and polished
                   Hero(
                     tag: product.name,
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(12),
                       child: AspectRatio(
-                        aspectRatio: 1, // Perfect square; no cropping
+                        aspectRatio: 1,
                         child: Image.asset(
                           product.imagePath,
-                          fit: BoxFit.contain, // Shows the full image cleanly
+                          fit: BoxFit.contain,
                         ),
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
-
-                  /// PRODUCT NAME
                   Text(
                     product.name,
                     style: const TextStyle(
@@ -57,10 +52,7 @@ class ProductPage extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
-                  /// PRICE
                   Text(
                     "£${product.price.toStringAsFixed(2)}",
                     style: const TextStyle(
@@ -69,10 +61,7 @@ class ProductPage extends StatelessWidget {
                       color: Color(0xFF4d2963),
                     ),
                   ),
-
                   const SizedBox(height: 20),
-
-                  /// DESCRIPTION TITLE
                   const Text(
                     "Description",
                     style: TextStyle(
@@ -80,10 +69,7 @@ class ProductPage extends StatelessWidget {
                       fontWeight: FontWeight.w600,
                     ),
                   ),
-
                   const SizedBox(height: 10),
-
-                  /// DESCRIPTION CONTENT
                   Text(
                     product.description,
                     style: const TextStyle(
@@ -92,10 +78,7 @@ class ProductPage extends StatelessWidget {
                       color: Colors.black87,
                     ),
                   ),
-
                   const SizedBox(height: 25),
-
-                  /// ADD TO CART BUTTON
                   SizedBox(
                     width: double.infinity,
                     child: ElevatedButton(
@@ -124,14 +107,11 @@ class ProductPage extends StatelessWidget {
                       ),
                     ),
                   ),
-
                   const SizedBox(height: 20),
                 ],
               ),
             ),
           ),
-
-          /// FOOTER
           const Footer(),
         ],
       ),

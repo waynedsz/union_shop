@@ -34,7 +34,7 @@ class ProductTile extends StatelessWidget {
                         tag: product.name,
                         child: Image.asset(
                           product.imagePath,
-                          fit: BoxFit.contain,
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
