@@ -9,9 +9,6 @@ class ProductTile extends StatelessWidget {
     super.key,
     required this.product,
     required this.onTap,
-    required name,
-    required imagePath,
-    required price,
   });
 
   @override
@@ -64,7 +61,7 @@ class ProductTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
-              '\$${product.price.toStringAsFixed(2)}',
+              '£${product.price.toStringAsFixed(2)}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 12,
