@@ -43,13 +43,6 @@ class _CollectionPageState extends State<CollectionPage> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            Align(
-              alignment: Alignment.centerLeft,
-              child: TextButton(
-                onPressed: () => Navigator.pop(context),
-                child: const Text('Back to Collections'),
-              ),
-            ),
             const SizedBox(height: 16),
             const SizedBox(height: 24),
             Center(
