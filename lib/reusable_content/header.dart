@@ -36,23 +36,27 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
             padding: const EdgeInsets.symmetric(vertical: 8),
             color: const Color(0xFF4d2963),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                if (canGoBack)
-                  IconButton(
-                    icon: const Icon(Icons.arrow_back, color: Colors.white),
-                    onPressed: () {
-                      Navigator.maybePop(context);
-                    },
-                  ),
-                const Expanded(
+                SizedBox(
+                  width: 48,
+                  child: canGoBack
+                      ? IconButton(
+                          icon:
+                              const Icon(Icons.arrow_back, color: Colors.white),
+                          onPressed: () {
+                            Navigator.maybePop(context);
+                          },
+                        )
+                      : const SizedBox.shrink(),
+                ),
+                Expanded(
                   child: Text(
-                    'Welcome to the Union Shop',
+                    title,
                     textAlign: TextAlign.center,
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: const TextStyle(color: Colors.white, fontSize: 16),
                   ),
                 ),
-                const SizedBox(width: 48), // Space for the back button
+                const SizedBox(width: 48),
               ],
             ),
           ),
