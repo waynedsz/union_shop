@@ -19,7 +19,7 @@ class ProductPage extends StatelessWidget {
     final String productName =
         args?['productName'] as String? ?? 'Placeholder Product Name';
     final String imagePath = args?['imagePath'] as String? ??
-        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
+        'assets/images/placeholder_product.png';
     final String price = args?['price'] as String? ?? '£15.00';
 
     return Scaffold(
@@ -50,32 +50,9 @@ class ProductPage extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.network(
+                            child: Image.asset(
                               imagePath,
                               fit: BoxFit.cover,
-                              errorBuilder: (context, error, stackTrace) {
-                                return Container(
-                                  color: Colors.grey[300],
-                                  child: const Center(
-                                    child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        Icon(
-                                          Icons.image_not_supported,
-                                          size: 64,
-                                          color: Colors.grey,
-                                        ),
-                                        SizedBox(height: 8),
-                                        Text(
-                                          'Image unavailable',
-                                          style: TextStyle(color: Colors.grey),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
                             ),
                           ),
                         ),
