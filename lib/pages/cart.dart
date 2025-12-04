@@ -40,6 +40,7 @@ class Cart extends StatelessWidget {
                     itemBuilder: (context, index) {
                       final cartItem = items[index];
                       final product = cartItem.product;
+                      final itemTotal = product.price * cartItem.quantity;
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
@@ -81,6 +82,14 @@ class Cart extends StatelessWidget {
                                         ),
                                       ),
                                       const SizedBox(height: 4),
+                                      Text(
+                                        '£${product.price.toStringAsFixed(2)} x ${cartItem.quantity} = £${itemTotal.toStringAsFixed(2)}',
+                                        style: const TextStyle(
+                                          fontSize: 12,
+                                          color: Colors.grey,
+                                        ),
+                                      ),
+                                      const SizedBox(height: 2),
                                       Text(
                                         '£${product.price.toStringAsFixed(2)}',
                                         style: const TextStyle(
