@@ -7,6 +7,7 @@ import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
 import 'package:union_shop/reusable_content/sale_sort_helper.dart';
 import 'package:union_shop/reusable_content/sale_sort_bar.dart';
+import 'package:union_shop/reusable_content/sale_grid.dart';
 
 class SaleCollection extends StatefulWidget {
   const SaleCollection({Key? key}) : super(key: key);
@@ -86,37 +87,9 @@ class _SaleCollectionState extends State<SaleCollection>
                   )
                 : Padding(
                     padding: const EdgeInsets.all(16.0),
-                    child: LayoutBuilder(
-                      builder: (context, constraints) {
-                        final crossAxisCount =
-                            constraints.maxWidth > 700 ? 3 : 2;
-                        return GridView.builder(
-                          itemCount: saleProducts.length,
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: crossAxisCount,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 0.7,
-                          ),
-                          itemBuilder: (context, index) {
-                            final product = saleProducts[index];
-                            return FadeTransition(
-                              opacity: _fadeAnimation,
-                              child: ProductTile(
-                                product: product,
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    '/product',
-                                    arguments: product,
-                                  );
-                                },
-                              ),
-                            );
-                          },
-                        );
-                      },
+                    child: SaleGrid(
+                      saleProducts: saleProducts,
+                      fadeAnimation: _fadeAnimation,
                     ),
                   ),
           ),
