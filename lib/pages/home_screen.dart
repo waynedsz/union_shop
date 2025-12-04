@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
+import 'package:union_shop/reusable_content/navigation_controller.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
-
-  void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  }
 
   void placeholderCallback() {}
 
@@ -14,17 +11,11 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
-        onNavigateHome: () => navigateToHome(context),
+        onNavigateHome: () => NavigationController.goHome(context),
         onSearchPressed: placeholderCallback,
-        onAboutPressed: () {
-          Navigator.pushNamed(context, '/about');
-        },
-        onLoginPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-        onCartPressed: () {
-          Navigator.pushNamed(context, '/cart');
-        },
+        onAboutPressed: () => NavigationController.goAbout(context),
+        onLoginPressed: () => NavigationController.goLogin(context),
+        onCartPressed: () => NavigationController.goCart(context),
       ),
       body: SingleChildScrollView(
         child: Column(
