@@ -7,6 +7,7 @@ final Map<String, List<Product>> collectionProducts = {
       imagePath: 'assets/images/products/hoodie_1.png',
       price: 35.00,
       description: 'A soft, premium purple hoodie perfect for daily wear.',
+      isOnSale: true,
     ),
     Product(
       name: 'White Hoodie',
@@ -27,6 +28,7 @@ final Map<String, List<Product>> collectionProducts = {
       imagePath: 'assets/images/products/tshirt_2.png',
       price: 18.00,
       description: 'A grey t-shirt with a minimalist crest design.',
+      isOnSale: true,
     ),
   ],
   'Accessories': [
@@ -41,6 +43,7 @@ final Map<String, List<Product>> collectionProducts = {
       imagePath: 'assets/images/products/accessory_beanie.png',
       price: 12.00,
       description: 'A warm knitted beanie ideal for cold days.',
+      isOnSale: true,
     ),
   ],
   'New Arrivals': [
@@ -55,6 +58,7 @@ final Map<String, List<Product>> collectionProducts = {
       imagePath: 'assets/images/products/water_bottle.png',
       price: 14.00,
       description: 'A reusable bottle to stay hydrated on campus.',
+      isOnSale: true,
     ),
   ],
 };
