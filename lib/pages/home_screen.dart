@@ -46,7 +46,7 @@ class _HomeScreenState extends State<HomeScreen>
 
   @override
   Widget build(BuildContext context) {
-    final showcaseProducts = _buildShowcaseProducts();
+    _buildShowcaseProducts();
 
     return Scaffold(
       appBar: Header(

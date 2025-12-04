@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/cart_state.dart';
-import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/cart_item.dart';
 
 class CartItemTile extends StatelessWidget {
