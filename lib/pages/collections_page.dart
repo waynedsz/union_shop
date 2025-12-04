@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/footer.dart';
-import 'package:union_shop/widgets/collection_tile.dart';
+import 'package:union_shop/reusable_content/footer.dart';
+import 'package:union_shop/reusable_content/collection_tile.dart';
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});

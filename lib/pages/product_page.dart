@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/reusable_content/footer.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
