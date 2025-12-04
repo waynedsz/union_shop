@@ -4,7 +4,6 @@ import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
 import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
-import 'package:union_shop/reusable_content/product_widgets/product_tile.dart';
 import 'package:union_shop/reusable_content/sale_widgets/sale_sort_helper.dart';
 import 'package:union_shop/reusable_content/sale_widgets/sale_sort_bar.dart';
 import 'package:union_shop/reusable_content/sale_widgets/sale_grid.dart';
