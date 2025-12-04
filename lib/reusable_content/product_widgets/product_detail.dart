@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/product_widgets/product.dart';
 
 class ProductDetail extends StatelessWidget {
   final Product product;

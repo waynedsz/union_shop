@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/reusable_content/product_data.dart';
+import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
 
 class FeaturedCollections extends StatelessWidget {
   const FeaturedCollections({super.key});

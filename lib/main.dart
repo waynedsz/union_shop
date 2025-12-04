@@ -11,7 +11,7 @@ import 'package:union_shop/pages/login_page.dart';
 import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/search_page.dart';
-import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/product_widgets/product.dart';
 
 void main() {
   runApp(

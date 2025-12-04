@@ -1,4 +1,4 @@
-import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/product_widgets/product.dart';
 
 List<Product> sortSaleProducts(List<Product> products, String sortOption) {
   final sorted = List<Product>.from(products);

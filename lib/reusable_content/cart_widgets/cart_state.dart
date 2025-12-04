@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:union_shop/reusable_content/cart_widgets/cart_item.dart';
-import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/product_widgets/product.dart';
 
 class CartState extends ChangeNotifier {
   final List<CartItem> items = [];

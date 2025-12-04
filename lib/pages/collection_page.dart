@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/header.dart';
-import 'package:union_shop/reusable_content/product_data.dart';
-import 'package:union_shop/reusable_content/product_tile.dart';
-import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
+import 'package:union_shop/reusable_content/product_widgets/product_tile.dart';
+import 'package:union_shop/reusable_content/product_widgets/product.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
