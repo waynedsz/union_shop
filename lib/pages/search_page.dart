@@ -5,6 +5,7 @@ import 'package:union_shop/reusable_content/product_widgets/product.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 import 'package:union_shop/reusable_content/search_widgets/search_empty_state.dart';
+import 'package:union_shop/reusable_content/search_widgets/search_results_grid.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -123,26 +124,13 @@ class _SearchPageState extends State<SearchPage>
                       opacity: _fadeAnimation,
                       child: ScaleTransition(
                         scale: _scaleAnimation,
-                        child: GridView.builder(
-                          itemCount: filteredProducts.length,
-                          gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
-                            childAspectRatio: 0.7,
-                          ),
-                          itemBuilder: (context, index) {
-                            final product = filteredProducts[index];
-                            return ProductTile(
-                              product: product,
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/product',
-                                  arguments: product,
-                                );
-                              },
+                        child: SearchResultsGrid(
+                          products: filteredProducts,
+                          onProductTap: (product) {
+                            Navigator.pushNamed(
+                              context,
+                              '/product',
+                              arguments: product,
                             );
                           },
                         ),
