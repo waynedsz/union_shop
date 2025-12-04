@@ -73,6 +73,7 @@ class _SearchPageState extends State<SearchPage> {
                         onPressed: _clearSearch,
                       ),
               ),
+              onSubmitted: (_) => _onQueryChanged(),
             ),
           ),
           Expanded(
