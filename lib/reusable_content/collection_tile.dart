@@ -27,44 +27,38 @@ class CollectionTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onTap,
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade300),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final double tileHeight = constraints.maxWidth * 1.2;
+
+        return GestureDetector(
+          onTap: onTap,
+          child: Column(
+            children: [
+              Container(
+                height: tileHeight,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(16),
+                ),
+                clipBehavior: Clip.antiAlias,
+                child: Image.asset(
+                  _imageForLabel(),
+                  fit: BoxFit.cover,
+                ),
               ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                _imageForLabel(),
-                fit: BoxFit.cover,
+              const SizedBox(height: 10),
+              Text(
+                label,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                ),
               ),
-            ),
+            ],
           ),
-          const SizedBox(height: 8),
-          Text(
-            label,
-            maxLines: 1,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-            ),
-          ),
-        ],
-      ),
+        );
+      },
     );
   }
 }

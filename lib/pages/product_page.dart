@@ -7,17 +7,16 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
+    final args = ModalRoute.of(context)?.settings.arguments;
 
-    if (rawArgs is! Product) {
-      return const Scaffold(
-        body: Center(
-          child: Text("Error: Product not found"),
-        ),
-      );
-    }
-
-    final Product product = rawArgs;
+    final Product product = args is Product
+        ? args
+        : Product(
+            name: 'Product',
+            price: 0.0,
+            imagePath: 'assets/images/placeholder.png',
+            description: 'A high-quality product from our collection.',
+          );
 
     return Scaffold(
       appBar: AppBar(
@@ -27,88 +26,75 @@ class ProductPage extends StatelessWidget {
         children: [
           Expanded(
             child: SingleChildScrollView(
-              padding: const EdgeInsets.all(20),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Hero(
-                    tag: product.name,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(12),
-                      child: AspectRatio(
-                        aspectRatio: 1,
-                        child: Image.asset(
-                          product.imagePath,
-                          fit: BoxFit.contain,
+              child: Padding(
+                padding: const EdgeInsets.all(24),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Center(
+                      child: ConstrainedBox(
+                        constraints: const BoxConstraints(
+                          maxWidth: 450,
+                          maxHeight: 450,
+                        ),
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Hero(
+                            tag: product.name,
+                            child: Image.asset(
+                              product.imagePath,
+                              fit: BoxFit.contain,
+                            ),
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  Text(
-                    product.name,
-                    style: const TextStyle(
-                      fontSize: 26,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    "£${product.price.toStringAsFixed(2)}",
-                    style: const TextStyle(
-                      fontSize: 22,
-                      fontWeight: FontWeight.bold,
-                      color: Color(0xFF4d2963),
-                    ),
-                  ),
-                  const SizedBox(height: 20),
-                  const Text(
-                    "Description",
-                    style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-                  Text(
-                    product.description,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      height: 1.5,
-                      color: Colors.black87,
-                    ),
-                  ),
-                  const SizedBox(height: 25),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFF4d2963),
-                        padding: const EdgeInsets.symmetric(vertical: 14),
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ),
+                    const SizedBox(height: 24),
+                    Text(
+                      product.name,
+                      style: const TextStyle(
+                        fontSize: 28,
+                        fontWeight: FontWeight.bold,
                       ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      '£${product.price.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 24,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4d2963),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    const Text(
+                      'Description',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 12),
+                    Text(
+                      product.description,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        height: 1.5,
+                        color: Colors.grey,
+                      ),
+                    ),
+                    const SizedBox(height: 24),
+                    ElevatedButton(
                       onPressed: () {
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
-                            content: Text("${product.name} added to cart"),
-                            duration: const Duration(seconds: 2),
-                          ),
+                              content: Text('${product.name} added to cart')),
                         );
                       },
-                      child: const Text(
-                        "Add to Cart",
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.w600,
-                          color: Colors.white,
-                        ),
-                      ),
+                      child: const Text('Add to Cart'),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
