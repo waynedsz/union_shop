@@ -36,15 +36,6 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Text(
-                      "Collection Items",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 28,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                    const SizedBox(height: 8),
-                    const Text(
                       "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
                       textAlign: TextAlign.center,
                       style: TextStyle(
