@@ -39,9 +39,6 @@ class CartPage extends StatelessWidget {
           // Already on cart; keep or no-op as you like.
           Navigator.pushNamed(context, '/cart');
         },
-        onMenuPressed: () {
-          Navigator.pushNamed(context, '/collections');
-        },
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
