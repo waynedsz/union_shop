@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/reusable_content/footer.dart';
 
 class Cart extends StatelessWidget {
   const Cart({Key? key}) : super(key: key);
@@ -9,8 +10,15 @@ class Cart extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cart'),
       ),
-      body: const Center(
-        child: Text('Welcome to the Cart Page!'),
+      body: Column(
+        children: const [
+          Expanded(
+            child: Center(
+              child: Text('Welcome to the Cart Page!'),
+            ),
+          ),
+          Footer(),
+        ],
       ),
     );
   }
