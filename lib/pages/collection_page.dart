@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/data/product_data.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
@@ -13,6 +14,11 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
+    final collectionName =
+        (ModalRoute.of(context)?.settings.arguments as String?) ??
+            'Selected Collection';
+    final products = collectionProducts[collectionName] ?? [];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Collections'),
@@ -26,11 +32,11 @@ class _CollectionPageState extends State<CollectionPage> {
           children: [
             const SizedBox(height: 16),
             const SizedBox(height: 24),
-            const Center(
+            Center(
               child: Text(
-                'Selected Collection',
+                collectionName,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.w600,
                 ),
@@ -71,17 +77,21 @@ class _CollectionPageState extends State<CollectionPage> {
             ),
             const SizedBox(height: 24),
             Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
+              child: GridView.builder(
                 padding: const EdgeInsets.all(16),
-                children: const [
-                  _ProductTile(name: 'Product 1'),
-                  _ProductTile(name: 'Product 2'),
-                  _ProductTile(name: 'Product 3'),
-                  _ProductTile(name: 'Product 4'),
-                ],
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 12,
+                  mainAxisSpacing: 12,
+                ),
+                itemCount: products.length,
+                itemBuilder: (context, index) {
+                  final product = products[index];
+                  return _ProductTile(
+                    name: product['name'] ?? '',
+                    imagePath: product['image'] ?? '',
+                  );
+                },
               ),
             ),
             const SizedBox(height: 16),
@@ -95,8 +105,12 @@ class _CollectionPageState extends State<CollectionPage> {
 
 class _ProductTile extends StatelessWidget {
   final String name;
+  final String imagePath;
 
-  const _ProductTile({required this.name});
+  const _ProductTile({
+    required this.name,
+    required this.imagePath,
+  });
 
   void _openProduct(BuildContext context) {
     final routeName = '/product/${name.toLowerCase().replaceAll(' ', '-')}';
@@ -115,17 +129,33 @@ class _ProductTile extends StatelessWidget {
         padding: const EdgeInsets.all(12),
         decoration: BoxDecoration(
           color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(16), // Increased borderRadius
+          borderRadius: BorderRadius.circular(16),
         ),
-        child: Center(
-          child: Text(
-            name,
-            textAlign: TextAlign.center,
-            style: const TextStyle(
-              fontSize: 16,
-              fontWeight: FontWeight.w500,
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            if (imagePath.isNotEmpty) ...[
+              Expanded(
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                ),
+              ),
+              const SizedBox(height: 8),
+            ] else ...[
+              const Spacer(),
+            ],
+            Center(
+              child: Text(
+                name,
+                textAlign: TextAlign.center,
+                style: const TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
             ),
-          ),
+          ],
         ),
       ),
     );
