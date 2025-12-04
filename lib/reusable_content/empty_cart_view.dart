@@ -13,9 +13,6 @@ class EmptyCartView extends StatelessWidget {
     final iconSize = 72.0 * scale;
     final gapTitle = 16.0 * scale;
     final gapSubtitle = 8.0 * scale;
-    final gapButton = 24.0 * scale;
-    final buttonVertPadding = 14.0 * scale;
-    final buttonRadius = 24.0 * scale;
 
     return Center(
       child: Padding(
@@ -48,24 +45,6 @@ class EmptyCartView extends StatelessWidget {
                         ?.color
                         ?.withOpacity(0.6),
                   ),
-            ),
-            SizedBox(height: gapButton),
-            SizedBox(
-              width: double.infinity,
-              child: OutlinedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                style: OutlinedButton.styleFrom(
-                  padding: EdgeInsets.symmetric(
-                    vertical: buttonVertPadding,
-                  ),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(buttonRadius),
-                  ),
-                ),
-                child: const Text('Back to collections'),
-              ),
             ),
           ],
         ),
