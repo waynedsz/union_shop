@@ -17,20 +17,43 @@ class CartItemTile extends StatelessWidget {
     final product = cartItem.product as Product;
     final itemTotal = product.price * cartItem.quantity;
 
+    final size = MediaQuery.of(context).size;
+    final shortestSide = size.shortestSide;
+    final scale = (shortestSide / 400).clamp(0.8, 1.2);
+
+    final outerHPad = 12.0 * scale;
+    final outerVPad = 8.0 * scale;
+    final cardRadius = 12.0 * scale;
+    final cardElevation = 3.0 * scale;
+    final innerPad = 12.0 * scale;
+    final imageSize = 60.0 * scale;
+    final imageRadius = 8.0 * scale;
+    final gapAfterImage = 12.0 * scale;
+    final gapNameToLine = 4.0 * scale;
+    final gapBetweenLines = 2.0 * scale;
+    final controlsGap = 8.0 * scale;
+    final qtyHPad = 4.0 * scale;
+
+    final nameFontSize = 16.0 * scale;
+    final lineFontSize = 12.0 * scale;
+    final unitPriceFontSize = 14.0 * scale;
+    final qtyFontSize = 16.0 * scale;
+    final iconSize = 24.0 * scale;
+
     return Padding(
-      padding: const EdgeInsets.symmetric(
-        horizontal: 12,
-        vertical: 8,
+      padding: EdgeInsets.symmetric(
+        horizontal: outerHPad,
+        vertical: outerVPad,
       ),
       child: Card(
-        elevation: 3,
+        elevation: cardElevation,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(cardRadius),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(
-            horizontal: 12,
-            vertical: 12,
+          padding: EdgeInsets.symmetric(
+            horizontal: innerPad,
+            vertical: innerPad,
           ),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
@@ -38,16 +61,16 @@ class CartItemTile extends StatelessWidget {
               Hero(
                 tag: product.name,
                 child: ClipRRect(
-                  borderRadius: BorderRadius.circular(8),
+                  borderRadius: BorderRadius.circular(imageRadius),
                   child: Image.asset(
                     product.imagePath,
-                    width: 60,
-                    height: 60,
+                    width: imageSize,
+                    height: imageSize,
                     fit: BoxFit.cover,
                   ),
                 ),
               ),
-              const SizedBox(width: 12),
+              SizedBox(width: gapAfterImage),
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -57,37 +80,38 @@ class CartItemTile extends StatelessWidget {
                       product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
-                        fontSize: 16,
+                      style: TextStyle(
+                        fontSize: nameFontSize,
                         fontWeight: FontWeight.w600,
                       ),
                     ),
-                    const SizedBox(height: 4),
+                    SizedBox(height: gapNameToLine),
                     Text(
                       '£${product.price.toStringAsFixed(2)} x ${cartItem.quantity} = £${itemTotal.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 12,
+                      style: TextStyle(
+                        fontSize: lineFontSize,
                         color: Colors.grey,
                       ),
                     ),
-                    const SizedBox(height: 2),
+                    SizedBox(height: gapBetweenLines),
                     Text(
                       '£${product.price.toStringAsFixed(2)}',
-                      style: const TextStyle(
-                        fontSize: 14,
+                      style: TextStyle(
+                        fontSize: unitPriceFontSize,
                         color: Colors.grey,
                       ),
                     ),
                   ],
                 ),
               ),
-              const SizedBox(width: 8),
+              SizedBox(width: controlsGap),
               Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.remove_circle_outline,
+                      size: iconSize,
                     ),
                     constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
@@ -96,17 +120,18 @@ class CartItemTile extends StatelessWidget {
                     },
                   ),
                   Padding(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 4,
+                    padding: EdgeInsets.symmetric(
+                      horizontal: qtyHPad,
                     ),
                     child: Text(
                       '${cartItem.quantity}',
-                      style: const TextStyle(fontSize: 16),
+                      style: TextStyle(fontSize: qtyFontSize),
                     ),
                   ),
                   IconButton(
-                    icon: const Icon(
+                    icon: Icon(
                       Icons.add_circle_outline,
+                      size: iconSize,
                     ),
                     constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
