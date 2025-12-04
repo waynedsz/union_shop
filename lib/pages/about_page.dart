@@ -29,7 +29,14 @@ class AboutPage extends StatelessWidget {
                   Padding(
                     padding: EdgeInsets.all(16.0),
                     child: Text(
-                      "Welcome to the Union Shop! We are on a mission to give you the best University branded products",
+                      "Welcome to the Union Shop! We are on a mission to give you the best University branded products.",
+                      style: TextStyle(fontSize: 16),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(16.0),
+                    child: Text(
+                      "From apparel to accessories, we carefully curate items that let you show your university pride in style.",
                       style: TextStyle(fontSize: 16),
                     ),
                   ),
