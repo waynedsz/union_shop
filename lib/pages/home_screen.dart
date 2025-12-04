@@ -4,8 +4,35 @@ import 'package:union_shop/reusable_content/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_card.dart';
 
-class HomeScreen extends StatelessWidget {
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
+
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fadeController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
+    );
+    _fadeAnimation =
+        CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut);
+    _fadeController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -29,17 +56,23 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            HomeHero(
-              title: 'Placeholder Hero Title',
-              subtitle: 'This is placeholder text for the hero section.',
-              buttonText: 'BROWSE PRODUCTS',
-              imageUrl:
-                  'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-              onButtonPressed: () {
-                Navigator.pushNamed(context, '/collections');
-              },
+            FadeTransition(
+              opacity: _fadeAnimation,
+              child: HomeHero(
+                title: 'Placeholder Hero Title',
+                subtitle: 'This is placeholder text for the hero section.',
+                buttonText: 'BROWSE PRODUCTS',
+                imageUrl:
+                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                onButtonPressed: () {
+                  Navigator.pushNamed(context, '/collections');
+                },
+              ),
             ),
-            HomeProductShowcase(products: showcaseProducts),
+            FadeTransition(
+              opacity: _fadeAnimation,
+              child: HomeProductShowcase(products: showcaseProducts),
+            ),
             Container(
               padding: const EdgeInsets.all(24),
               width: double.infinity,
