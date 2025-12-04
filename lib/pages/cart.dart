@@ -44,7 +44,7 @@ class Cart extends StatelessWidget {
                       return Padding(
                         padding: const EdgeInsets.symmetric(
                           horizontal: 12,
-                          vertical: 6,
+                          vertical: 8, // slightly more vertical spacing
                         ),
                         child: Card(
                           elevation: 3,
@@ -52,7 +52,11 @@ class Cart extends StatelessWidget {
                             borderRadius: BorderRadius.circular(12),
                           ),
                           child: Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            // increase inner padding to make content breathe
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 12,
+                              vertical: 12,
+                            ),
                             child: Row(
                               crossAxisAlignment: CrossAxisAlignment.center,
                               children: [
