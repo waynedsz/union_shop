@@ -29,41 +29,58 @@ class Cart extends StatelessWidget {
             ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: items.isEmpty
-                ? const EmptyCartView()
-                : ListView.builder(
-                    itemCount: items.length,
-                    itemBuilder: (context, index) {
-                      final cartItem = items[index];
-                      return AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        transitionBuilder: (child, animation) {
-                          final offsetAnimation = Tween<Offset>(
-                            begin: const Offset(0, 0.05),
-                            end: Offset.zero,
-                          ).animate(animation);
-                          return FadeTransition(
-                            opacity: animation,
-                            child: SlideTransition(
-                              position: offsetAnimation,
-                              child: child,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final height = constraints.maxHeight;
+          final baseHeight = 800.0;
+          final scale = (height / baseHeight).clamp(0.7, 1.2);
+          final verticalOffset = 0.05 * scale;
+
+          return Column(
+            children: [
+              Expanded(
+                child: items.isEmpty
+                    ? const EmptyCartView()
+                    : ListView.builder(
+                        itemCount: items.length,
+                        itemBuilder: (context, index) {
+                          final cartItem = items[index];
+                          return AnimatedSwitcher(
+                            duration: Duration(
+                              milliseconds:
+                                  (250 * scale).clamp(150, 350).toInt(),
+                            ),
+                            transitionBuilder: (child, animation) {
+                              final offsetAnimation = Tween<Offset>(
+                                begin: Offset(0, verticalOffset),
+                                end: Offset.zero,
+                              ).animate(animation);
+                              return FadeTransition(
+                                opacity: animation,
+                                child: SlideTransition(
+                                  position: offsetAnimation,
+                                  child: child,
+                                ),
+                              );
+                            },
+                            child: CartItemTile(
+                              key: ValueKey(cartItem.product),
+                              cartItem: cartItem,
+                              cartState: cartState,
                             ),
                           );
                         },
-                        child: CartItemTile(
-                          key: ValueKey(cartItem.product),
-                          cartItem: cartItem,
-                          cartState: cartState,
-                        ),
-                      );
-                    },
-                  ),
-          ),
-          const Footer(),
-        ],
+                      ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  bottom: 8.0 * scale,
+                ),
+                child: const Footer(),
+              ),
+            ],
+          );
+        },
       ),
       bottomNavigationBar: CartBottomBar(
         total: total,
