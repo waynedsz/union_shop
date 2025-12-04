@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
+import 'package:union_shop/reusable_content/product.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});

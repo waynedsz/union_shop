@@ -58,3 +58,5 @@ final Map<String, List<Product>> collectionProducts = {
     ),
   ],
 };
+final List<Product> allProductsList =
+    collectionProducts.values.expand((list) => list).toList();
