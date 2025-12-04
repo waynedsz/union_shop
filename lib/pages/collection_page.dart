@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
 import 'package:union_shop/data/product_data.dart';
+import 'package:union_shop/widgets/product_tile.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
@@ -99,74 +100,32 @@ class _CollectionPageState extends State<CollectionPage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
-                  return _ProductTile(
-                    name: product['name'] ?? '',
-                    imagePath: product['image'] ?? '',
+                  final name = product['name'] ?? '';
+                  final imagePath = product['image'] ?? '';
+                  final price = product['price'] ?? '';
+                  return ProductTile(
+                    name: name,
+                    imagePath: imagePath,
+                    price: price,
+                    onTap: () {
+                      final routeName =
+                          '/product/${name.toLowerCase().replaceAll(' ', '-')}';
+                      Navigator.pushNamed(
+                        context,
+                        routeName,
+                        arguments: {
+                          'productName': name,
+                          'imagePath': imagePath,
+                          'price': price,
+                        },
+                      );
+                    },
                   );
                 },
               ),
             ),
             const SizedBox(height: 16),
             const Footer(),
-          ],
-        ),
-      ),
-    );
-  }
-}
-
-class _ProductTile extends StatelessWidget {
-  final String name;
-  final String imagePath;
-
-  const _ProductTile({
-    required this.name,
-    required this.imagePath,
-  });
-
-  void _openProduct(BuildContext context) {
-    final routeName = '/product/${name.toLowerCase().replaceAll(' ', '-')}';
-    Navigator.pushNamed(
-      context,
-      routeName,
-      arguments: {'productName': name},
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _openProduct(context),
-      child: Container(
-        padding: const EdgeInsets.all(12),
-        decoration: BoxDecoration(
-          color: Colors.grey.shade200,
-          borderRadius: BorderRadius.circular(16),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            if (imagePath.isNotEmpty) ...[
-              Expanded(
-                child: Image.asset(
-                  imagePath,
-                  fit: BoxFit.cover,
-                ),
-              ),
-              const SizedBox(height: 8),
-            ] else ...[
-              const Spacer(),
-            ],
-            Center(
-              child: Text(
-                name,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
-            ),
           ],
         ),
       ),
