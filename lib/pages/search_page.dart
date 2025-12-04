@@ -78,7 +78,16 @@ class _SearchPageState extends State<SearchPage> {
                       ),
                       itemBuilder: (context, index) {
                         final product = filteredProducts[index];
-                        return ProductTile(product: product);
+                        return ProductTile(
+                          product: product,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/product',
+                              arguments: product,
+                            );
+                          },
+                        );
                       },
                     ),
                   ),
