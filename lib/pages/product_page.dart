@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
+import 'package:union_shop/reusable_content/product.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
@@ -8,22 +9,28 @@ class ProductPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void placeholderCallbackForButtons() {
-    // This is the event handler for buttons that don't work yet
-  }
+  void placeholderCallbackForButtons() {}
 
   @override
   Widget build(BuildContext context) {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
-    // Use safe fallbacks if any argument is missing or not a String
-    final String productName = (args?['productName'] as String?) ?? 'Product';
-    final String imagePath =
-        (args?['imagePath'] as String?) ?? 'assets/images/placeholder.png';
-    final String price = (args?['price'] as String?) ?? '\$0.00';
-    final String description = (args?['description'] as String?) ??
-        '$productName is part of our premium range and features high-quality materials for everyday use.';
+    final Product? product = args?['product'] as Product?;
+
+    final Product safeProduct = product ??
+        Product(
+          name: 'Product',
+          price: 0.0,
+          description:
+              'Product is part of our premium range and features high-quality materials for everyday use.',
+          imagePath: 'assets/images/placeholder.png',
+        );
+
+    final String productName = safeProduct.name;
+    final String imagePath = safeProduct.imagePath;
+    final String price = safeProduct.price as String;
+    final String description = safeProduct.description;
 
     return Scaffold(
       appBar: AppBar(
@@ -36,14 +43,12 @@ class ProductPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  // Product details
                   Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(24),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Product image
                         Container(
                           height: 300,
                           width: double.infinity,
@@ -65,7 +70,6 @@ class ProductPage extends StatelessWidget {
 
                         const SizedBox(height: 16),
 
-                        // Product name
                         Text(
                           productName,
                           style: const TextStyle(
@@ -77,7 +81,6 @@ class ProductPage extends StatelessWidget {
 
                         const SizedBox(height: 16),
 
-                        // Product price
                         Text(
                           price,
                           style: const TextStyle(
@@ -89,7 +92,6 @@ class ProductPage extends StatelessWidget {
 
                         const SizedBox(height: 16),
 
-                        // Product description
                         const Text(
                           'Description',
                           style: TextStyle(
@@ -129,7 +131,6 @@ class ProductPage extends StatelessWidget {
               ),
             ),
           ),
-          // Footer at the bottom
           const Footer(),
         ],
       ),
