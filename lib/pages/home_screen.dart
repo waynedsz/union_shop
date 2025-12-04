@@ -162,7 +162,16 @@ class HomeProductShowcase extends StatelessWidget {
           const SizedBox(height: 48),
           LayoutBuilder(
             builder: (context, constraints) {
-              final crossAxisCount = constraints.maxWidth > 600 ? 2 : 1;
+              final maxWidth = constraints.maxWidth;
+              int crossAxisCount;
+              if (maxWidth >= 900) {
+                crossAxisCount = 3;
+              } else if (maxWidth >= 600) {
+                crossAxisCount = 2;
+              } else {
+                crossAxisCount = 1;
+              }
+
               return GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
