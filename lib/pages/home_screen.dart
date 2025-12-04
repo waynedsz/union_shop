@@ -3,6 +3,7 @@ import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_card.dart';
+import 'package:union_shop/reusable_content/product.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,10 +54,10 @@ class _HomeScreenState extends State<HomeScreen>
         onLoginPressed: () => NavigationController.goLogin(context),
         onCartPressed: () => NavigationController.goCart(context),
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            FadeTransition(
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: FadeTransition(
               opacity: _fadeAnimation,
               child: HomeHero(
                 title: 'Placeholder Hero Title',
@@ -69,11 +70,15 @@ class _HomeScreenState extends State<HomeScreen>
                 },
               ),
             ),
-            FadeTransition(
+          ),
+          SliverToBoxAdapter(
+            child: FadeTransition(
               opacity: _fadeAnimation,
               child: HomeProductShowcase(products: showcaseProducts),
             ),
-            Container(
+          ),
+          SliverToBoxAdapter(
+            child: Container(
               padding: const EdgeInsets.all(24),
               width: double.infinity,
               color: Colors.grey[50],
@@ -83,8 +88,8 @@ class _HomeScreenState extends State<HomeScreen>
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
