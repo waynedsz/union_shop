@@ -24,6 +24,8 @@ class _SearchPageState extends State<SearchPage>
   late final Animation<double> _fadeAnimation;
   late final Animation<double> _scaleAnimation;
 
+  String _selectedCategory = 'All';
+
   @override
   void initState() {
     super.initState();
@@ -38,18 +40,31 @@ class _SearchPageState extends State<SearchPage>
     _searchController.addListener(_onQueryChanged);
   }
 
-  void _onQueryChanged() {
+  void _applyFilters() {
     final query = _searchController.text.toLowerCase();
     setState(() {
-      if (query.isEmpty) {
-        filteredProducts = [];
+      Iterable<Product> products = allProducts;
+
+      if (query.isNotEmpty) {
+        products = products.where(
+          (product) => product.name.toLowerCase().contains(query),
+        );
+      }
+
+      if (_selectedCategory != 'All') {
+        products = products.where((product) {
+          final tag = _selectedCategory.toLowerCase();
+          return product.tags?.map((t) => t.toLowerCase()).contains(tag) ??
+              false;
+        });
+      }
+
+      filteredProducts = products.toList();
+
+      if (filteredProducts.isEmpty ||
+          query.isEmpty && _selectedCategory == 'All') {
         _resultsController.reset();
       } else {
-        filteredProducts = allProducts
-            .where(
-              (product) => product.name.toLowerCase().contains(query),
-            )
-            .toList();
         _resultsController
           ..reset()
           ..forward();
@@ -57,12 +72,13 @@ class _SearchPageState extends State<SearchPage>
     });
   }
 
+  void _onQueryChanged() {
+    _applyFilters();
+  }
+
   void _clearSearch() {
     _searchController.clear();
-    setState(() {
-      filteredProducts = [];
-      _resultsController.reset();
-    });
+    _applyFilters();
   }
 
   @override
@@ -82,7 +98,6 @@ class _SearchPageState extends State<SearchPage>
         title: 'Search',
         onNavigateHome: () => NavigationController.goHome(context),
         onSearchPressed: () {
-          // already on search; you may no-op or still push
           Navigator.pushNamed(context, '/search');
         },
         onAboutPressed: () => NavigationController.goAbout(context),
@@ -93,30 +108,67 @@ class _SearchPageState extends State<SearchPage>
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                border: const OutlineInputBorder(),
-                suffixIcon: query.isEmpty
-                    ? null
-                    : IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: _clearSearch,
-                      ),
-              ),
-              onSubmitted: (_) => _onQueryChanged(),
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _searchController,
+                    decoration: InputDecoration(
+                      labelText: 'Search',
+                      border: const OutlineInputBorder(),
+                      suffixIcon: query.isEmpty
+                          ? null
+                          : IconButton(
+                              icon: const Icon(Icons.clear),
+                              onPressed: _clearSearch,
+                            ),
+                    ),
+                    onSubmitted: (_) => _applyFilters(),
+                  ),
+                ),
+                const SizedBox(width: 12),
+                DropdownButton<String>(
+                  value: _selectedCategory,
+                  onChanged: (value) {
+                    if (value == null) return;
+                    _selectedCategory = value;
+                    _applyFilters();
+                  },
+                  items: const [
+                    DropdownMenuItem(
+                      value: 'All',
+                      child: Text('All'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Hoodies',
+                      child: Text('Hoodies'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'T-Shirts',
+                      child: Text('T-Shirts'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'Accessories',
+                      child: Text('Accessories'),
+                    ),
+                    DropdownMenuItem(
+                      value: 'New Arrivals',
+                      child: Text('New Arrivals'),
+                    ),
+                  ],
+                ),
+              ],
             ),
           ),
           Expanded(
             child: filteredProducts.isEmpty
                 ? SearchEmptyState(
-                    title: query.isEmpty
+                    title: query.isEmpty && (_selectedCategory == 'All')
                         ? 'Start typing to search'
-                        : 'No products match your search',
-                    subtitle: query.isEmpty
+                        : 'No products match your filters',
+                    subtitle: query.isEmpty && (_selectedCategory == 'All')
                         ? 'Find products by name, e.g. "hoodie" or "mug".'
-                        : 'Try a different keyword or check back later.',
+                        : 'Try a different keyword or category.',
                   )
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
