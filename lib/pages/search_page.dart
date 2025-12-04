@@ -6,6 +6,7 @@ import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 import 'package:union_shop/reusable_content/search_widgets/search_empty_state.dart';
 import 'package:union_shop/reusable_content/search_widgets/search_results_grid.dart';
+import 'dart:async';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -23,6 +24,7 @@ class _SearchPageState extends State<SearchPage>
   late final AnimationController _resultsController;
   late final Animation<double> _fadeAnimation;
   late final Animation<double> _scaleAnimation;
+  Timer? _debounce;
 
   String _selectedCategory = 'All';
 
@@ -73,11 +75,13 @@ class _SearchPageState extends State<SearchPage>
   }
 
   void _onQueryChanged() {
-    _applyFilters();
+    _debounce?.cancel();
+    _debounce = Timer(const Duration(milliseconds: 250), _applyFilters);
   }
 
   void _clearSearch() {
     _searchController.clear();
+    _debounce?.cancel();
     _applyFilters();
   }
 
@@ -86,6 +90,7 @@ class _SearchPageState extends State<SearchPage>
     _searchController.removeListener(_onQueryChanged);
     _searchController.dispose();
     _resultsController.dispose();
+    _debounce?.cancel();
     super.dispose();
   }
 
