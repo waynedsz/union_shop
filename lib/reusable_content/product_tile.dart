@@ -18,7 +18,13 @@ class ProductTile extends StatelessWidget {
         final double height = constraints.maxWidth * 0.9;
 
         return GestureDetector(
-          onTap: onTap,
+          onTap: () {
+            Navigator.pushNamed(
+              context,
+              '/product',
+              arguments: product,
+            );
+          },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
