@@ -8,7 +8,7 @@ import 'package:union_shop/pages/collections_page.dart';
 import 'package:union_shop/pages/collection_page.dart';
 import 'package:union_shop/pages/sale_collection.dart';
 import 'package:union_shop/pages/login_page.dart';
-import 'package:union_shop/pages/cart.dart';
+import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/reusable_content/product.dart';
 

@@ -97,9 +97,9 @@ class CartBottomBar extends StatelessWidget {
                 child: Text(
                   'Checkout',
                   style: TextStyle(
-                    fontSize: buttonTextSize,
-                    fontWeight: FontWeight.w600,
-                  ),
+                      fontSize: buttonTextSize,
+                      fontWeight: FontWeight.w600,
+                      color: Colors.white),
                 ),
               ),
             ),
