@@ -31,56 +31,33 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/collections');
               },
             ),
-            Container(
-              color: Colors.white,
-              padding: const EdgeInsets.all(40),
-              child: Column(
-                children: [
-                  const Text(
-                    'PRODUCTS SECTION',
-                    style: TextStyle(
-                      fontSize: 20,
-                      color: Colors.black,
-                      letterSpacing: 1,
-                    ),
-                  ),
-                  const SizedBox(height: 48),
-                  GridView.count(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisCount:
-                        MediaQuery.of(context).size.width > 600 ? 2 : 1,
-                    crossAxisSpacing: 24,
-                    mainAxisSpacing: 48,
-                    children: const [
-                      ProductCard(
-                        title: 'Placeholder Product 1',
-                        price: '£10.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                      ),
-                      ProductCard(
-                        title: 'Placeholder Product 2',
-                        price: '£15.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                      ),
-                      ProductCard(
-                        title: 'Placeholder Product 3',
-                        price: '£20.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                      ),
-                      ProductCard(
-                        title: 'Placeholder Product 4',
-                        price: '£25.00',
-                        imageUrl:
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            HomeProductShowcase(
+              products: const [
+                ProductCard(
+                  title: 'Placeholder Product 1',
+                  price: '£10.00',
+                  imageUrl:
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                ),
+                ProductCard(
+                  title: 'Placeholder Product 2',
+                  price: '£15.00',
+                  imageUrl:
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                ),
+                ProductCard(
+                  title: 'Placeholder Product 3',
+                  price: '£20.00',
+                  imageUrl:
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                ),
+                ProductCard(
+                  title: 'Placeholder Product 4',
+                  price: '£25.00',
+                  imageUrl:
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                ),
+              ],
             ),
             Container(
               padding: const EdgeInsets.all(24),
@@ -172,6 +149,49 @@ class HomeHero extends StatelessWidget {
                 ),
               ],
             ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class HomeProductShowcase extends StatelessWidget {
+  const HomeProductShowcase({
+    super.key,
+    required this.products,
+  });
+
+  final List<ProductCard> products;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.all(40),
+      child: Column(
+        children: [
+          const Text(
+            'PRODUCTS SECTION',
+            style: TextStyle(
+              fontSize: 20,
+              color: Colors.black,
+              letterSpacing: 1,
+            ),
+          ),
+          const SizedBox(height: 48),
+          LayoutBuilder(
+            builder: (context, constraints) {
+              final crossAxisCount = constraints.maxWidth > 600 ? 2 : 1;
+              return GridView.count(
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 24,
+                mainAxisSpacing: 48,
+                children: products,
+              );
+            },
           ),
         ],
       ),
