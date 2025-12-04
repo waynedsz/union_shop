@@ -154,9 +154,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/search');
-                          },
+                          onPressed: onSearchPressed,
                         ),
                         IconButton(
                           icon: const Icon(
@@ -183,21 +181,6 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             minHeight: 32,
                           ),
                           onPressed: onCartPressed,
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.shopping_cart,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/cart');
-                          },
                         ),
                       ],
                     ),
