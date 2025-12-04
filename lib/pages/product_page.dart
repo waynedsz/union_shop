@@ -17,10 +17,11 @@ class ProductPage extends StatelessWidget {
     final args =
         ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
 
-    // Updated: assume arguments are always passed from ProductTile
-    final String productName = args?['productName'] as String;
-    final String imagePath = args?['imagePath'] as String;
-    final String price = args?['price'] as String;
+    // Use safe fallbacks if any argument is missing or not a String
+    final String productName = (args?['productName'] as String?) ?? 'Product';
+    final String imagePath =
+        (args?['imagePath'] as String?) ?? 'assets/images/placeholder.png';
+    final String price = (args?['price'] as String?) ?? '\$0.00';
 
     return Scaffold(
       appBar: AppBar(
