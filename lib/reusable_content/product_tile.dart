@@ -1,24 +1,18 @@
 import 'package:flutter/material.dart';
-
-// ...existing _ProductTile implementation from CollectionsPage, adapted...
+import 'package:union_shop/reusable_content/product.dart';
 
 class ProductTile extends StatelessWidget {
-  final String name;
-  final String imagePath;
-  final String price;
+  final Product product;
   final VoidCallback onTap;
 
   const ProductTile({
     super.key,
-    required this.name,
-    required this.imagePath,
-    required this.price,
+    required this.product,
     required this.onTap,
   });
 
   @override
   Widget build(BuildContext context) {
-    // Layout copied from _ProductTile, but using the new parameters.
     return GestureDetector(
       onTap: onTap,
       child: Column(
@@ -40,9 +34,9 @@ class ProductTile extends StatelessWidget {
               ),
               clipBehavior: Clip.antiAlias,
               child: Hero(
-                tag: name,
+                tag: product.name,
                 child: Image.asset(
-                  imagePath,
+                  product.imagePath,
                   fit: BoxFit.cover,
                 ),
               ),
@@ -52,7 +46,7 @@ class ProductTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
-              name,
+              product.name,
               maxLines: 2,
               overflow: TextOverflow.ellipsis,
               textAlign: TextAlign.center,
@@ -67,7 +61,7 @@ class ProductTile extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 4),
             child: Text(
-              price,
+              '\$${product.price.toStringAsFixed(2)}',
               textAlign: TextAlign.center,
               style: const TextStyle(
                 fontSize: 12,
