@@ -12,9 +12,11 @@ class Product {
   });
 
   factory Product.fromMap(Map<String, dynamic> map) {
+    final dynamic rawImage = map['imagePath'] ?? map['image'];
+
     return Product(
       name: map['name'] as String? ?? '',
-      imagePath: map['imagePath'] as String? ?? '',
+      imagePath: rawImage as String? ?? '',
       price: (map['price'] is num) ? (map['price'] as num).toDouble() : 0.0,
       description: map['description'] as String? ?? '',
     );
