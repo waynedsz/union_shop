@@ -17,14 +17,14 @@ class CartBottomBar extends StatelessWidget {
     final scale = (shortestSide / 400).clamp(0.8, 1.2);
 
     final horizontalPadding = 16.0 * scale;
-    final verticalPadding = 8.0 * scale;
+    final verticalPadding = (8.0 * scale).clamp(6.0, 10.0);
     final innerHorizontal = 12.0 * scale;
     final innerVertical = 10.0 * scale;
     final boxBlur = 4.0 * scale;
     final borderRadius = 12.0 * scale;
     final buttonRadius = 24.0 * scale;
-    final buttonVertPadding = 14.0 * scale;
-    final gap = 8.0 * scale;
+    final buttonVertPadding = (14.0 * scale).clamp(10.0, 16.0);
+    final gap = (8.0 * scale).clamp(6.0, 10.0);
 
     final totalLabelSize = 17.0 * scale;
     final totalValueSize = 20.0 * scale;

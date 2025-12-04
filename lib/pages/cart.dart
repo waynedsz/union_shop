@@ -42,10 +42,12 @@ class Cart extends StatelessWidget {
                 child: items.isEmpty
                     ? const EmptyCartView()
                     : ListView.builder(
-                        itemCount: items.length + 1, // extra slot for Footer
+                        padding: EdgeInsets.only(
+                          bottom: 80.0 * scale,
+                        ),
+                        itemCount: items.length + 1,
                         itemBuilder: (context, index) {
                           if (index == items.length) {
-                            // footer as last scrollable item
                             return Padding(
                               padding: EdgeInsets.only(
                                 top: 8.0 * scale,
