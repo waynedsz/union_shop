@@ -1,36 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product.dart';
-import 'package:union_shop/reusable_content/product_detail.dart';
 
 class ProductPage extends StatelessWidget {
   const ProductPage({super.key});
 
-  void navigateToHome(BuildContext context) {
-    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
-  }
-
-  void placeholderCallbackForButtons() {}
-
   @override
   Widget build(BuildContext context) {
-    final args =
-        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
-
-    final Product? product = args?['product'] as Product?;
-
-    final Product safeProduct = product ??
-        Product(
-          name: 'Product',
-          price: 0.0,
-          description:
-              'Product is part of our premium range and features high-quality materials for everyday use.',
-          imagePath: 'assets/images/placeholder.png',
-        );
+    final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
+    final Product product;
+    if (rawArgs is Product) {
+      product = rawArgs;
+    } else {
+      product = Product(
+        name: 'Unknown Product',
+        imagePath: 'assets/images/placeholder.png',
+        price: 0.00,
+        description: 'No description available.',
+      );
+    }
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Product'),
+        title: Text(product.name),
         automaticallyImplyLeading: true,
       ),
       body: Column(
@@ -39,9 +31,82 @@ class ProductPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ProductDetail(
-                    product: safeProduct,
-                    onAddToCart: () {},
+                  Container(
+                    padding: const EdgeInsets.all(24),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Container(
+                          height: 300,
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(12),
+                            color: Colors.grey[200],
+                          ),
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(12),
+                            child: Hero(
+                              tag: product.name,
+                              child: Image.asset(
+                                product.imagePath,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        Text(
+                          product.name,
+                          style: const TextStyle(
+                            fontSize: 28,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          '£${product.price.toStringAsFixed(2)}',
+                          style: const TextStyle(
+                            fontSize: 24,
+                            color: Color(0xFF4d2963),
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
+                        const Text(
+                          "Description",
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                        const SizedBox(height: 12),
+                        Text(
+                          product.description,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            color: Colors.black54,
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 28),
+                        ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text("${product.name} added to cart"),
+                              ),
+                            );
+                          },
+                          style: ElevatedButton.styleFrom(
+                            padding: const EdgeInsets.symmetric(
+                              vertical: 14,
+                              horizontal: 32,
+                            ),
+                          ),
+                          child: const Text("Add to Cart"),
+                        ),
+                      ],
+                    ),
                   ),
                 ],
               ),
