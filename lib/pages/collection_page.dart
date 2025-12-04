@@ -108,11 +108,9 @@ class _CollectionPageState extends State<CollectionPage> {
                     imagePath: imagePath,
                     price: price,
                     onTap: () {
-                      final routeName =
-                          '/product/${name.toLowerCase().replaceAll(' ', '-')}';
                       Navigator.pushNamed(
                         context,
-                        routeName,
+                        '/product', // ProductPage route
                         arguments: {
                           'productName': name,
                           'imagePath': imagePath,
