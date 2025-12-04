@@ -20,8 +20,8 @@ class FeaturedCollections extends StatelessWidget {
     final labels = collectionProducts.keys.toList();
 
     return Container(
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       color: Colors.white,
+      padding: const EdgeInsets.all(40),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -29,26 +29,29 @@ class FeaturedCollections extends StatelessWidget {
             'Featured Collections',
             style: TextStyle(
               fontSize: 20,
+              color: Colors.black,
+              letterSpacing: 1,
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: 32),
           SizedBox(
-            height: 140,
+            height: 200,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: labels.length,
-              separatorBuilder: (_, __) => const SizedBox(width: 12),
+              separatorBuilder: (_, __) => const SizedBox(width: 24),
               itemBuilder: (context, index) {
                 final label = labels[index];
                 final products = collectionProducts[label] ?? [];
                 final firstProduct =
                     products.isNotEmpty ? products.first : null;
                 final imageUrl = firstProduct?.imagePath;
+
                 return GestureDetector(
                   onTap: () => _openCollection(context, label),
                   child: Container(
-                    width: 160,
+                    width: 200,
                     decoration: BoxDecoration(
                       color: Colors.grey[100],
                       borderRadius: BorderRadius.circular(12),
@@ -102,7 +105,6 @@ class FeaturedCollections extends StatelessWidget {
                             ),
                           ),
                         ),
-                        // Optionally show priceText under the label later if desired.
                       ],
                     ),
                   ),
