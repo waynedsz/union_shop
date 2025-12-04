@@ -17,7 +17,7 @@ class FeaturedCollections extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final labels = collectionProducts.keys.toList();
+    final labels = collectionProducts.keys.take(2).toList();
 
     return Container(
       color: Colors.white,
