@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:union_shop/reusable_content/navigation_controller.dart';
+import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({
