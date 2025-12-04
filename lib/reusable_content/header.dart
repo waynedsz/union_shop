@@ -125,8 +125,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: () =>
-                              NavigationController.goSale(context),
+                          onPressed: () => NavigationController.goSale(context),
                           child: const Text(
                             'Sale',
                             style: TextStyle(
