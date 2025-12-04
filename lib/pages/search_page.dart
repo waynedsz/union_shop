@@ -4,6 +4,7 @@ import 'package:union_shop/reusable_content/product_widgets/product_tile.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
+import 'package:union_shop/reusable_content/search_widgets/search_empty_state.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -41,16 +42,17 @@ class _SearchPageState extends State<SearchPage>
     setState(() {
       if (query.isEmpty) {
         filteredProducts = [];
+        _resultsController.reset();
       } else {
         filteredProducts = allProducts
             .where(
               (product) => product.name.toLowerCase().contains(query),
             )
             .toList();
+        _resultsController
+          ..reset()
+          ..forward();
       }
-      _resultsController
-        ..reset()
-        ..forward();
     });
   }
 
@@ -107,12 +109,13 @@ class _SearchPageState extends State<SearchPage>
           ),
           Expanded(
             child: filteredProducts.isEmpty
-                ? Center(
-                    child: Text(
-                      query.isEmpty
-                          ? 'Start typing to search'
-                          : 'No products match your search',
-                    ),
+                ? SearchEmptyState(
+                    title: query.isEmpty
+                        ? 'Start typing to search'
+                        : 'No products match your search',
+                    subtitle: query.isEmpty
+                        ? 'Find products by name, e.g. "hoodie" or "mug".'
+                        : 'Try a different keyword or check back later.',
                   )
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
