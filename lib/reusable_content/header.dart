@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Header extends StatelessWidget {
+class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({
     super.key,
     required this.onNavigateHome,
@@ -17,6 +17,9 @@ class Header extends StatelessWidget {
   final VoidCallback onLoginPressed;
   final VoidCallback onCartPressed;
   final VoidCallback onMenuPressed;
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 
   @override
   Widget build(BuildContext context) {
