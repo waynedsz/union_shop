@@ -57,18 +57,23 @@ class _HomeScreenState extends State<HomeScreen>
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: HomeHero(
-                title: 'Placeholder Hero Title',
-                subtitle: 'This is placeholder text for the hero section.',
-                buttonText: 'BROWSE PRODUCTS',
-                imageUrl:
-                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                onButtonPressed: () {
-                  Navigator.pushNamed(context, '/collections');
-                },
-              ),
+            child: Column(
+              children: [
+                SizedBox(height: Header.preferredHeight),
+                FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: HomeHero(
+                    title: 'Placeholder Hero Title',
+                    subtitle: 'This is placeholder text for the hero section.',
+                    buttonText: 'BROWSE PRODUCTS',
+                    imageUrl:
+                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                    onButtonPressed: () {
+                      Navigator.pushNamed(context, '/collections');
+                    },
+                  ),
+                ),
+              ],
             ),
           ),
           SliverToBoxAdapter(
