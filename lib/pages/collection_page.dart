@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
-import 'package:union_shop/data/product_data.dart';
+import 'package:union_shop/widgets/product_data.dart';
 import 'package:union_shop/widgets/product_tile.dart';
 
 class CollectionPage extends StatefulWidget {
