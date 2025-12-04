@@ -12,14 +12,27 @@ class SearchPage extends StatefulWidget {
   State<SearchPage> createState() => _SearchPageState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchPageState extends State<SearchPage>
+    with SingleTickerProviderStateMixin {
   final TextEditingController _searchController = TextEditingController();
   late final List<Product> allProducts = allProductsList;
   List<Product> filteredProducts = [];
 
+  late final AnimationController _resultsController;
+  late final Animation<double> _fadeAnimation;
+  late final Animation<double> _scaleAnimation;
+
   @override
   void initState() {
     super.initState();
+    _resultsController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 250),
+    );
+    _fadeAnimation =
+        CurvedAnimation(parent: _resultsController, curve: Curves.easeInOut);
+    _scaleAnimation =
+        CurvedAnimation(parent: _resultsController, curve: Curves.easeOut);
     _searchController.addListener(_onQueryChanged);
   }
 
@@ -35,6 +48,9 @@ class _SearchPageState extends State<SearchPage> {
             )
             .toList();
       }
+      _resultsController
+        ..reset()
+        ..forward();
     });
   }
 
@@ -42,6 +58,7 @@ class _SearchPageState extends State<SearchPage> {
     _searchController.clear();
     setState(() {
       filteredProducts = [];
+      _resultsController.reset();
     });
   }
 
@@ -49,6 +66,7 @@ class _SearchPageState extends State<SearchPage> {
   void dispose() {
     _searchController.removeListener(_onQueryChanged);
     _searchController.dispose();
+    _resultsController.dispose();
     super.dispose();
   }
 
@@ -98,28 +116,34 @@ class _SearchPageState extends State<SearchPage> {
                   )
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: GridView.builder(
-                      itemCount: filteredProducts.length,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: 2,
-                        crossAxisSpacing: 16,
-                        mainAxisSpacing: 16,
-                        childAspectRatio: 0.7,
-                      ),
-                      itemBuilder: (context, index) {
-                        final product = filteredProducts[index];
-                        return ProductTile(
-                          product: product,
-                          onTap: () {
-                            Navigator.pushNamed(
-                              context,
-                              '/product',
-                              arguments: product,
+                    child: FadeTransition(
+                      opacity: _fadeAnimation,
+                      child: ScaleTransition(
+                        scale: _scaleAnimation,
+                        child: GridView.builder(
+                          itemCount: filteredProducts.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 0.7,
+                          ),
+                          itemBuilder: (context, index) {
+                            final product = filteredProducts[index];
+                            return ProductTile(
+                              product: product,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/product',
+                                  arguments: product,
+                                );
+                              },
                             );
                           },
-                        );
-                      },
+                        ),
+                      ),
                     ),
                   ),
           ),
