@@ -22,6 +22,8 @@ class ProductPage extends StatelessWidget {
     final String imagePath =
         (args?['imagePath'] as String?) ?? 'assets/images/placeholder.png';
     final String price = (args?['price'] as String?) ?? '\$0.00';
+    final String description = (args?['description'] as String?) ??
+        '$productName is part of our premium range and features high-quality materials for everyday use.';
 
     return Scaffold(
       appBar: AppBar(
@@ -97,7 +99,7 @@ class ProductPage extends StatelessWidget {
                         const SizedBox(height: 16),
 
                         Text(
-                          '$productName is part of our premium range and features high-quality materials for everyday use.',
+                          description,
                           style: const TextStyle(
                             fontSize: 16,
                             color: Colors.grey,
