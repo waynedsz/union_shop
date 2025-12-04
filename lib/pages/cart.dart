@@ -42,8 +42,19 @@ class Cart extends StatelessWidget {
                 child: items.isEmpty
                     ? const EmptyCartView()
                     : ListView.builder(
-                        itemCount: items.length,
+                        itemCount: items.length + 1, // extra slot for Footer
                         itemBuilder: (context, index) {
+                          if (index == items.length) {
+                            // footer as last scrollable item
+                            return Padding(
+                              padding: EdgeInsets.only(
+                                top: 8.0 * scale,
+                                bottom: 8.0 * scale,
+                              ),
+                              child: const Footer(),
+                            );
+                          }
+
                           final cartItem = items[index];
                           return AnimatedSwitcher(
                             duration: Duration(
@@ -71,12 +82,6 @@ class Cart extends StatelessWidget {
                           );
                         },
                       ),
-              ),
-              Padding(
-                padding: EdgeInsets.only(
-                  bottom: 8.0 * scale,
-                ),
-                child: const Footer(),
               ),
             ],
           );
