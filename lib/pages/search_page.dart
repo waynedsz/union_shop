@@ -35,6 +35,13 @@ class _SearchPageState extends State<SearchPage> {
     });
   }
 
+  void _clearSearch() {
+    _searchController.clear();
+    setState(() {
+      filteredProducts = [];
+    });
+  }
+
   @override
   void dispose() {
     _searchController.removeListener(_onQueryChanged);
@@ -56,9 +63,15 @@ class _SearchPageState extends State<SearchPage> {
             padding: const EdgeInsets.all(16.0),
             child: TextField(
               controller: _searchController,
-              decoration: const InputDecoration(
+              decoration: InputDecoration(
                 labelText: 'Search',
-                border: OutlineInputBorder(),
+                border: const OutlineInputBorder(),
+                suffixIcon: query.isEmpty
+                    ? null
+                    : IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: _clearSearch,
+                      ),
               ),
             ),
           ),
