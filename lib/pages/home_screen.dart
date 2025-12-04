@@ -5,7 +5,6 @@ import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/featured_collections.dart';
 import 'package:union_shop/reusable_content/home_hero.dart';
-import 'package:union_shop/reusable_content/home_product_showcase.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -75,12 +74,6 @@ class _HomeScreenState extends State<HomeScreen>
                   Navigator.pushNamed(context, '/collections');
                 },
               ),
-            ),
-          ),
-          SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: HomeProductShowcase(products: showcaseProducts),
             ),
           ),
           SliverToBoxAdapter(
