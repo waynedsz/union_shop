@@ -15,7 +15,10 @@ class _CollectionsPageState extends State<CollectionsPage> {
     Navigator.pushNamed(
       context,
       '/collection',
-      arguments: label,
+      arguments: {
+        'label': label,
+        'products': collectionProducts[label],
+      },
     );
   }
 
