@@ -106,6 +106,19 @@ class ProductPage extends StatelessWidget {
                             height: 1.5,
                           ),
                         ),
+
+                        const SizedBox(height: 16),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content: Text('$productName added to cart'),
+                              ),
+                            );
+                          },
+                          child: const Text('Add to Cart'),
+                        ),
                       ],
                     ),
                   ),
