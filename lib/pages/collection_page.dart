@@ -74,8 +74,6 @@ class _CollectionPageState extends State<CollectionPage> {
                     },
                   ),
                   const SizedBox(height: 20),
-
-                  /// Grid INSIDE scroll view + shrinkWrap solves overflow.
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
@@ -101,7 +99,6 @@ class _CollectionPageState extends State<CollectionPage> {
                       );
                     },
                   ),
-
                   const SizedBox(height: 20),
                   const Footer(),
                 ],

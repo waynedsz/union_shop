@@ -19,16 +19,22 @@ class ProductTile extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           AspectRatio(
-            aspectRatio: 1,
+            aspectRatio: 0.8,
             child: ClipRRect(
               borderRadius: BorderRadius.circular(12),
               child: Container(
                 color: Colors.grey.shade200,
-                child: Hero(
-                  tag: product.name,
-                  child: Image.asset(
-                    product.imagePath,
-                    fit: BoxFit.contain,
+                child: FittedBox(
+                  fit: BoxFit.contain,
+                  child: SizedBox(
+                    height: 0.8 * MediaQuery.of(context).size.width / 2,
+                    child: Hero(
+                      tag: product.name,
+                      child: Image.asset(
+                        product.imagePath,
+                        fit: BoxFit.contain,
+                      ),
+                    ),
                   ),
                 ),
               ),
