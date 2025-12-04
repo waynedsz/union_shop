@@ -4,7 +4,7 @@ import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/collections_page.dart';
 import 'package:union_shop/pages/collection_page.dart';
 import 'package:union_shop/pages/sale_collection.dart';
-import 'package:union_shop/login_page.dart';
+import 'package:union_shop/pages/login_page.dart';
 import 'package:union_shop/pages/cart.dart';
 
 void main() {
