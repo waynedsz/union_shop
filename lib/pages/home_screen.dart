@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/reusable_content/header.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,84 +16,21 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              height: 100,
-              color: Colors.white,
-              child: Column(
-                children: [
-                  Container(
-                    width: double.infinity,
-                    padding: const EdgeInsets.symmetric(vertical: 8),
-                    color: const Color(0xFF4d2963),
-                    child: const Text(
-                      'PLACEHOLDER HEADER TEXT',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(color: Colors.white, fontSize: 16),
-                    ),
-                  ),
-                  Expanded(
-                    child: Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Row(
-                        children: [
-                          GestureDetector(
-                            onTap: () => navigateToHome(context),
-                            child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                              height: 18,
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, __, ___) {
-                                return Container(
-                                  width: 18,
-                                  height: 18,
-                                  color: Colors.grey[300],
-                                  child: const Icon(Icons.image_not_supported,
-                                      color: Colors.grey),
-                                );
-                              },
-                            ),
-                          ),
-                          const Spacer(),
-                          Row(
-                            children: [
-                              IconButton(
-                                icon: const Icon(Icons.search, size: 18),
-                                onPressed: placeholderCallback,
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.info_outline, size: 18),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/about');
-                                },
-                              ),
-                              IconButton(
-                                icon:
-                                    const Icon(Icons.person_outline, size: 18),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/login');
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.shopping_bag_outlined,
-                                    size: 18),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/cart');
-                                },
-                              ),
-                              IconButton(
-                                icon: const Icon(Icons.menu, size: 18),
-                                onPressed: () {
-                                  Navigator.pushNamed(context, '/collections');
-                                },
-                              ),
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                ],
-              ),
+            Header(
+              onNavigateHome: () => navigateToHome(context),
+              onSearchPressed: placeholderCallback,
+              onAboutPressed: () {
+                Navigator.pushNamed(context, '/about');
+              },
+              onLoginPressed: () {
+                Navigator.pushNamed(context, '/login');
+              },
+              onCartPressed: () {
+                Navigator.pushNamed(context, '/cart');
+              },
+              onMenuPressed: () {
+                Navigator.pushNamed(context, '/collections');
+              },
             ),
             SizedBox(
               height: 400,
