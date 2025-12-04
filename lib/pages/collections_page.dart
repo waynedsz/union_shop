@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/widgets/footer.dart';
+import 'package:union_shop/widgets/collection_tile.dart';
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
@@ -80,11 +81,47 @@ class _CollectionsPageState extends State<CollectionsPage> {
                   mainAxisSpacing: 16,
                   crossAxisSpacing: 16,
                   padding: const EdgeInsets.only(top: 8),
-                  children: const [
-                    _CollectionTile(label: 'Hoodies'),
-                    _CollectionTile(label: 'T-Shirts'),
-                    _CollectionTile(label: 'Accessories'),
-                    _CollectionTile(label: 'New Arrivals'),
+                  children: [
+                    CollectionTile(
+                      label: 'Hoodies',
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/collection',
+                          arguments: 'Hoodies',
+                        );
+                      },
+                    ),
+                    CollectionTile(
+                      label: 'T-Shirts',
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/collection',
+                          arguments: 'T-Shirts',
+                        );
+                      },
+                    ),
+                    CollectionTile(
+                      label: 'Accessories',
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/collection',
+                          arguments: 'Accessories',
+                        );
+                      },
+                    ),
+                    CollectionTile(
+                      label: 'New Arrivals',
+                      onTap: () {
+                        Navigator.pushNamed(
+                          context,
+                          '/collection',
+                          arguments: 'New Arrivals',
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),
@@ -94,83 +131,6 @@ class _CollectionsPageState extends State<CollectionsPage> {
             ],
           ),
         ),
-      ),
-    );
-  }
-}
-
-class _CollectionTile extends StatelessWidget {
-  final String label;
-
-  const _CollectionTile({required this.label});
-
-  void _openCollection(BuildContext context) {
-    Navigator.pushNamed(
-      context,
-      '/collection',
-      arguments: label,
-    );
-  }
-
-  String _imageForLabel() {
-    switch (label) {
-      case 'Hoodies':
-        return 'assets/images/collections/hoodies.png';
-      case 'T-Shirts':
-        return 'assets/images/collections/tshirts.png';
-      case 'Accessories':
-        return 'assets/images/collections/accessories.png';
-      case 'New Arrivals':
-        return 'assets/images/collections/new_arrivals.png';
-      default:
-        return 'assets/images/collections/default.png';
-    }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => _openCollection(context),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Flexible(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade300),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
-                  ),
-                ],
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                _imageForLabel(),
-                fit: BoxFit.cover,
-              ),
-            ),
-          ),
-          const SizedBox(height: 8),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 4),
-            child: Text(
-              label,
-              maxLines: 2,
-              overflow: TextOverflow.ellipsis,
-              textAlign: TextAlign.center,
-              style: const TextStyle(
-                fontSize: 14,
-                fontWeight: FontWeight.w600,
-                letterSpacing: 0.3,
-              ),
-            ),
-          ),
-        ],
       ),
     );
   }
