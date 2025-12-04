@@ -32,7 +32,7 @@ class Cart extends StatelessWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final height = constraints.maxHeight;
-          final baseHeight = 800.0;
+          const baseHeight = 800.0;
           final scale = (height / baseHeight).clamp(0.7, 1.2);
           final verticalOffset = 0.05 * scale;
 
