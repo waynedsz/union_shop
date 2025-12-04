@@ -81,11 +81,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     Navigator.pushNamed(
                       context,
                       '/product',
-                      arguments: {
-                        'productName': product.name,
-                        'imagePath': product.imagePath,
-                        'price': product.price,
-                      },
+                      arguments: product,
                     );
                   },
                 );
