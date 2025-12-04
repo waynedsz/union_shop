@@ -38,10 +38,13 @@ class FeaturedCollections extends StatelessWidget {
           const SizedBox(height: 32),
           LayoutBuilder(
             builder: (context, constraints) {
+              final maxWidth = constraints.maxWidth;
+              final crossAxisCount = maxWidth > 700 ? 3 : 2;
+
               return GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: 2,
+                crossAxisCount: crossAxisCount,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
                 childAspectRatio: 4 / 3,
