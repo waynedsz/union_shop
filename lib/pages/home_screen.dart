@@ -11,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
+        title: 'Home',
         onNavigateHome: () => NavigationController.goHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () => NavigationController.goAbout(context),

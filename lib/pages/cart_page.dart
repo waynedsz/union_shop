@@ -27,6 +27,7 @@ class CartPage extends StatelessWidget {
 
     return Scaffold(
       appBar: Header(
+        title: 'Your Cart',
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () {

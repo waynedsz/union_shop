@@ -15,6 +15,7 @@ class AboutPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
+        title: 'About Us',
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () {

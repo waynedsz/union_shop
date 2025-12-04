@@ -28,6 +28,7 @@ class CollectionsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
+        title: 'Collections',
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () {

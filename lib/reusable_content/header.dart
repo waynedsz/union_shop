@@ -4,6 +4,7 @@ import 'package:union_shop/reusable_content/navigation_controller.dart';
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({
     super.key,
+    required this.title,
     required this.onNavigateHome,
     required this.onSearchPressed,
     required this.onAboutPressed,
@@ -11,6 +12,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     required this.onCartPressed,
   });
 
+  final String title;
   final VoidCallback onNavigateHome;
   final VoidCallback onSearchPressed;
   final VoidCallback onAboutPressed;

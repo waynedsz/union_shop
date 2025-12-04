@@ -45,6 +45,7 @@ class _CollectionPageState extends State<CollectionPage> {
 
     return Scaffold(
       appBar: Header(
+        title: collectionName,
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () {

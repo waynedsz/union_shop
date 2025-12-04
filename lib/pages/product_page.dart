@@ -31,6 +31,7 @@ class ProductPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
+        title: product.name,
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () {
