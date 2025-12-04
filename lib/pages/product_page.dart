@@ -53,9 +53,12 @@ class ProductPage extends StatelessWidget {
                           ),
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
-                            child: Image.asset(
-                              imagePath,
-                              fit: BoxFit.cover,
+                            child: Hero(
+                              tag: productName,
+                              child: Image.asset(
+                                imagePath,
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                         ),

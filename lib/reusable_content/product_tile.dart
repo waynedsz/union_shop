@@ -39,9 +39,12 @@ class ProductTile extends StatelessWidget {
                 ],
               ),
               clipBehavior: Clip.antiAlias,
-              child: Image.asset(
-                imagePath,
-                fit: BoxFit.cover,
+              child: Hero(
+                tag: name,
+                child: Image.asset(
+                  imagePath,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
