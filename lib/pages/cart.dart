@@ -25,9 +25,7 @@ class Cart extends StatelessWidget {
           if (items.isNotEmpty)
             IconButton(
               icon: const Icon(Icons.delete_outline),
-              onPressed: () {
-                cartState.clearCart();
-              },
+              onPressed: cartState.clearCart,
             ),
         ],
       ),

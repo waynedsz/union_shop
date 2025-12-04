@@ -14,8 +14,7 @@ class EmptyCartView extends StatelessWidget {
             Icon(
               Icons.shopping_bag_outlined,
               size: 72,
-              color:
-                  Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
             ),
             const SizedBox(height: 16),
             Text(
