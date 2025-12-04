@@ -111,15 +111,15 @@ class _CollectionTile extends StatelessWidget {
   String _imageForLabel() {
     switch (label) {
       case 'Hoodies':
-        return 'assets/images/products/product1.png';
+        return 'assets/images/collections/hoodies.png';
       case 'T-Shirts':
-        return 'assets/images/products/product2.png';
+        return 'assets/images/collections/tshirts.png';
       case 'Accessories':
-        return 'assets/images/products/product1.png';
+        return 'assets/images/collections/accessories.png';
       case 'New Arrivals':
-        return 'assets/images/products/product2.png';
+        return 'assets/images/collections/new_arrivals.png';
       default:
-        return 'assets/images/products/product1.png';
+        return 'assets/images/collections/default.png';
     }
   }
 
