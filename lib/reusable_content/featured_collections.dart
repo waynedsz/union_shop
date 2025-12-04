@@ -42,9 +42,9 @@ class FeaturedCollections extends StatelessWidget {
               itemBuilder: (context, index) {
                 final label = labels[index];
                 final products = collectionProducts[label] ?? [];
-                final imageUrl =
-                    products.isNotEmpty ? products.first.imageUrl : null;
-
+                final firstProduct =
+                    products.isNotEmpty ? products.first : null;
+                final imageUrl = firstProduct?.imagePath;
                 return GestureDetector(
                   onTap: () => _openCollection(context, label),
                   child: Container(
@@ -102,6 +102,7 @@ class FeaturedCollections extends StatelessWidget {
                             ),
                           ),
                         ),
+                        // Optionally show priceText under the label later if desired.
                       ],
                     ),
                   ),
