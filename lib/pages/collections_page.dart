@@ -11,26 +11,15 @@ class CollectionsPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void placeholderCallback() {}
-
-  void _open(BuildContext context, String label) {
-    Navigator.pushNamed(
-      context,
-      '/collection',
-      arguments: {
-        'label': label,
-        'products': collectionProducts[label],
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
         title: 'Collections',
         onNavigateHome: () => navigateToHome(context),
-        onSearchPressed: placeholderCallback,
+        onSearchPressed: () {
+          Navigator.pushNamed(context, '/search');
+        },
         onAboutPressed: () {
           Navigator.pushNamed(context, '/about');
         },
@@ -96,6 +85,17 @@ class CollectionsPage extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+
+  void _open(BuildContext context, String label) {
+    Navigator.pushNamed(
+      context,
+      '/collection',
+      arguments: {
+        'label': label,
+        'products': collectionProducts[label],
+      },
     );
   }
 }

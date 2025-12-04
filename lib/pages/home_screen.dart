@@ -5,15 +5,15 @@ import 'package:union_shop/reusable_content/navigation_controller.dart';
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
-  void placeholderCallback() {}
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: Header(
         title: 'Home',
         onNavigateHome: () => NavigationController.goHome(context),
-        onSearchPressed: placeholderCallback,
+        onSearchPressed: () {
+          Navigator.pushNamed(context, '/search');
+        },
         onAboutPressed: () => NavigationController.goAbout(context),
         onLoginPressed: () => NavigationController.goLogin(context),
         onCartPressed: () => NavigationController.goCart(context),
