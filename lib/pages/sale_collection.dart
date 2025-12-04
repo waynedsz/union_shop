@@ -18,6 +18,9 @@ class _SaleCollectionState extends State<SaleCollection>
   late final AnimationController _fadeController;
   late final Animation<double> _fadeAnimation;
 
+  late List<Product> saleProducts;
+  String _sortOption = 'price_low_high';
+
   @override
   void initState() {
     super.initState();
@@ -28,6 +31,12 @@ class _SaleCollectionState extends State<SaleCollection>
     _fadeAnimation =
         CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut);
     _fadeController.forward();
+
+    saleProducts = collectionProducts.values
+        .expand((products) => products)
+        .where((product) => product.isOnSale)
+        .toList();
+    _applySort();
   }
 
   @override
@@ -36,13 +45,24 @@ class _SaleCollectionState extends State<SaleCollection>
     super.dispose();
   }
 
+  void _applySort() {
+    setState(() {
+      if (_sortOption == 'price_low_high') {
+        saleProducts.sort((a, b) => a.price.compareTo(b.price));
+      } else if (_sortOption == 'discount_high_low') {
+        double discountValue(Product p) =>
+            (p.discountPercent ?? 0) > 0 ? p.discountPercent! : 0;
+        saleProducts.sort(
+          (a, b) => discountValue(b).compareTo(discountValue(a)),
+        );
+      } else if (_sortOption == 'alpha_az') {
+        saleProducts.sort((a, b) => a.name.compareTo(b.name));
+      }
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    final List<Product> saleProducts = collectionProducts.values
-        .expand((products) => products)
-        .where((product) => product.isOnSale)
-        .toList();
-
     return Scaffold(
       appBar: Header(
         title: 'Sale',
@@ -56,6 +76,41 @@ class _SaleCollectionState extends State<SaleCollection>
       ),
       body: Column(
         children: [
+          if (saleProducts.isNotEmpty)
+            Padding(
+              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
+              child: Row(
+                children: [
+                  const Text(
+                    'Sort by:',
+                    style: TextStyle(fontSize: 14),
+                  ),
+                  const SizedBox(width: 8),
+                  DropdownButton<String>(
+                    value: _sortOption,
+                    onChanged: (value) {
+                      if (value == null) return;
+                      _sortOption = value;
+                      _applySort();
+                    },
+                    items: const [
+                      DropdownMenuItem(
+                        value: 'price_low_high',
+                        child: Text('Price: Low → High'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'discount_high_low',
+                        child: Text('Discount: High → Low'),
+                      ),
+                      DropdownMenuItem(
+                        value: 'alpha_az',
+                        child: Text('Alphabetical: A → Z'),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
           Expanded(
             child: saleProducts.isEmpty
                 ? Center(
