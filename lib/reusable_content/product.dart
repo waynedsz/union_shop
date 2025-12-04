@@ -4,6 +4,7 @@ class Product {
   final double price;
   final String description;
   final bool isOnSale;
+  final double? discountPercent;
 
   Product({
     required this.name,
@@ -11,6 +12,7 @@ class Product {
     required this.price,
     required this.description,
     this.isOnSale = false,
+    this.discountPercent,
   });
 
   factory Product.fromMap(Map<String, dynamic> map) {
@@ -22,6 +24,7 @@ class Product {
       price: (map['price'] is num) ? (map['price'] as num).toDouble() : 0.0,
       description: map['description'] as String? ?? '',
       isOnSale: map['isOnSale'] as bool? ?? false,
+      discountPercent: (map['discountPercent'] as num?)?.toDouble(),
     );
   }
 }
