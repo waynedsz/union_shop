@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/reusable_content/product_data.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -9,6 +10,8 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   final TextEditingController _searchController = TextEditingController();
+  late final List<Product> allProducts = allProductsList;
+  List<Product> filteredProducts = [];
 
   @override
   void dispose() {
