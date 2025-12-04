@@ -4,6 +4,7 @@ import 'package:union_shop/reusable_content/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_card.dart';
 import 'package:union_shop/reusable_content/product.dart';
+import 'package:union_shop/reusable_content/featured_collections.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -76,6 +77,9 @@ class _HomeScreenState extends State<HomeScreen>
               opacity: _fadeAnimation,
               child: HomeProductShowcase(products: showcaseProducts),
             ),
+          ),
+          const SliverToBoxAdapter(
+            child: FeaturedCollections(),
           ),
           SliverToBoxAdapter(
             child: Container(
