@@ -75,8 +75,6 @@ class Cart extends StatelessWidget {
                             width: double.infinity,
                             child: OutlinedButton(
                               onPressed: () {
-                                // Navigate back to collections page.
-                                // Adjust this to your actual navigation target.
                                 Navigator.of(context).pop();
                               },
                               style: OutlinedButton.styleFrom(
@@ -125,7 +123,6 @@ class Cart extends StatelessWidget {
           const Footer(),
         ],
       ),
-      // Sticky bottom container above Footer
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(16, 8, 16, 8),
         decoration: BoxDecoration(
@@ -143,7 +140,6 @@ class Cart extends StatelessWidget {
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
-              // Redesigned total row
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.symmetric(
@@ -178,9 +174,7 @@ class Cart extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () {
-                    // TODO: implement checkout flow
-                  },
+                  onPressed: () {},
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Theme.of(context).primaryColor,
                     padding: const EdgeInsets.symmetric(vertical: 14),
@@ -205,7 +199,6 @@ class Cart extends StatelessWidget {
   }
 }
 
-/// Reusable cart item tile widget
 class CartItemTile extends StatelessWidget {
   final dynamic cartItem;
   final CartState cartState;
@@ -224,7 +217,7 @@ class CartItemTile extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(
         horizontal: 12,
-        vertical: 8, // slightly more vertical spacing
+        vertical: 8,
       ),
       child: Card(
         elevation: 3,
@@ -232,7 +225,6 @@ class CartItemTile extends StatelessWidget {
           borderRadius: BorderRadius.circular(12),
         ),
         child: Padding(
-          // increase inner padding to make content breathe
           padding: const EdgeInsets.symmetric(
             horizontal: 12,
             vertical: 12,
