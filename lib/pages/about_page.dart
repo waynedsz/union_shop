@@ -19,7 +19,6 @@ class AboutPage extends StatelessWidget {
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
         onAboutPressed: () {
-          // Already on About; you can keep this or no-op.
           Navigator.pushNamed(context, '/about');
         },
         onLoginPressed: () {
