@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
 import 'package:union_shop/reusable_content/product_widgets/product_tile.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
+import 'package:union_shop/reusable_content/header.dart';
+import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -55,8 +57,16 @@ class _SearchPageState extends State<SearchPage> {
     final query = _searchController.text.trim();
 
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Search'),
+      appBar: Header(
+        title: 'Search',
+        onNavigateHome: () => NavigationController.goHome(context),
+        onSearchPressed: () {
+          // already on search; you may no-op or still push
+          Navigator.pushNamed(context, '/search');
+        },
+        onAboutPressed: () => NavigationController.goAbout(context),
+        onLoginPressed: () => NavigationController.goLogin(context),
+        onCartPressed: () => NavigationController.goCart(context),
       ),
       body: Column(
         children: [
