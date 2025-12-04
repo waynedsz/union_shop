@@ -4,6 +4,7 @@ import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
+import 'package:union_shop/reusable_content/product_tile.dart';
 
 class SaleCollection extends StatelessWidget {
   const SaleCollection({Key? key}) : super(key: key);
@@ -29,17 +30,45 @@ class SaleCollection extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Center(
-              child: saleProducts.isEmpty
-                  ? Text(
+            child: saleProducts.isEmpty
+                ? Center(
+                    child: Text(
                       'No products are on sale right now.',
                       style: Theme.of(context).textTheme.bodyLarge,
-                    )
-                  : Text(
-                      'Sale',
-                      style: Theme.of(context).textTheme.headlineMedium,
                     ),
-            ),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        final crossAxisCount =
+                            constraints.maxWidth > 700 ? 3 : 2;
+                        return GridView.builder(
+                          itemCount: saleProducts.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: crossAxisCount,
+                            crossAxisSpacing: 16,
+                            mainAxisSpacing: 16,
+                            childAspectRatio: 0.7,
+                          ),
+                          itemBuilder: (context, index) {
+                            final product = saleProducts[index];
+                            return ProductTile(
+                              product: product,
+                              onTap: () {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/product',
+                                  arguments: product,
+                                );
+                              },
+                            );
+                          },
+                        );
+                      },
+                    ),
+                  ),
           ),
           const Footer(),
         ],
