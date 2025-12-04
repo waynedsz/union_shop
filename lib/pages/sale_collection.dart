@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
+import 'package:union_shop/reusable_content/header.dart';
+import 'package:union_shop/reusable_content/navigation_controller.dart';
 
 class SaleCollection extends StatelessWidget {
   const SaleCollection({Key? key}) : super(key: key);
@@ -7,17 +9,27 @@ class SaleCollection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Sale Collection'),
+      appBar: Header(
+        title: 'Sale',
+        onNavigateHome: () => NavigationController.goHome(context),
+        onSearchPressed: () {
+          Navigator.pushNamed(context, '/search');
+        },
+        onAboutPressed: () => NavigationController.goAbout(context),
+        onLoginPressed: () => NavigationController.goLogin(context),
+        onCartPressed: () => NavigationController.goCart(context),
       ),
       body: Column(
-        children: const [
+        children: [
           Expanded(
             child: Center(
-              child: Text('Welcome to the Sale Collection Page!'),
+              child: Text(
+                'Sale',
+                style: Theme.of(context).textTheme.headlineMedium,
+              ),
             ),
           ),
-          Footer(),
+          const Footer(),
         ],
       ),
     );
