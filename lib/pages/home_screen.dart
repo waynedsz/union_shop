@@ -78,8 +78,11 @@ class _HomeScreenState extends State<HomeScreen>
               child: HomeProductShowcase(products: showcaseProducts),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: FeaturedCollections(),
+          SliverToBoxAdapter(
+            child: FadeTransition(
+              opacity: _fadeAnimation,
+              child: const FeaturedCollections(),
+            ),
           ),
           SliverToBoxAdapter(
             child: Container(
