@@ -16,14 +16,13 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
+    final rawArgs = ModalRoute.of(context)?.settings.arguments;
 
     String collectionName;
-
     if (rawArgs is String) {
       collectionName = rawArgs;
     } else if (rawArgs is Map) {
-      final Object? value = rawArgs['collectionName'] ?? rawArgs['label'];
+      final value = rawArgs['collectionName'] ?? rawArgs['label'];
       collectionName = value is String ? value : 'Selected Collection';
     } else {
       collectionName = 'Selected Collection';
@@ -41,72 +40,54 @@ class _CollectionPageState extends State<CollectionPage> {
       appBar: AppBar(
         title: Text(collectionName),
       ),
-      body: SingleChildScrollView(
-        child: ConstrainedBox(
-          constraints: BoxConstraints(
-            minHeight: MediaQuery.of(context).size.height -
-                (Scaffold.of(context).appBarMaxHeight ?? kToolbarHeight),
+      body: Column(
+        children: [
+          const SizedBox(height: 12),
+          const Text(
+            'Browse a curated selection of products.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: Colors.black54),
           ),
-          child: IntrinsicHeight(
-            child: Padding(
-              padding: const EdgeInsets.all(16),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  const SizedBox(height: 12),
-                  const Text(
-                    'Browse a curated selection of products.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 14, color: Colors.black54),
-                  ),
-                  const SizedBox(height: 20),
-                  DropdownButton<String>(
-                    value: _selectedSort,
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'Sort A-Z', child: Text('Sort A-Z')),
-                      DropdownMenuItem(
-                          value: 'Sort Z-A', child: Text('Sort Z-A')),
-                    ],
-                    onChanged: (value) {
-                      if (value == null) return;
-                      setState(() => _selectedSort = value);
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  GridView.builder(
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                    gridDelegate:
-                        const SliverGridDelegateWithFixedCrossAxisCount(
-                      crossAxisCount: 2,
-                      mainAxisSpacing: 10,
-                      crossAxisSpacing: 16,
-                    ),
-                    itemCount: products.length,
-                    itemBuilder: (context, index) {
-                      final product = products[index];
-                      return ProductTile(
-                        product: product,
-                        onTap: () {
-                          Navigator.pushNamed(
-                            context,
-                            '/product',
-                            arguments: product,
-                          );
-                        },
-                      );
-                    },
-                  ),
-                  const SizedBox(height: 20),
-                  const Footer(),
-                ],
+          const SizedBox(height: 20),
+          DropdownButton<String>(
+            value: _selectedSort,
+            items: const [
+              DropdownMenuItem(value: 'Sort A-Z', child: Text('Sort A-Z')),
+              DropdownMenuItem(value: 'Sort Z-A', child: Text('Sort Z-A')),
+            ],
+            onChanged: (value) {
+              if (value == null) return;
+              setState(() => _selectedSort = value);
+            },
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                mainAxisSpacing: 20,
+                crossAxisSpacing: 16,
+                childAspectRatio: 0.70,
               ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return ProductTile(
+                  product: product,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/product',
+                      arguments: product,
+                    );
+                  },
+                );
+              },
             ),
           ),
-        ),
+          const Footer(),
+        ],
       ),
     );
   }
