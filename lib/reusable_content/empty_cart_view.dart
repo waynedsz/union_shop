@@ -5,18 +5,30 @@ class EmptyCartView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final size = MediaQuery.of(context).size;
+    final shortestSide = size.shortestSide;
+    final scale = (shortestSide / 400).clamp(0.8, 1.2);
+
+    final horizontalPadding = 32.0 * scale;
+    final iconSize = 72.0 * scale;
+    final gapTitle = 16.0 * scale;
+    final gapSubtitle = 8.0 * scale;
+    final gapButton = 24.0 * scale;
+    final buttonVertPadding = 14.0 * scale;
+    final buttonRadius = 24.0 * scale;
+
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 32.0),
+        padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
         child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Icon(
               Icons.shopping_bag_outlined,
-              size: 72,
+              size: iconSize,
               color: Theme.of(context).colorScheme.onSurface.withOpacity(0.3),
             ),
-            const SizedBox(height: 16),
+            SizedBox(height: gapTitle),
             Text(
               'Your cart is empty',
               textAlign: TextAlign.center,
@@ -25,7 +37,7 @@ class EmptyCartView extends StatelessWidget {
                   .titleMedium
                   ?.copyWith(fontWeight: FontWeight.w600),
             ),
-            const SizedBox(height: 8),
+            SizedBox(height: gapSubtitle),
             Text(
               'Browse our collections and add items you love.',
               textAlign: TextAlign.center,
@@ -37,7 +49,7 @@ class EmptyCartView extends StatelessWidget {
                         ?.withOpacity(0.6),
                   ),
             ),
-            const SizedBox(height: 24),
+            SizedBox(height: gapButton),
             SizedBox(
               width: double.infinity,
               child: OutlinedButton(
@@ -45,11 +57,11 @@ class EmptyCartView extends StatelessWidget {
                   Navigator.of(context).pop();
                 },
                 style: OutlinedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(
-                    vertical: 14,
+                  padding: EdgeInsets.symmetric(
+                    vertical: buttonVertPadding,
                   ),
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(24),
+                    borderRadius: BorderRadius.circular(buttonRadius),
                   ),
                 ),
                 child: const Text('Back to collections'),
