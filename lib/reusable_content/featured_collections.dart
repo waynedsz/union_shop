@@ -23,10 +23,11 @@ class FeaturedCollections extends StatelessWidget {
       color: Colors.white,
       padding: const EdgeInsets.all(40),
       child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
         children: [
           const Text(
             'Featured Collections',
+            textAlign: TextAlign.center,
             style: TextStyle(
               fontSize: 20,
               color: Colors.black,
