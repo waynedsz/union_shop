@@ -38,6 +38,12 @@ class Cart extends StatelessWidget {
                         subtitle: Text(
                           '£${product.price.toStringAsFixed(2)} x ${cartItem.quantity}',
                         ),
+                        trailing: IconButton(
+                          icon: const Icon(Icons.remove_circle_outline),
+                          onPressed: () {
+                            cartState.removeFromCart(product);
+                          },
+                        ),
                       );
                     },
                   ),
