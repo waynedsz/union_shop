@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/cart_state.dart';
+import 'package:union_shop/reusable_content/header.dart';
 import 'package:provider/provider.dart';
 
 class ProductPage extends StatelessWidget {
@@ -20,11 +21,30 @@ class ProductPage extends StatelessWidget {
     );
   }
 
+  void navigateToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
+  void placeholderCallback() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(product.name),
+      appBar: Header(
+        onNavigateHome: () => navigateToHome(context),
+        onSearchPressed: placeholderCallback,
+        onAboutPressed: () {
+          Navigator.pushNamed(context, '/about');
+        },
+        onLoginPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
+        onCartPressed: () {
+          Navigator.pushNamed(context, '/cart');
+        },
+        onMenuPressed: () {
+          Navigator.pushNamed(context, '/collections');
+        },
       ),
       body: Column(
         children: [
