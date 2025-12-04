@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import 'package:union_shop/reusable_content/cart_state.dart';
+import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 import 'package:union_shop/pages/home_screen.dart';
 import 'package:union_shop/pages/about_page.dart';
 import 'package:union_shop/pages/collections_page.dart';
