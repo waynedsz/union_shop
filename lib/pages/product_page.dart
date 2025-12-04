@@ -13,6 +13,15 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final args =
+        ModalRoute.of(context)?.settings.arguments as Map<String, dynamic>?;
+
+    final String productName =
+        args?['productName'] as String? ?? 'Placeholder Product Name';
+    final String imagePath = args?['imagePath'] as String? ??
+        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282';
+    final String price = args?['price'] as String? ?? '£15.00';
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Product'),
@@ -42,7 +51,7 @@ class ProductPage extends StatelessWidget {
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(8),
                             child: Image.network(
-                              'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
+                              imagePath,
                               fit: BoxFit.cover,
                               errorBuilder: (context, error, stackTrace) {
                                 return Container(
@@ -74,9 +83,9 @@ class ProductPage extends StatelessWidget {
                         const SizedBox(height: 24),
 
                         // Product name
-                        const Text(
-                          'Placeholder Product Name',
-                          style: TextStyle(
+                        Text(
+                          productName,
+                          style: const TextStyle(
                             fontSize: 28,
                             fontWeight: FontWeight.bold,
                             color: Colors.black,
@@ -86,9 +95,9 @@ class ProductPage extends StatelessWidget {
                         const SizedBox(height: 12),
 
                         // Product price
-                        const Text(
-                          '£15.00',
-                          style: TextStyle(
+                        Text(
+                          price,
+                          style: const TextStyle(
                             fontSize: 24,
                             fontWeight: FontWeight.bold,
                             color: Color(0xFF4d2963),
