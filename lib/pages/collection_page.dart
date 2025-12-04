@@ -42,59 +42,72 @@ class _CollectionPageState extends State<CollectionPage> {
         title: Text(collectionName),
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 12),
-            const Text(
-              'Browse a curated selection of products.',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 14, color: Colors.black54),
-            ),
-            const SizedBox(height: 20),
-            DropdownButton<String>(
-              value: _selectedSort,
-              items: const [
-                DropdownMenuItem(value: 'Sort A-Z', child: Text('Sort A-Z')),
-                DropdownMenuItem(value: 'Sort Z-A', child: Text('Sort Z-A')),
-              ],
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() => _selectedSort = value);
-              },
-            ),
-            const SizedBox(height: 20),
-
-            /// Grid INSIDE scroll view + shrinkWrap solves overflow.
-            GridView.builder(
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
+        child: ConstrainedBox(
+          constraints: BoxConstraints(
+            minHeight: MediaQuery.of(context).size.height -
+                (Scaffold.of(context).appBarMaxHeight ?? kToolbarHeight),
+          ),
+          child: IntrinsicHeight(
+            child: Padding(
               padding: const EdgeInsets.all(16),
-              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 2,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
-              ),
-              itemCount: products.length,
-              itemBuilder: (context, index) {
-                final product = products[index];
-                return ProductTile(
-                  product: product,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      '/product',
-                      arguments: product,
-                    );
-                  },
-                );
-              },
-            ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Browse a curated selection of products.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14, color: Colors.black54),
+                  ),
+                  const SizedBox(height: 20),
+                  DropdownButton<String>(
+                    value: _selectedSort,
+                    items: const [
+                      DropdownMenuItem(
+                          value: 'Sort A-Z', child: Text('Sort A-Z')),
+                      DropdownMenuItem(
+                          value: 'Sort Z-A', child: Text('Sort Z-A')),
+                    ],
+                    onChanged: (value) {
+                      if (value == null) return;
+                      setState(() => _selectedSort = value);
+                    },
+                  ),
+                  const SizedBox(height: 20),
 
-            const SizedBox(height: 20),
-            const Footer(),
-          ],
+                  /// Grid INSIDE scroll view + shrinkWrap solves overflow.
+                  GridView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(16),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      mainAxisSpacing: 16,
+                      crossAxisSpacing: 16,
+                    ),
+                    itemCount: products.length,
+                    itemBuilder: (context, index) {
+                      final product = products[index];
+                      return ProductTile(
+                        product: product,
+                        onTap: () {
+                          Navigator.pushNamed(
+                            context,
+                            '/product',
+                            arguments: product,
+                          );
+                        },
+                      );
+                    },
+                  ),
+
+                  const SizedBox(height: 20),
+                  const Footer(),
+                ],
+              ),
+            ),
+          ),
         ),
       ),
     );
