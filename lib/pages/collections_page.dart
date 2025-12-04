@@ -51,20 +51,20 @@ class CollectionsPage extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: [
                     const Text(
-                      "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: Colors.black54,
-                      ),
-                    ),
-                    const SizedBox(height: 20),
-                    const Text(
                       "Browse Our Collections",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    const Text(
+                      "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: Colors.black54,
                       ),
                     ),
                     const SizedBox(height: 20),
