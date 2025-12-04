@@ -36,7 +36,7 @@ final Map<String, List<Map<String, String>>> collectionProducts = {
     },
     {
       'name': 'Water Bottle',
-      'image': 'assets/images/products/water_botlle.png',
+      'image': 'assets/images/products/water_bottle.png',
     },
   ],
 };
