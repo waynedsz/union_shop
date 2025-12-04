@@ -67,9 +67,7 @@ class ProductPage extends StatelessWidget {
                             ),
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
                         Text(
                           productName,
                           style: const TextStyle(
@@ -78,9 +76,7 @@ class ProductPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
                         Text(
                           price,
                           style: const TextStyle(
@@ -89,9 +85,7 @@ class ProductPage extends StatelessWidget {
                             color: Color(0xFF4d2963),
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
                         const Text(
                           'Description',
                           style: TextStyle(
@@ -100,9 +94,7 @@ class ProductPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
                         Text(
                           description,
                           style: const TextStyle(
@@ -111,9 +103,7 @@ class ProductPage extends StatelessWidget {
                             height: 1.5,
                           ),
                         ),
-
                         const SizedBox(height: 16),
-
                         ElevatedButton(
                           onPressed: () {
                             ScaffoldMessenger.of(context).showSnackBar(
