@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/collection_tile.dart';
+import 'package:union_shop/reusable_content/product_data.dart';
 
 class CollectionsPage extends StatefulWidget {
   const CollectionsPage({super.key});
@@ -53,30 +54,23 @@ class _CollectionsPageState extends State<CollectionsPage> {
                       ),
                     ),
                     const SizedBox(height: 20),
-                    GridView.count(
+                    GridView.builder(
                       shrinkWrap: true,
                       physics: const NeverScrollableScrollPhysics(),
-                      crossAxisCount: 2,
-                      crossAxisSpacing: 16,
-                      mainAxisSpacing: 16,
-                      children: [
-                        CollectionTile(
-                          label: 'Hoodies',
-                          onTap: () => _open(context, 'Hoodies'),
-                        ),
-                        CollectionTile(
-                          label: 'T-Shirts',
-                          onTap: () => _open(context, 'T-Shirts'),
-                        ),
-                        CollectionTile(
-                          label: 'Accessories',
-                          onTap: () => _open(context, 'Accessories'),
-                        ),
-                        CollectionTile(
-                          label: 'New Arrivals',
-                          onTap: () => _open(context, 'New Arrivals'),
-                        ),
-                      ],
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                      ),
+                      itemCount: collectionProducts.keys.length,
+                      itemBuilder: (context, index) {
+                        final label = collectionProducts.keys.toList()[index];
+                        return CollectionTile(
+                          label: label,
+                          onTap: () => _open(context, label),
+                        );
+                      },
                     ),
                     const SizedBox(height: 20),
                     const Footer(),
