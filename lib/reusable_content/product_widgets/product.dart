@@ -17,6 +17,9 @@ class Product {
     DateTime? createdAt,
   }) : createdAt = createdAt ?? DateTime(2000);
 
+  /// Always returns a non-null createdAt (defaults to year 2000).
+  DateTime get safeCreatedAt => createdAt ?? DateTime(2000);
+
   factory Product.fromMap(Map<String, dynamic> map) {
     final dynamic rawImage = map['imagePath'] ?? map['image'];
 
