@@ -21,65 +21,15 @@ class HomeScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(
-              height: 400,
-              width: double.infinity,
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        image: DecorationImage(
-                          image: NetworkImage(
-                            'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                          ),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Container(
-                        color: Colors.black54,
-                      ),
-                    ),
-                  ),
-                  Positioned(
-                    left: 24,
-                    right: 24,
-                    top: 80,
-                    child: Column(
-                      children: [
-                        const Text(
-                          'Placeholder Hero Title',
-                          style: TextStyle(
-                            fontSize: 32,
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        const SizedBox(height: 16),
-                        const Text(
-                          'This is placeholder text for the hero section.',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(fontSize: 20, color: Colors.white),
-                        ),
-                        const SizedBox(height: 32),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/collections');
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF4d2963),
-                            foregroundColor: Colors.white,
-                          ),
-                          child: const Text(
-                            'BROWSE PRODUCTS',
-                            style: TextStyle(letterSpacing: 1),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ],
-              ),
+            HomeHero(
+              title: 'Placeholder Hero Title',
+              subtitle: 'This is placeholder text for the hero section.',
+              buttonText: 'BROWSE PRODUCTS',
+              imageUrl:
+                  'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+              onButtonPressed: () {
+                Navigator.pushNamed(context, '/collections');
+              },
             ),
             Container(
               color: Colors.white,
@@ -149,6 +99,86 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
+class HomeHero extends StatelessWidget {
+  const HomeHero({
+    super.key,
+    required this.title,
+    required this.subtitle,
+    required this.buttonText,
+    required this.imageUrl,
+    required this.onButtonPressed,
+  });
+
+  final String title;
+  final String subtitle;
+  final String buttonText;
+  final String imageUrl;
+  final VoidCallback onButtonPressed;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      height: 400,
+      width: double.infinity,
+      child: Stack(
+        children: [
+          Positioned.fill(
+            child: Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: NetworkImage(imageUrl),
+                  fit: BoxFit.cover,
+                ),
+              ),
+              child: Container(
+                color: Colors.black54,
+              ),
+            ),
+          ),
+          Positioned(
+            left: 24,
+            right: 24,
+            top: 80,
+            child: Column(
+              children: [
+                Text(
+                  title,
+                  style: const TextStyle(
+                    fontSize: 32,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  subtitle,
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(
+                    fontSize: 20,
+                    color: Colors.white,
+                  ),
+                ),
+                const SizedBox(height: 32),
+                ElevatedButton(
+                  onPressed: onButtonPressed,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF4d2963),
+                    foregroundColor: Colors.white,
+                  ),
+                  child: Text(
+                    buttonText,
+                    style: const TextStyle(letterSpacing: 1),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
 class ProductCard extends StatelessWidget {
   final String title;
   final String price;
@@ -175,8 +205,10 @@ class ProductCard extends StatelessWidget {
               errorBuilder: (_, __, ___) {
                 return Container(
                   color: Colors.grey[300],
-                  child:
-                      const Icon(Icons.image_not_supported, color: Colors.grey),
+                  child: const Icon(
+                    Icons.image_not_supported,
+                    color: Colors.grey,
+                  ),
                 );
               },
             ),
@@ -184,7 +216,10 @@ class ProductCard extends StatelessWidget {
           const SizedBox(height: 4),
           Text(title, maxLines: 2),
           const SizedBox(height: 4),
-          Text(price, style: const TextStyle(color: Colors.grey)),
+          Text(
+            price,
+            style: const TextStyle(color: Colors.grey),
+          ),
         ],
       ),
     );
