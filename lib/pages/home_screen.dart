@@ -25,9 +25,6 @@ class HomeScreen extends StatelessWidget {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
-        onMenuPressed: () {
-          Navigator.pushNamed(context, '/collections');
-        },
       ),
       body: SingleChildScrollView(
         child: Column(

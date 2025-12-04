@@ -8,7 +8,6 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     required this.onAboutPressed,
     required this.onLoginPressed,
     required this.onCartPressed,
-    required this.onMenuPressed,
   });
 
   final VoidCallback onNavigateHome;
@@ -16,7 +15,6 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onAboutPressed;
   final VoidCallback onLoginPressed;
   final VoidCallback onCartPressed;
-  final VoidCallback onMenuPressed;
 
   @override
   Size get preferredSize => const Size.fromHeight(kToolbarHeight);
@@ -158,19 +156,6 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             minHeight: 32,
                           ),
                           onPressed: onCartPressed,
-                        ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.menu,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onMenuPressed,
                         ),
                         IconButton(
                           icon: const Icon(

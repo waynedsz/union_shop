@@ -40,7 +40,7 @@ class UnionShopApp extends StatelessWidget {
         '/collection': (context) => const CollectionPage(),
         '/sale-collection': (context) => const SaleCollection(),
         '/login': (context) => const LoginPage(),
-        '/cart': (context) => const Cart(),
+        '/cart': (context) => const CartPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/product') {
