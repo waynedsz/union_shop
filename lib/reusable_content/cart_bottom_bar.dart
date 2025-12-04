@@ -14,7 +14,6 @@ class CartBottomBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final shortestSide = size.shortestSide;
-    // Clamp scale so very small/large devices still look reasonable.
     final scale = (shortestSide / 400).clamp(0.8, 1.2);
 
     final horizontalPadding = 16.0 * scale;
