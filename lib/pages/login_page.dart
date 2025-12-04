@@ -16,54 +16,56 @@ class LoginPage extends StatelessWidget {
       body: const Column(
         children: [
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.all(24.0),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Email',
-                        border: OutlineInputBorder(),
-                      ),
-                      keyboardType: TextInputType.emailAddress,
-                    ),
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(vertical: 8.0),
-                    child: TextField(
-                      decoration: InputDecoration(
-                        labelText: 'Password',
-                        border: OutlineInputBorder(),
-                      ),
-                      obscureText: true,
-                    ),
-                  ),
-                  SizedBox(height: 32),
-                  SizedBox(
-                    width: double.infinity,
-                    child: ElevatedButton(
-                      onPressed: null,
-                      child: Text('Login'),
-                    ),
-                  ),
-                  SizedBox(height: 16),
-                  Center(
-                    child: TextButton(
-                      onPressed: null,
-                      child: Text(
-                        'Forgot password?',
-                        style: TextStyle(fontSize: 12),
+            child: SingleChildScrollView(
+              child: Padding(
+                padding: EdgeInsets.all(24.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          border: OutlineInputBorder(),
+                        ),
+                        keyboardType: TextInputType.emailAddress,
                       ),
                     ),
-                  ),
-                  SizedBox(height: 32),
-                  Center(
-                    child: Text('Welcome to the Login Page!'),
-                  ),
-                ],
+                    Padding(
+                      padding: EdgeInsets.symmetric(vertical: 8.0),
+                      child: TextField(
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          border: OutlineInputBorder(),
+                        ),
+                        obscureText: true,
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    SizedBox(
+                      width: double.infinity,
+                      child: ElevatedButton(
+                        onPressed: null,
+                        child: Text('Login'),
+                      ),
+                    ),
+                    SizedBox(height: 16),
+                    Center(
+                      child: TextButton(
+                        onPressed: null,
+                        child: Text(
+                          'Forgot password?',
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 32),
+                    Center(
+                      child: Text('Welcome to the Login Page!'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
