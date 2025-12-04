@@ -41,6 +41,16 @@ class LoginPage extends StatelessWidget {
                       child: Text('Login'),
                     ),
                   ),
+                  SizedBox(height: 8),
+                  Center(
+                    child: TextButton(
+                      onPressed: null, // no navigation yet
+                      child: Text(
+                        'Forgot password?',
+                        style: TextStyle(fontSize: 12),
+                      ),
+                    ),
+                  ),
                   SizedBox(height: 24),
                   Center(
                     child: Text('Welcome to the Login Page!'),
