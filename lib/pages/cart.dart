@@ -18,6 +18,15 @@ class Cart extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),
+        actions: [
+          if (items.isNotEmpty)
+            IconButton(
+              icon: const Icon(Icons.delete_outline),
+              onPressed: () {
+                cartState.clearCart();
+              },
+            ),
+        ],
       ),
       body: Column(
         children: [
