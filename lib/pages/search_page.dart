@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
+import 'package:union_shop/reusable_content/product_tile.dart';
 
 class SearchPage extends StatefulWidget {
   const SearchPage({super.key});
@@ -59,10 +60,28 @@ class _SearchPageState extends State<SearchPage> {
               ),
             ),
           ),
-          const Expanded(
-            child: Center(
-              child: Text('Start typing to search'),
-            ),
+          Expanded(
+            child: filteredProducts.isEmpty
+                ? const Center(
+                    child: Text('Start typing to search'),
+                  )
+                : Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                    child: GridView.builder(
+                      itemCount: filteredProducts.length,
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 16,
+                        mainAxisSpacing: 16,
+                        childAspectRatio: 0.7,
+                      ),
+                      itemBuilder: (context, index) {
+                        final product = filteredProducts[index];
+                        return ProductTile(product: product);
+                      },
+                    ),
+                  ),
           ),
         ],
       ),
