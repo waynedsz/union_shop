@@ -18,26 +18,18 @@ class ProductTile extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Flexible(
-            child: Container(
-              decoration: BoxDecoration(
+          AspectRatio(
+            aspectRatio: 1,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(12),
+              child: Container(
                 color: Colors.grey.shade200,
-                borderRadius: BorderRadius.circular(16),
-                border: Border.all(color: Colors.grey.shade300),
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.black.withOpacity(0.06),
-                    blurRadius: 8,
-                    offset: const Offset(0, 3),
+                child: Hero(
+                  tag: product.name,
+                  child: Image.asset(
+                    product.imagePath,
+                    fit: BoxFit.contain,
                   ),
-                ],
-              ),
-              clipBehavior: Clip.antiAlias,
-              child: Hero(
-                tag: product.name,
-                child: Image.asset(
-                  product.imagePath,
-                  fit: BoxFit.cover,
                 ),
               ),
             ),
