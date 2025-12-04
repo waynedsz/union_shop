@@ -39,8 +39,25 @@ class _CollectionPageState extends State<CollectionPage> {
         List<Product>.from(collectionProducts[collectionName] ?? []);
 
     products.sort((a, b) {
-      final cmp = a.name.toLowerCase().compareTo(b.name.toLowerCase());
-      return _selectedSort == 'Sort Z-A' ? -cmp : cmp;
+      switch (_selectedSort) {
+        case 'Sort Z-A':
+          return b.name.toLowerCase().compareTo(a.name.toLowerCase());
+        case 'Price: Low → High':
+          return a.price.compareTo(b.price);
+        case 'Price: High → Low':
+          return b.price.compareTo(a.price);
+        case 'Newest First':
+          final aDate = a.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+          final bDate = b.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+          return bDate.compareTo(aDate);
+        case 'Oldest First':
+          final aDate = a.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+          final bDate = b.createdAt ?? DateTime.fromMillisecondsSinceEpoch(0);
+          return aDate.compareTo(bDate);
+        case 'Sort A-Z':
+        default:
+          return a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      }
     });
 
     return Scaffold(
