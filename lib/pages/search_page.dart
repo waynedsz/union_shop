@@ -44,6 +44,8 @@ class _SearchPageState extends State<SearchPage> {
 
   @override
   Widget build(BuildContext context) {
+    final query = _searchController.text.trim();
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Search'),
@@ -62,8 +64,12 @@ class _SearchPageState extends State<SearchPage> {
           ),
           Expanded(
             child: filteredProducts.isEmpty
-                ? const Center(
-                    child: Text('Start typing to search'),
+                ? Center(
+                    child: Text(
+                      query.isEmpty
+                          ? 'Start typing to search'
+                          : 'No products match your search',
+                    ),
                   )
                 : Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 16.0),
