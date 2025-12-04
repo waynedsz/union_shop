@@ -6,8 +6,35 @@ import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
 
-class SaleCollection extends StatelessWidget {
+class SaleCollection extends StatefulWidget {
   const SaleCollection({Key? key}) : super(key: key);
+
+  @override
+  State<SaleCollection> createState() => _SaleCollectionState();
+}
+
+class _SaleCollectionState extends State<SaleCollection>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fadeController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 400),
+    );
+    _fadeAnimation =
+        CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut);
+    _fadeController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -54,15 +81,18 @@ class SaleCollection extends StatelessWidget {
                           ),
                           itemBuilder: (context, index) {
                             final product = saleProducts[index];
-                            return ProductTile(
-                              product: product,
-                              onTap: () {
-                                Navigator.pushNamed(
-                                  context,
-                                  '/product',
-                                  arguments: product,
-                                );
-                              },
+                            return FadeTransition(
+                              opacity: _fadeAnimation,
+                              child: ProductTile(
+                                product: product,
+                                onTap: () {
+                                  Navigator.pushNamed(
+                                    context,
+                                    '/product',
+                                    arguments: product,
+                                  );
+                                },
+                              ),
                             );
                           },
                         );
