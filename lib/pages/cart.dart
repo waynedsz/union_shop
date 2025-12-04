@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:union_shop/reusable_content/cart_state.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 
 class Cart extends StatelessWidget {
@@ -6,6 +8,8 @@ class Cart extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final cartState = Provider.of<CartState>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('Cart'),
