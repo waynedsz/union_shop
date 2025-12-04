@@ -18,13 +18,14 @@ class _CollectionPageState extends State<CollectionPage> {
     final collectionName =
         (ModalRoute.of(context)?.settings.arguments as String?) ??
             'Selected Collection';
-    final products = List<Map<String, String>>.from(
+
+    final products = List<Product>.from(
       collectionProducts[collectionName] ?? [],
     );
 
     products.sort((a, b) {
-      final nameA = (a['name'] ?? '').toLowerCase();
-      final nameB = (b['name'] ?? '').toLowerCase();
+      final nameA = (a.name ?? '').toLowerCase();
+      final nameB = (b.name ?? '').toLowerCase();
       final cmp = nameA.compareTo(nameB);
       if (_selectedSort == 'Sort Z-A') {
         return -cmp;
@@ -100,9 +101,9 @@ class _CollectionPageState extends State<CollectionPage> {
                 itemCount: products.length,
                 itemBuilder: (context, index) {
                   final product = products[index];
-                  final name = product['name'] ?? '';
-                  final imagePath = product['image'] ?? '';
-                  final price = product['price'] ?? '';
+                  final name = product.name ?? '';
+                  final imagePath = product.imagePath ?? '';
+                  final price = product.price ?? '';
                   return ProductTile(
                     name: name,
                     imagePath: imagePath,
@@ -110,11 +111,9 @@ class _CollectionPageState extends State<CollectionPage> {
                     onTap: () {
                       Navigator.pushNamed(
                         context,
-                        '/product', // ProductPage route
+                        '/product',
                         arguments: {
-                          'productName': name,
-                          'imagePath': imagePath,
-                          'price': price,
+                          'product': product,
                         },
                       );
                     },
