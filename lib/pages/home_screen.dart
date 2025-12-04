@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
-import 'package:union_shop/reusable_content/product_card.dart';
 import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/featured_collections.dart';
 import 'package:union_shop/reusable_content/home_hero.dart';
@@ -38,13 +37,17 @@ class _HomeScreenState extends State<HomeScreen>
     super.dispose();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    final showcaseProducts = collectionProducts.values
+  List<Product> _buildShowcaseProducts() {
+    return collectionProducts.values
         .map((products) => products.isNotEmpty ? products.first : null)
         .where((p) => p != null)
         .cast<Product>()
         .toList();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final showcaseProducts = _buildShowcaseProducts();
 
     return Scaffold(
       appBar: Header(
