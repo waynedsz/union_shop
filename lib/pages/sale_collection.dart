@@ -5,6 +5,7 @@ import 'package:union_shop/reusable_content/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
+import 'package:union_shop/reusable_content/sale_sort_helper.dart';
 
 class SaleCollection extends StatefulWidget {
   const SaleCollection({Key? key}) : super(key: key);
@@ -47,17 +48,7 @@ class _SaleCollectionState extends State<SaleCollection>
 
   void _applySort() {
     setState(() {
-      if (_sortOption == 'price_low_high') {
-        saleProducts.sort((a, b) => a.price.compareTo(b.price));
-      } else if (_sortOption == 'discount_high_low') {
-        double discountValue(Product p) =>
-            (p.discountPercent ?? 0) > 0 ? p.discountPercent! : 0;
-        saleProducts.sort(
-          (a, b) => discountValue(b).compareTo(discountValue(a)),
-        );
-      } else if (_sortOption == 'alpha_az') {
-        saleProducts.sort((a, b) => a.name.compareTo(b.name));
-      }
+      saleProducts = sortSaleProducts(saleProducts, _sortOption);
     });
   }
 
