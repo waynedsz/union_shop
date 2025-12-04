@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
-import 'package:union_shop/reusable_content/product.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
@@ -16,58 +15,50 @@ class _CollectionPageState extends State<CollectionPage> {
 
   @override
   Widget build(BuildContext context) {
-    final String collectionName =
-        (ModalRoute.of(context)?.settings.arguments as String?) ??
-            'Selected Collection';
+    final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
 
-    final List<Product> products =
-        List<Product>.from(collectionProducts[collectionName] ?? []);
+    String collectionName;
+    if (rawArgs is String) {
+      collectionName = rawArgs;
+    } else if (rawArgs is Map) {
+      final Object? possible = rawArgs['collectionName'] ?? rawArgs['label'];
+      collectionName = (possible is String) ? possible : 'Selected Collection';
+    } else {
+      collectionName = 'Selected Collection';
+    }
+
+    final products = List<Map<String, String>>.from(
+      collectionProducts[collectionName] ?? [],
+    );
 
     products.sort((a, b) {
-      final String nameA = a.name.toLowerCase();
-      final String nameB = b.name.toLowerCase();
-      final int cmp = nameA.compareTo(nameB);
-      if (_selectedSort == 'Sort Z-A') {
-        return -cmp;
-      }
+      final nameA = (a['name'] ?? '').toLowerCase();
+      final nameB = (b['name'] ?? '').toLowerCase();
+      final cmp = nameA.compareTo(nameB);
+      if (_selectedSort == 'Sort Z-A') return -cmp;
       return cmp;
     });
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Collections'),
+        title: Text(collectionName),
         automaticallyImplyLeading: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            const SizedBox(height: 16),
-            const SizedBox(height: 24),
-            Center(
-              child: Text(
-                collectionName,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
             const SizedBox(height: 8),
-            const Center(
-              child: Text(
-                'Browse a curated selection of products from this collection.',
-                textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 14,
-                  color: Colors.black54,
-                ),
+            const Text(
+              'Browse a curated selection of products from this collection.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                color: Colors.black54,
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             Center(
               child: DropdownButton<String>(
                 value: _selectedSort,
@@ -83,33 +74,37 @@ class _CollectionPageState extends State<CollectionPage> {
                 ],
                 onChanged: (value) {
                   if (value == null) return;
-                  setState(() {
-                    _selectedSort = value;
-                  });
+                  setState(() => _selectedSort = value);
                 },
               ),
             ),
-            const SizedBox(height: 24),
+            const SizedBox(height: 20),
             Expanded(
               child: GridView.builder(
                 padding: const EdgeInsets.all(16),
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
-                  crossAxisSpacing: 12,
-                  mainAxisSpacing: 12,
+                  crossAxisSpacing: 16,
+                  mainAxisSpacing: 16,
                 ),
                 itemCount: products.length,
                 itemBuilder: (context, index) {
-                  final Product product = products[index];
-
+                  final product = products[index];
+                  final name = product['name'] ?? '';
+                  final imagePath = product['image'] ?? '';
+                  final price = product['price'] ?? '';
                   return ProductTile(
-                    product: product,
+                    name: name,
+                    imagePath: imagePath,
+                    price: price,
                     onTap: () {
                       Navigator.pushNamed(
                         context,
                         '/product',
                         arguments: {
-                          'product': product,
+                          'productName': name,
+                          'imagePath': imagePath,
+                          'price': price,
                         },
                       );
                     },

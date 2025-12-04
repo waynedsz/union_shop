@@ -9,6 +9,9 @@ class ProductTile extends StatelessWidget {
     super.key,
     required this.product,
     required this.onTap,
+    required String name,
+    required String price,
+    required String imagePath,
   });
 
   @override
