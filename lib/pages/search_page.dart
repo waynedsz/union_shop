@@ -9,9 +9,9 @@ class SearchPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Search'),
       ),
-      body: Column(
+      body: const Column(
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.all(16.0),
             child: TextField(
               decoration: InputDecoration(
@@ -20,7 +20,7 @@ class SearchPage extends StatelessWidget {
               ),
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Center(
               child: Text('Start typing to search'),
             ),
