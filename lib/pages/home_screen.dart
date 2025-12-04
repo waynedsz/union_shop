@@ -228,8 +228,8 @@ class HomeProductShowcase extends StatelessWidget {
                     .map(
                       (product) => ProductCard(
                         title: product.name,
-                        price: product.priceFormatted,
-                        imageUrl: product.imageUrl,
+                        price: '£${product.price.toStringAsFixed(2)}',
+                        imageUrl: product.imagePath,
                       ),
                     )
                     .toList(),
