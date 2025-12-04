@@ -60,8 +60,19 @@ class ProductTile extends StatelessWidget {
               ),
             ),
           ),
-          // You will later place the price text below the name as requested
-          // when updating the usage/layout.
+          const SizedBox(height: 4),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 4),
+            child: Text(
+              price,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Colors.black87,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
         ],
       ),
     );
