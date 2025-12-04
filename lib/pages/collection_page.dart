@@ -77,11 +77,12 @@ class _CollectionPageState extends State<CollectionPage> {
                   GridView.builder(
                     shrinkWrap: true,
                     physics: const NeverScrollableScrollPhysics(),
-                    padding: const EdgeInsets.all(16),
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
                     gridDelegate:
                         const SliverGridDelegateWithFixedCrossAxisCount(
                       crossAxisCount: 2,
-                      mainAxisSpacing: 16,
+                      mainAxisSpacing: 10,
                       crossAxisSpacing: 16,
                     ),
                     itemCount: products.length,
