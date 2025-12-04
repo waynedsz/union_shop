@@ -10,8 +10,8 @@ class Cart extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Cart'),
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           Expanded(
             child: Center(
               child: Text('Welcome to the Cart Page!'),
