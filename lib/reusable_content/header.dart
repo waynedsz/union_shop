@@ -154,7 +154,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             minWidth: 32,
                             minHeight: 32,
                           ),
-                          onPressed: onSearchPressed,
+                          onPressed: () {
+                            Navigator.pushNamed(context, '/search');
+                          },
                         ),
                         IconButton(
                           icon: const Icon(
