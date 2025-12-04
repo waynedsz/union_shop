@@ -4,7 +4,7 @@ import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/cart_widgets/cart_item_tile.dart';
 import 'package:union_shop/reusable_content/cart_widgets/cart_bottom_bar.dart';
-import 'package:union_shop/reusable_content/empty_cart_view.dart';
+import 'package:union_shop/reusable_content/cart_widgets/empty_cart_view.dart';
 import 'package:union_shop/reusable_content/header.dart';
 
 class CartPage extends StatelessWidget {
