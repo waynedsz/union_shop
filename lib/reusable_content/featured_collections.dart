@@ -34,30 +34,75 @@ class FeaturedCollections extends StatelessWidget {
           ),
           const SizedBox(height: 16),
           SizedBox(
-            height: 48,
+            height: 140,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
               itemCount: labels.length,
               separatorBuilder: (_, __) => const SizedBox(width: 12),
               itemBuilder: (context, index) {
                 final label = labels[index];
+                final products = collectionProducts[label] ?? [];
+                final imageUrl =
+                    products.isNotEmpty ? products.first.imageUrl : null;
+
                 return GestureDetector(
                   onTap: () => _openCollection(context, label),
                   child: Container(
-                    padding:
-                        const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                    width: 160,
                     decoration: BoxDecoration(
-                      color: Colors.grey[200],
-                      borderRadius: BorderRadius.circular(20),
-                    ),
-                    child: Center(
-                      child: Text(
-                        label,
-                        style: const TextStyle(
-                          fontSize: 14,
-                          fontWeight: FontWeight.w600,
+                      color: Colors.grey[100],
+                      borderRadius: BorderRadius.circular(12),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.black.withOpacity(0.05),
+                          blurRadius: 6,
+                          offset: const Offset(0, 3),
                         ),
-                      ),
+                      ],
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: ClipRRect(
+                            borderRadius: const BorderRadius.vertical(
+                              top: Radius.circular(12),
+                            ),
+                            child: imageUrl == null
+                                ? Container(
+                                    color: Colors.grey[300],
+                                    child: const Icon(
+                                      Icons.image_not_supported,
+                                      color: Colors.grey,
+                                    ),
+                                  )
+                                : Image.network(
+                                    imageUrl,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, __, ___) => Container(
+                                      color: Colors.grey[300],
+                                      child: const Icon(
+                                        Icons.image_not_supported,
+                                        color: Colors.grey,
+                                      ),
+                                    ),
+                                  ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            label,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
+                            textAlign: TextAlign.center,
+                            style: const TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 );
