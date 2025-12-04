@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/reusable_content/navigation_controller.dart';
 
 class Header extends StatelessWidget implements PreferredSizeWidget {
   const Header({
@@ -17,7 +18,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onCartPressed;
 
   @override
-  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(100);
 
   @override
   Widget build(BuildContext context) {
@@ -80,7 +81,8 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: onCartPressed,
+                          onPressed: () =>
+                              NavigationController.goCollections(context),
                           child: const Text(
                             'Collections',
                             style: TextStyle(
@@ -100,7 +102,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                           ),
                         ),
                         TextButton(
-                          onPressed: onCartPressed,
+                          onPressed: () => NavigationController.goSale(context),
                           child: const Text(
                             'Sale',
                             style: TextStyle(
