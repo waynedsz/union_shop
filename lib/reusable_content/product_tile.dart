@@ -35,12 +35,39 @@ class ProductTile extends StatelessWidget {
                   color: Colors.grey.shade200,
                 ),
                 clipBehavior: Clip.antiAlias,
-                child: Hero(
-                  tag: product.name,
-                  child: Image.asset(
-                    product.imagePath,
-                    fit: BoxFit.cover,
-                  ),
+                child: Stack(
+                  children: [
+                    Hero(
+                      tag: product.name,
+                      child: Image.asset(
+                        product.imagePath,
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+                    if (product.isOnSale)
+                      Positioned(
+                        top: 8,
+                        left: 8,
+                        child: Container(
+                          padding: const EdgeInsets.symmetric(
+                            horizontal: 8,
+                            vertical: 4,
+                          ),
+                          decoration: BoxDecoration(
+                            color: Colors.redAccent,
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: const Text(
+                            'SALE',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 10,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
               const SizedBox(height: 8),
