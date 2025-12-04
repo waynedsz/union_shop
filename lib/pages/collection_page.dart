@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
+import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
 import 'package:union_shop/reusable_content/product.dart';
@@ -13,6 +14,12 @@ class CollectionPage extends StatefulWidget {
 
 class _CollectionPageState extends State<CollectionPage> {
   String _selectedSort = 'Sort A-Z';
+
+  void navigateToHome(BuildContext context) {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
+  void placeholderCallback() {}
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +44,21 @@ class _CollectionPageState extends State<CollectionPage> {
     });
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text(collectionName),
+      appBar: Header(
+        onNavigateHome: () => navigateToHome(context),
+        onSearchPressed: placeholderCallback,
+        onAboutPressed: () {
+          Navigator.pushNamed(context, '/about');
+        },
+        onLoginPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
+        onCartPressed: () {
+          Navigator.pushNamed(context, '/cart');
+        },
+        onMenuPressed: () {
+          Navigator.pushNamed(context, '/collections');
+        },
       ),
       body: Column(
         children: [
