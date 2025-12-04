@@ -10,37 +10,66 @@ class CollectionTile extends StatelessWidget {
     required this.onTap,
   });
 
-  @override
-  Widget build(BuildContext context) {
-    // ...existing image selection logic from _CollectionTile...
-    String imageAsset;
+  String _imageForLabel() {
     switch (label) {
       case 'Hoodies':
-        imageAsset = 'assets/images/products/hoodie_1.png';
-        break;
+        return 'assets/images/collections/hoodies.png';
       case 'T-Shirts':
-        imageAsset = 'assets/images/products/tshirt_1.png';
-        break;
+        return 'assets/images/collections/tshirts.png';
       case 'Accessories':
-        imageAsset = 'assets/images/products/accessory_tote.png';
-        break;
+        return 'assets/images/collections/accessories.png';
       case 'New Arrivals':
-        imageAsset = 'assets/images/products/notebook.png';
-        break;
+        return 'assets/images/collections/new_arrivals.png';
       default:
-        imageAsset = 'assets/images/products/hoodie_1.png';
+        return 'assets/images/collections/default.png';
     }
+  }
 
-    // ...existing tile UI from _CollectionTile using imageAsset and label...
+  @override
+  Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
-      child: Column(
-        children: [
-          // image
-          Image.asset(imageAsset),
-          // label
-          Text(label),
-        ],
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.grey.shade200,
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(color: Colors.grey.shade300),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.06),
+              blurRadius: 8,
+              offset: const Offset(0, 3),
+            ),
+          ],
+        ),
+        padding: const EdgeInsets.all(8),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            AspectRatio(
+              aspectRatio: 4 / 3,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(12),
+                child: Image.asset(
+                  _imageForLabel(),
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
+            const SizedBox(height: 8),
+            Text(
+              label,
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                letterSpacing: 0.3,
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
