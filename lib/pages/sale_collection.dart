@@ -6,6 +6,7 @@ import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
 import 'package:union_shop/reusable_content/sale_sort_helper.dart';
+import 'package:union_shop/reusable_content/sale_sort_bar.dart';
 
 class SaleCollection extends StatefulWidget {
   const SaleCollection({Key? key}) : super(key: key);
@@ -68,39 +69,12 @@ class _SaleCollectionState extends State<SaleCollection>
       body: Column(
         children: [
           if (saleProducts.isNotEmpty)
-            Padding(
-              padding: const EdgeInsets.fromLTRB(16, 16, 16, 0),
-              child: Row(
-                children: [
-                  const Text(
-                    'Sort by:',
-                    style: TextStyle(fontSize: 14),
-                  ),
-                  const SizedBox(width: 8),
-                  DropdownButton<String>(
-                    value: _sortOption,
-                    onChanged: (value) {
-                      if (value == null) return;
-                      _sortOption = value;
-                      _applySort();
-                    },
-                    items: const [
-                      DropdownMenuItem(
-                        value: 'price_low_high',
-                        child: Text('Price: Low → High'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'discount_high_low',
-                        child: Text('Discount: High → Low'),
-                      ),
-                      DropdownMenuItem(
-                        value: 'alpha_az',
-                        child: Text('Alphabetical: A → Z'),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
+            SaleSortBar(
+              sortOption: _sortOption,
+              onSortChanged: (newValue) {
+                _sortOption = newValue;
+                _applySort();
+              },
             ),
           Expanded(
             child: saleProducts.isEmpty
