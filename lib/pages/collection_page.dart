@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
+import 'package:union_shop/reusable_content/product.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
@@ -93,18 +94,25 @@ class _CollectionPageState extends State<CollectionPage> {
                   final name = product['name'] ?? '';
                   final imagePath = product['image'] ?? '';
                   final price = product['price'] ?? '';
-                  return ProductTile(
+
+                  final productObj = Product(
                     name: name,
                     imagePath: imagePath,
-                    price: price,
+                    price: double.tryParse(price.replaceAll('£', '')) ?? 0.0,
+                    description: product['description'] ??
+                        'Product is part of our premium range and features high-quality materials for everyday use.',
+                  );
+
+                  return ProductTile(
+                    product: productObj,
                     onTap: () {
                       Navigator.pushNamed(
                         context,
                         '/product',
                         arguments: {
-                          'productName': name,
-                          'imagePath': imagePath,
-                          'price': price,
+                          'productName': productObj.name,
+                          'imagePath': productObj.imagePath,
+                          'price': productObj.price.toString(),
                         },
                       );
                     },
