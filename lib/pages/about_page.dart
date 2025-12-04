@@ -5,8 +5,12 @@ class AboutPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
-      body: SingleChildScrollView(
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('About Us'),
+        automaticallyImplyLeading: true,
+      ),
+      body: const SingleChildScrollView(
         child: Column(
           children: [
             SizedBox(height: 50),
