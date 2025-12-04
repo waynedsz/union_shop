@@ -36,6 +36,10 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Email',
+                            prefixIcon: const Icon(
+                              Icons.email_outlined,
+                              size: 20,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(
@@ -72,6 +76,10 @@ class _LoginPageState extends State<LoginPage> {
                         child: TextFormField(
                           decoration: InputDecoration(
                             labelText: 'Password',
+                            prefixIcon: const Icon(
+                              Icons.lock_outline,
+                              size: 20,
+                            ),
                             border: OutlineInputBorder(
                               borderRadius: BorderRadius.circular(8),
                               borderSide: const BorderSide(
