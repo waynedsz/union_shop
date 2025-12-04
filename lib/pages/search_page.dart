@@ -20,13 +20,10 @@ class _SearchPageState extends State<SearchPage>
   final TextEditingController _searchController = TextEditingController();
   late final List<Product> allProducts = allProductsList;
   List<Product> filteredProducts = [];
-
   late final AnimationController _resultsController;
   late final Animation<double> _fadeAnimation;
   late final Animation<double> _scaleAnimation;
   Timer? _debounce;
-
-  String _selectedCategory = 'All';
 
   @override
   void initState() {
@@ -42,29 +39,24 @@ class _SearchPageState extends State<SearchPage>
     _searchController.addListener(_onQueryChanged);
   }
 
+  List<Product> _filterProducts(String query) {
+    final q = query.toLowerCase();
+    if (q.isEmpty) {
+      return [];
+    }
+    return allProducts
+        .where(
+          (product) => product.name.toLowerCase().contains(q),
+        )
+        .toList();
+  }
+
   void _applyFilters() {
-    final query = _searchController.text.toLowerCase();
+    final query = _searchController.text;
+    final newFiltered = _filterProducts(query);
     setState(() {
-      Iterable<Product> products = allProducts;
-
-      if (query.isNotEmpty) {
-        products = products.where(
-          (product) => product.name.toLowerCase().contains(query),
-        );
-      }
-
-      if (_selectedCategory != 'All') {
-        products = products.where((product) {
-          final tag = _selectedCategory.toLowerCase();
-          return product.tags?.map((t) => t.toLowerCase()).contains(tag) ??
-              false;
-        });
-      }
-
-      filteredProducts = products.toList();
-
-      if (filteredProducts.isEmpty ||
-          query.isEmpty && _selectedCategory == 'All') {
+      filteredProducts = newFiltered;
+      if (filteredProducts.isEmpty || query.trim().isEmpty) {
         _resultsController.reset();
       } else {
         _resultsController
@@ -113,65 +105,28 @@ class _SearchPageState extends State<SearchPage>
         children: [
           Padding(
             padding: const EdgeInsets.all(16.0),
-            child: Row(
-              children: [
-                Expanded(
-                  child: TextField(
-                    controller: _searchController,
-                    decoration: InputDecoration(
-                      labelText: 'Search',
-                      border: const OutlineInputBorder(),
-                      suffixIcon: query.isEmpty
-                          ? null
-                          : IconButton(
-                              icon: const Icon(Icons.clear),
-                              onPressed: _clearSearch,
-                            ),
-                    ),
-                    onSubmitted: (_) => _applyFilters(),
-                  ),
-                ),
-                const SizedBox(width: 12),
-                DropdownButton<String>(
-                  value: _selectedCategory,
-                  onChanged: (value) {
-                    if (value == null) return;
-                    _selectedCategory = value;
-                    _applyFilters();
-                  },
-                  items: const [
-                    DropdownMenuItem(
-                      value: 'All',
-                      child: Text('All'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Hoodies',
-                      child: Text('Hoodies'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'T-Shirts',
-                      child: Text('T-Shirts'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'Accessories',
-                      child: Text('Accessories'),
-                    ),
-                    DropdownMenuItem(
-                      value: 'New Arrivals',
-                      child: Text('New Arrivals'),
-                    ),
-                  ],
-                ),
-              ],
+            child: TextField(
+              controller: _searchController,
+              decoration: InputDecoration(
+                labelText: 'Search',
+                border: const OutlineInputBorder(),
+                suffixIcon: query.isEmpty
+                    ? null
+                    : IconButton(
+                        icon: const Icon(Icons.clear),
+                        onPressed: _clearSearch,
+                      ),
+              ),
+              onSubmitted: (_) => _applyFilters(),
             ),
           ),
           Expanded(
             child: filteredProducts.isEmpty
                 ? SearchEmptyState(
-                    title: query.isEmpty && (_selectedCategory == 'All')
+                    title: query.isEmpty
                         ? 'Start typing to search'
-                        : 'No products match your filters',
-                    subtitle: query.isEmpty && (_selectedCategory == 'All')
+                        : 'No products match your search',
+                    subtitle: query.isEmpty
                         ? 'Find products by name, e.g. "hoodie" or "mug".'
                         : 'Try a different keyword or category.',
                   )
