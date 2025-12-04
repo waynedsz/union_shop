@@ -10,11 +10,35 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Login Page'),
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           Expanded(
-            child: Center(
-              child: Text('Welcome to the Login Page!'),
+            child: Padding(
+              padding: EdgeInsets.all(16.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Email',
+                      border: OutlineInputBorder(),
+                    ),
+                    keyboardType: TextInputType.emailAddress,
+                  ),
+                  SizedBox(height: 16),
+                  TextField(
+                    decoration: InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(),
+                    ),
+                    obscureText: true,
+                  ),
+                  SizedBox(height: 24),
+                  Center(
+                    child: Text('Welcome to the Login Page!'),
+                  ),
+                ],
+              ),
             ),
           ),
           Footer(),
