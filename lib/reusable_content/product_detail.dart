@@ -3,8 +3,13 @@ import 'package:union_shop/reusable_content/product.dart';
 
 class ProductDetail extends StatelessWidget {
   final Product product;
+  final VoidCallback onAddToCart;
 
-  const ProductDetail({super.key, required this.product});
+  const ProductDetail({
+    super.key,
+    required this.product,
+    required this.onAddToCart,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -76,6 +81,7 @@ class ProductDetail extends StatelessWidget {
           const SizedBox(height: 16),
           ElevatedButton(
             onPressed: () {
+              onAddToCart();
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text('$productName added to cart'),

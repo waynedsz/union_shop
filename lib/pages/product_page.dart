@@ -39,7 +39,10 @@ class ProductPage extends StatelessWidget {
             child: SingleChildScrollView(
               child: Column(
                 children: [
-                  ProductDetail(product: safeProduct),
+                  ProductDetail(
+                    product: safeProduct,
+                    onAddToCart: () {},
+                  ),
                 ],
               ),
             ),
