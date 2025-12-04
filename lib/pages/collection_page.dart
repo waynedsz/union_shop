@@ -19,111 +19,81 @@ class _CollectionPageState extends State<CollectionPage> {
     final Object? rawArgs = ModalRoute.of(context)?.settings.arguments;
 
     String collectionName;
+
     if (rawArgs is String) {
       collectionName = rawArgs;
     } else if (rawArgs is Map) {
-      final Object? possible = rawArgs['collectionName'] ?? rawArgs['label'];
-      collectionName = (possible is String) ? possible : 'Selected Collection';
+      final Object? value = rawArgs['collectionName'] ?? rawArgs['label'];
+      collectionName = value is String ? value : 'Selected Collection';
     } else {
       collectionName = 'Selected Collection';
     }
 
-    final products = List<Map<String, String>>.from(
+    // products are now List<Product>
+    final List<Product> products = List<Product>.from(
       collectionProducts[collectionName] ?? [],
     );
 
     products.sort((a, b) {
-      final nameA = (a['name'] ?? '').toLowerCase();
-      final nameB = (b['name'] ?? '').toLowerCase();
-      final cmp = nameA.compareTo(nameB);
-      if (_selectedSort == 'Sort Z-A') return -cmp;
-      return cmp;
+      final cmp = a.name.toLowerCase().compareTo(b.name.toLowerCase());
+      return _selectedSort == 'Sort Z-A' ? -cmp : cmp;
     });
 
     return Scaffold(
       appBar: AppBar(
         title: Text(collectionName),
-        automaticallyImplyLeading: true,
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            const SizedBox(height: 8),
-            const Text(
-              'Browse a curated selection of products from this collection.',
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 14,
-                color: Colors.black54,
+      body: Column(
+        children: [
+          const SizedBox(height: 12),
+          const Text(
+            'Browse a curated selection of products.',
+            textAlign: TextAlign.center,
+            style: TextStyle(fontSize: 14, color: Colors.black54),
+          ),
+          const SizedBox(height: 20),
+          DropdownButton<String>(
+            value: _selectedSort,
+            items: const [
+              DropdownMenuItem(value: 'Sort A-Z', child: Text('Sort A-Z')),
+              DropdownMenuItem(value: 'Sort Z-A', child: Text('Sort Z-A')),
+            ],
+            onChanged: (value) {
+              if (value == null) return;
+              setState(() => _selectedSort = value);
+            },
+          ),
+          const SizedBox(height: 20),
+          Expanded(
+            child: GridView.builder(
+              padding: const EdgeInsets.all(16),
+              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: 2,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
               ),
+              itemCount: products.length,
+              itemBuilder: (context, index) {
+                final product = products[index];
+                return ProductTile(
+                  product: product,
+                  onTap: () {
+                    Navigator.pushNamed(
+                      context,
+                      '/product',
+                      arguments: {
+                        'productName': product.name,
+                        'imagePath': product.imagePath,
+                        'price': product.price,
+                      },
+                    );
+                  },
+                );
+              },
             ),
-            const SizedBox(height: 20),
-            Center(
-              child: DropdownButton<String>(
-                value: _selectedSort,
-                items: const [
-                  DropdownMenuItem(
-                    value: 'Sort A-Z',
-                    child: Text('Sort A-Z'),
-                  ),
-                  DropdownMenuItem(
-                    value: 'Sort Z-A',
-                    child: Text('Sort Z-A'),
-                  ),
-                ],
-                onChanged: (value) {
-                  if (value == null) return;
-                  setState(() => _selectedSort = value);
-                },
-              ),
-            ),
-            const SizedBox(height: 20),
-            Expanded(
-              child: GridView.builder(
-                padding: const EdgeInsets.all(16),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 16,
-                  mainAxisSpacing: 16,
-                ),
-                itemCount: products.length,
-                itemBuilder: (context, index) {
-                  final product = products[index];
-                  final name = product['name'] ?? '';
-                  final imagePath = product['image'] ?? '';
-                  final price = product['price'] ?? '';
-
-                  final productObj = Product(
-                    name: name,
-                    imagePath: imagePath,
-                    price: double.tryParse(price.replaceAll('£', '')) ?? 0.0,
-                    description: product['description'] ??
-                        'Product is part of our premium range and features high-quality materials for everyday use.',
-                  );
-
-                  return ProductTile(
-                    product: productObj,
-                    onTap: () {
-                      Navigator.pushNamed(
-                        context,
-                        '/product',
-                        arguments: {
-                          'productName': productObj.name,
-                          'imagePath': productObj.imagePath,
-                          'price': productObj.price.toString(),
-                        },
-                      );
-                    },
-                  );
-                },
-              ),
-            ),
-            const SizedBox(height: 16),
-            const Footer(),
-          ],
-        ),
+          ),
+          const Footer(),
+        ],
       ),
     );
   }

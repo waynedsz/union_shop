@@ -1,58 +1,60 @@
-import 'product.dart';
+import 'package:union_shop/reusable_content/product.dart';
 
-final Map<String, List<Map<String, dynamic>>> _rawCollectionProducts = {
+final Map<String, List<Product>> collectionProducts = {
   'Hoodies': [
-    {
-      'name': 'Purple Hoodie',
-      'image': 'assets/images/products/hoodie_1.png',
-      'price': 35.00,
-    },
-    {
-      'name': 'White Hoodie',
-      'image': 'assets/images/products/hoodie_2.png',
-      'price': 32.00,
-    },
+    Product(
+      name: 'Purple Hoodie',
+      imagePath: 'assets/images/products/hoodie_1.png',
+      price: 35.00,
+      description: 'A soft, premium purple hoodie perfect for daily wear.',
+    ),
+    Product(
+      name: 'White Hoodie',
+      imagePath: 'assets/images/products/hoodie_2.png',
+      price: 32.00,
+      description: 'A clean, stylish white hoodie with a comfortable fit.',
+    ),
   ],
   'T-Shirts': [
-    {
-      'name': 'Beige Crest T-Shirt',
-      'image': 'assets/images/products/tshirt_1.png',
-      'price': 18.00,
-    },
-    {
-      'name': 'Grey Crest T-Shirt',
-      'image': 'assets/images/products/tshirt_2.png',
-      'price': 18.00,
-    },
+    Product(
+      name: 'Beige Crest T-Shirt',
+      imagePath: 'assets/images/products/tshirt_1.png',
+      price: 18.00,
+      description: 'A beige t-shirt featuring the university crest.',
+    ),
+    Product(
+      name: 'Grey Crest T-Shirt',
+      imagePath: 'assets/images/products/tshirt_2.png',
+      price: 18.00,
+      description: 'A grey t-shirt with a minimalist crest design.',
+    ),
   ],
   'Accessories': [
-    {
-      'name': 'Tote Bag',
-      'image': 'assets/images/products/accessory_tote.png',
-      'price': 10.00,
-    },
-    {
-      'name': 'Beanie',
-      'image': 'assets/images/products/accessory_beanie.png',
-      'price': 12.00,
-    },
+    Product(
+      name: 'Tote Bag',
+      imagePath: 'assets/images/products/accessory_tote.png',
+      price: 10.00,
+      description: 'A durable tote bag perfect for books or groceries.',
+    ),
+    Product(
+      name: 'Beanie',
+      imagePath: 'assets/images/products/accessory_beanie.png',
+      price: 12.00,
+      description: 'A warm knitted beanie ideal for cold days.',
+    ),
   ],
   'New Arrivals': [
-    {
-      'name': 'Notebook',
-      'image': 'assets/images/products/notebook.png',
-      'price': 6.00,
-    },
-    {
-      'name': 'Water Bottle',
-      'image': 'assets/images/products/water_bottle.png',
-      'price': 14.00,
-    },
+    Product(
+      name: 'Notebook',
+      imagePath: 'assets/images/products/notebook.png',
+      price: 6.00,
+      description: 'A lined notebook for lectures, notes, and sketches.',
+    ),
+    Product(
+      name: 'Water Bottle',
+      imagePath: 'assets/images/products/water_bottle.png',
+      price: 14.00,
+      description: 'A reusable bottle to stay hydrated on campus.',
+    ),
   ],
 };
-
-final Map<String, List<Product>> collectionProducts =
-    _rawCollectionProducts.map((collectionName, products) => MapEntry(
-          collectionName,
-          products.map((p) => Product.fromMap(p)).toList(),
-        ));
