@@ -15,7 +15,7 @@ class CartItemTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final product = cartItem.product as Product;
+    final product = cartItem.product;
     final itemTotal = product.price * cartItem.quantity;
 
     final size = MediaQuery.of(context).size;
