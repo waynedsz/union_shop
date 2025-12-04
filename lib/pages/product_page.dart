@@ -57,7 +57,7 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
 
                         // Product name
                         Text(
@@ -69,7 +69,7 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
 
                         // Product price
                         Text(
@@ -81,7 +81,7 @@ class ProductPage extends StatelessWidget {
                           ),
                         ),
 
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 16),
 
                         // Product description
                         const Text(
@@ -92,7 +92,9 @@ class ProductPage extends StatelessWidget {
                             color: Colors.black,
                           ),
                         ),
-                        const SizedBox(height: 8),
+
+                        const SizedBox(height: 16),
+
                         Text(
                           '$productName is part of our premium range and features high-quality materials for everyday use.',
                           style: const TextStyle(
