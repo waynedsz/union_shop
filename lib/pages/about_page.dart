@@ -28,18 +28,28 @@ class AboutPage extends StatelessWidget {
                           builder: (context, constraints) {
                             final width = constraints.maxWidth;
                             final height = (width * 0.25).clamp(160.0, 260.0);
-                            return Container(
-                              width: double.infinity,
-                              constraints:
-                                  const BoxConstraints(minHeight: 160.0),
-                              height: height,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: Colors.blueGrey.shade50,
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/about_banner.png'),
-                                  fit: BoxFit.cover,
+                            return ClipRRect(
+                              borderRadius: BorderRadius.circular(16),
+                              child: Container(
+                                width: double.infinity,
+                                constraints:
+                                    const BoxConstraints(minHeight: 160.0),
+                                height: height,
+                                decoration: BoxDecoration(
+                                  color: Colors.blueGrey.shade50,
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: Colors.black.withOpacity(0.06),
+                                      blurRadius: 14,
+                                      spreadRadius: 1,
+                                      offset: const Offset(0, 6),
+                                    ),
+                                  ],
+                                  image: const DecorationImage(
+                                    image: AssetImage(
+                                        'assets/images/about_banner.png'),
+                                    fit: BoxFit.cover,
+                                  ),
                                 ),
                               ),
                             );
