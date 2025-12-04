@@ -5,6 +5,7 @@ class Product {
   final String description;
   final bool isOnSale;
   final double? discountPercent;
+  final DateTime? createdAt;
 
   Product({
     required this.name,
@@ -13,10 +14,23 @@ class Product {
     required this.description,
     this.isOnSale = false,
     this.discountPercent,
-  });
+    DateTime? createdAt,
+  }) : createdAt = createdAt ?? DateTime(2000);
 
   factory Product.fromMap(Map<String, dynamic> map) {
     final dynamic rawImage = map['imagePath'] ?? map['image'];
+
+    DateTime _parseCreatedAt(dynamic value) {
+      if (value is DateTime) return value;
+      if (value is String) {
+        try {
+          return DateTime.parse(value);
+        } catch (_) {
+          return DateTime(2000);
+        }
+      }
+      return DateTime(2000);
+    }
 
     return Product(
       name: map['name'] as String? ?? '',
@@ -25,6 +39,7 @@ class Product {
       description: map['description'] as String? ?? '',
       isOnSale: map['isOnSale'] as bool? ?? false,
       discountPercent: (map['discountPercent'] as num?)?.toDouble(),
+      createdAt: _parseCreatedAt(map['createdAt']),
     );
   }
 }
