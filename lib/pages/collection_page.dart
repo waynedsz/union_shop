@@ -17,7 +17,19 @@ class _CollectionPageState extends State<CollectionPage> {
     final collectionName =
         (ModalRoute.of(context)?.settings.arguments as String?) ??
             'Selected Collection';
-    final products = collectionProducts[collectionName] ?? [];
+    final products = List<Map<String, String>>.from(
+      collectionProducts[collectionName] ?? [],
+    );
+
+    products.sort((a, b) {
+      final nameA = (a['name'] ?? '').toLowerCase();
+      final nameB = (b['name'] ?? '').toLowerCase();
+      final cmp = nameA.compareTo(nameB);
+      if (_selectedSort == 'Sort Z-A') {
+        return -cmp;
+      }
+      return cmp;
+    });
 
     return Scaffold(
       appBar: AppBar(
