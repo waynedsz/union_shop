@@ -5,6 +5,7 @@ import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_card.dart';
 import 'package:union_shop/reusable_content/product.dart';
 import 'package:union_shop/reusable_content/featured_collections.dart';
+import 'package:union_shop/reusable_content/home_hero.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -94,86 +95,6 @@ class _HomeScreenState extends State<HomeScreen>
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 16, color: Colors.grey),
               ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }
-}
-
-class HomeHero extends StatelessWidget {
-  const HomeHero({
-    super.key,
-    required this.title,
-    required this.subtitle,
-    required this.buttonText,
-    required this.imageUrl,
-    required this.onButtonPressed,
-  });
-
-  final String title;
-  final String subtitle;
-  final String buttonText;
-  final String imageUrl;
-  final VoidCallback onButtonPressed;
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      width: double.infinity,
-      child: Stack(
-        children: [
-          Positioned.fill(
-            child: Container(
-              decoration: BoxDecoration(
-                image: DecorationImage(
-                  image: NetworkImage(imageUrl),
-                  fit: BoxFit.cover,
-                ),
-              ),
-              child: Container(
-                color: Colors.black54,
-              ),
-            ),
-          ),
-          Positioned(
-            left: 24,
-            right: 24,
-            top: 80,
-            child: Column(
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 32,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  subtitle,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
-                  ),
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: onButtonPressed,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4d2963),
-                    foregroundColor: Colors.white,
-                  ),
-                  child: Text(
-                    buttonText,
-                    style: const TextStyle(letterSpacing: 1),
-                  ),
-                ),
-              ],
             ),
           ),
         ],
