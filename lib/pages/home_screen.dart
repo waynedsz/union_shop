@@ -13,25 +13,25 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: Header(
+        onNavigateHome: () => navigateToHome(context),
+        onSearchPressed: placeholderCallback,
+        onAboutPressed: () {
+          Navigator.pushNamed(context, '/about');
+        },
+        onLoginPressed: () {
+          Navigator.pushNamed(context, '/login');
+        },
+        onCartPressed: () {
+          Navigator.pushNamed(context, '/cart');
+        },
+        onMenuPressed: () {
+          Navigator.pushNamed(context, '/collections');
+        },
+      ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Header(
-              onNavigateHome: () => navigateToHome(context),
-              onSearchPressed: placeholderCallback,
-              onAboutPressed: () {
-                Navigator.pushNamed(context, '/about');
-              },
-              onLoginPressed: () {
-                Navigator.pushNamed(context, '/login');
-              },
-              onCartPressed: () {
-                Navigator.pushNamed(context, '/cart');
-              },
-              onMenuPressed: () {
-                Navigator.pushNamed(context, '/collections');
-              },
-            ),
             SizedBox(
               height: 400,
               width: double.infinity,
