@@ -1,12 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/navigation_controller.dart';
+import 'package:union_shop/reusable_content/product_data.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final showcaseProducts = collectionProducts.values
+        .map((products) => products.isNotEmpty ? products.first : null)
+        .where((p) => p != null)
+        .cast<Product>()
+        .toList();
+
     return Scaffold(
       appBar: Header(
         title: 'Home',
@@ -31,34 +38,7 @@ class HomeScreen extends StatelessWidget {
                 Navigator.pushNamed(context, '/collections');
               },
             ),
-            HomeProductShowcase(
-              products: const [
-                ProductCard(
-                  title: 'Placeholder Product 1',
-                  price: '£10.00',
-                  imageUrl:
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                ),
-                ProductCard(
-                  title: 'Placeholder Product 2',
-                  price: '£15.00',
-                  imageUrl:
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                ),
-                ProductCard(
-                  title: 'Placeholder Product 3',
-                  price: '£20.00',
-                  imageUrl:
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                ),
-                ProductCard(
-                  title: 'Placeholder Product 4',
-                  price: '£25.00',
-                  imageUrl:
-                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityMagnet1_1024x1024@2x.jpg?v=1752230282',
-                ),
-              ],
-            ),
+            HomeProductShowcase(products: showcaseProducts),
             Container(
               padding: const EdgeInsets.all(24),
               width: double.infinity,
@@ -162,7 +142,7 @@ class HomeProductShowcase extends StatelessWidget {
     required this.products,
   });
 
-  final List<ProductCard> products;
+  final List<Product> products;
 
   @override
   Widget build(BuildContext context) {
@@ -189,7 +169,15 @@ class HomeProductShowcase extends StatelessWidget {
                 crossAxisCount: crossAxisCount,
                 crossAxisSpacing: 24,
                 mainAxisSpacing: 48,
-                children: products,
+                children: products
+                    .map(
+                      (product) => ProductCard(
+                        title: product.name,
+                        price: product.priceFormatted,
+                        imageUrl: product.imageUrl,
+                      ),
+                    )
+                    .toList(),
               );
             },
           ),
