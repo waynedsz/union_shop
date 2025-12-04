@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product_data.dart';
 import 'package:union_shop/reusable_content/product_tile.dart';
+import 'package:union_shop/reusable_content/product.dart';
 
 class CollectionPage extends StatefulWidget {
   const CollectionPage({Key? key}) : super(key: key);
@@ -117,6 +118,7 @@ class _CollectionPageState extends State<CollectionPage> {
                         },
                       );
                     },
+                    product: product,
                   );
                 },
               ),
