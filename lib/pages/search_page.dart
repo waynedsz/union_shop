@@ -14,7 +14,29 @@ class _SearchPageState extends State<SearchPage> {
   List<Product> filteredProducts = [];
 
   @override
+  void initState() {
+    super.initState();
+    _searchController.addListener(_onQueryChanged);
+  }
+
+  void _onQueryChanged() {
+    final query = _searchController.text.toLowerCase();
+    setState(() {
+      if (query.isEmpty) {
+        filteredProducts = [];
+      } else {
+        filteredProducts = allProducts
+            .where(
+              (product) => product.name.toLowerCase().contains(query),
+            )
+            .toList();
+      }
+    });
+  }
+
+  @override
   void dispose() {
+    _searchController.removeListener(_onQueryChanged);
     _searchController.dispose();
     super.dispose();
   }
