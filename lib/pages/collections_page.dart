@@ -105,7 +105,11 @@ class _CollectionTile extends StatelessWidget {
   const _CollectionTile({required this.label});
 
   void _openCollection(BuildContext context) {
-    Navigator.pushNamed(context, '/collection');
+    Navigator.pushNamed(
+      context,
+      '/collection',
+      arguments: label,
+    );
   }
 
   String _imageForLabel() {
