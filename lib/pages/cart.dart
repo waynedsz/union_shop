@@ -10,6 +10,10 @@ class Cart extends StatelessWidget {
   Widget build(BuildContext context) {
     final cartState = Provider.of<CartState>(context);
     final items = cartState.items;
+    final total = items.fold<double>(
+      0,
+      (sum, item) => sum + item.product.price * item.quantity,
+    );
 
     return Scaffold(
       appBar: AppBar(
@@ -47,6 +51,28 @@ class Cart extends StatelessWidget {
                       );
                     },
                   ),
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                const Text(
+                  'Total:',
+                  style: TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  '£${total.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ],
+            ),
           ),
           const Footer(),
         ],
