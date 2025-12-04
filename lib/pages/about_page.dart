@@ -27,9 +27,6 @@ class AboutPage extends StatelessWidget {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
-        onMenuPressed: () {
-          Navigator.pushNamed(context, '/collections');
-        },
       ),
       body: Column(
         children: [
