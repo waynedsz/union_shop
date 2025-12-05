@@ -21,15 +21,59 @@ class PrintShackAboutPage extends StatelessWidget {
       body: Column(
         children: [
           Expanded(
-            child: Center(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Text(
-                  'Print Shack allows you to personalise products with custom text, sizes, and colours.',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: Colors.grey[800],
+            child: SingleChildScrollView(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 900),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 20,
+                      vertical: 32,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Container(
+                            height: 160,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.grey[300],
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                  'assets/images/print_banner.png',
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 32),
+                        Text(
+                          'About Print Shack',
+                          style: Theme.of(context).textTheme.headlineSmall,
+                        ),
+                        const SizedBox(height: 12),
+                        const Text(
+                          'Print Shack allows you to personalise a range of university products. '
+                          'Choose a product, customise it with your own message, pick your size and select a colour that fits your style.',
+                          style: TextStyle(
+                            fontSize: 16,
+                            height: 1.5,
+                          ),
+                        ),
+                        const SizedBox(height: 20),
+                        const Text(
+                          'Every custom item is created with care to ensure high quality and long-lasting results. '
+                          'Whether you want a unique gift or something special for yourself, Print Shack makes it simple and fun.',
+                          style: TextStyle(
+                            fontSize: 16,
+                            height: 1.5,
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
