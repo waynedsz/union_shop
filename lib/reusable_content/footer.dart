@@ -12,6 +12,7 @@ class Footer extends StatelessWidget {
           height: 1,
           color: Colors.black12,
         ),
+        const SizedBox(height: 6),
         Container(
           width: double.infinity,
           color: Colors.grey[100],
