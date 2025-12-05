@@ -26,6 +26,19 @@ class _PrintShackPageState extends State<PrintShackPage> {
     );
   }
 
+  Widget _sectionCard(Widget child) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      margin: const EdgeInsets.only(bottom: 32),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.black12),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: child,
+    );
+  }
+
   Widget _styledDropdown({
     required String value,
     required List<DropdownMenuItem<String>> items,
@@ -84,90 +97,112 @@ class _PrintShackPageState extends State<PrintShackPage> {
                           ),
                         ),
                         const SizedBox(height: 32),
-                        _sectionTitle('Choose a product'),
-                        const SizedBox(height: 12),
-                        _styledDropdown(
-                          value: _selectedProduct,
-                          items: const [
-                            DropdownMenuItem(
-                                value: 'T-Shirt', child: Text('T-Shirt')),
-                            DropdownMenuItem(
-                                value: 'Hoodie', child: Text('Hoodie')),
-                            DropdownMenuItem(value: 'Mug', child: Text('Mug')),
-                          ],
-                          onChanged: (value) {
-                            if (value != null)
-                              setState(() => _selectedProduct = value);
-                          },
-                        ),
-                        const SizedBox(height: 32),
-                        _sectionTitle('Custom message'),
-                        const SizedBox(height: 12),
-                        TextField(
-                          decoration: const InputDecoration(
-                            labelText: 'Enter custom message',
-                            border: OutlineInputBorder(),
-                          ),
-                          onChanged: (value) {
-                            setState(() => _customMessage = value);
-                          },
-                        ),
-                        const SizedBox(height: 12),
-                        Text(
-                          'Message preview: $_customMessage',
-                          style:
-                              TextStyle(fontSize: 16, color: Colors.grey[700]),
-                        ),
-                        const SizedBox(height: 32),
-                        _sectionTitle('Select size'),
-                        const SizedBox(height: 12),
-                        _styledDropdown(
-                          value: _selectedSize,
-                          items: const [
-                            DropdownMenuItem(
-                                value: 'S', child: Text('Small (S)')),
-                            DropdownMenuItem(
-                                value: 'M', child: Text('Medium (M)')),
-                            DropdownMenuItem(
-                                value: 'L', child: Text('Large (L)')),
-                            DropdownMenuItem(value: 'XL', child: Text('XL')),
-                          ],
-                          onChanged: (value) {
-                            if (value != null)
-                              setState(() => _selectedSize = value);
-                          },
-                        ),
-                        const SizedBox(height: 32),
-                        _sectionTitle('Select colour'),
-                        const SizedBox(height: 12),
-                        _styledDropdown(
-                          value: _selectedColor,
-                          items: const [
-                            DropdownMenuItem(
-                                value: 'Black', child: Text('Black')),
-                            DropdownMenuItem(
-                                value: 'White', child: Text('White')),
-                            DropdownMenuItem(value: 'Red', child: Text('Red')),
-                            DropdownMenuItem(
-                                value: 'Blue', child: Text('Blue')),
-                          ],
-                          onChanged: (value) {
-                            if (value != null)
-                              setState(() => _selectedColor = value);
-                          },
-                        ),
-                        const SizedBox(height: 40),
-                        _sectionTitle('Preview'),
-                        const SizedBox(height: 12),
-                        Container(
-                          padding: const EdgeInsets.all(16),
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.grey),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
+                        _sectionCard(
+                          Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
+                              _sectionTitle('Choose a product'),
+                              const SizedBox(height: 12),
+                              _styledDropdown(
+                                value: _selectedProduct,
+                                items: const [
+                                  DropdownMenuItem(
+                                      value: 'T-Shirt', child: Text('T-Shirt')),
+                                  DropdownMenuItem(
+                                      value: 'Hoodie', child: Text('Hoodie')),
+                                  DropdownMenuItem(
+                                      value: 'Mug', child: Text('Mug')),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null)
+                                    setState(() => _selectedProduct = value);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        _sectionCard(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _sectionTitle('Custom message'),
+                              const SizedBox(height: 12),
+                              TextField(
+                                decoration: const InputDecoration(
+                                  labelText: 'Enter custom message',
+                                  border: OutlineInputBorder(),
+                                ),
+                                onChanged: (value) {
+                                  setState(() => _customMessage = value);
+                                },
+                              ),
+                              const SizedBox(height: 12),
+                              Text(
+                                'Message preview: $_customMessage',
+                                style: TextStyle(
+                                    fontSize: 16, color: Colors.grey[700]),
+                              ),
+                            ],
+                          ),
+                        ),
+                        _sectionCard(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _sectionTitle('Select size'),
+                              const SizedBox(height: 12),
+                              _styledDropdown(
+                                value: _selectedSize,
+                                items: const [
+                                  DropdownMenuItem(
+                                      value: 'S', child: Text('Small (S)')),
+                                  DropdownMenuItem(
+                                      value: 'M', child: Text('Medium (M)')),
+                                  DropdownMenuItem(
+                                      value: 'L', child: Text('Large (L)')),
+                                  DropdownMenuItem(
+                                      value: 'XL', child: Text('XL')),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null)
+                                    setState(() => _selectedSize = value);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        _sectionCard(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _sectionTitle('Select colour'),
+                              const SizedBox(height: 12),
+                              _styledDropdown(
+                                value: _selectedColor,
+                                items: const [
+                                  DropdownMenuItem(
+                                      value: 'Black', child: Text('Black')),
+                                  DropdownMenuItem(
+                                      value: 'White', child: Text('White')),
+                                  DropdownMenuItem(
+                                      value: 'Red', child: Text('Red')),
+                                  DropdownMenuItem(
+                                      value: 'Blue', child: Text('Blue')),
+                                ],
+                                onChanged: (value) {
+                                  if (value != null)
+                                    setState(() => _selectedColor = value);
+                                },
+                              ),
+                            ],
+                          ),
+                        ),
+                        _sectionCard(
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              _sectionTitle('Preview'),
+                              const SizedBox(height: 12),
                               Text('Product: $_selectedProduct',
                                   style: const TextStyle(fontSize: 16)),
                               Text('Message: $_customMessage',
@@ -179,7 +214,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 40),
                         Center(
                           child: TextButton(
                             onPressed: () => Navigator.pushNamed(
