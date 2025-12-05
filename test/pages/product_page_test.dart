@@ -11,13 +11,13 @@ void main() {
       (WidgetTester tester) async {
     // Mock product
     final product = Product(
-      id: 'p1',
       name: 'Test Product',
       price: 10.0,
       imagePath: 'assets/images/test.png',
       description: 'Test description',
       discountPercent: null,
       isOnSale: false,
+      category: 'Test Category',
     );
 
     await tester.pumpWidget(
