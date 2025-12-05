@@ -28,7 +28,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final canGoBack = Navigator.canPop(context);
     final width = MediaQuery.of(context).size.width;
-    final isSmall = width < 400;
+    final isMobile = width < 500;
 
     return Container(
       height: 100,
@@ -47,9 +47,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                       ? IconButton(
                           icon:
                               const Icon(Icons.arrow_back, color: Colors.white),
-                          onPressed: () {
-                            Navigator.maybePop(context);
-                          },
+                          onPressed: () => Navigator.maybePop(context),
                         )
                       : const SizedBox.shrink(),
                 ),
@@ -66,91 +64,51 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           ),
           Expanded(
             child: Container(
-              padding: EdgeInsets.symmetric(
-                horizontal: isSmall ? 6 : 10,
-              ),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: onNavigateHome,
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                      height: isSmall ? 20 : 24,
+                      height: 24,
                       fit: BoxFit.cover,
-                      errorBuilder: (context, error, stackTrace) {
-                        return Container(
-                          color: Colors.grey[300],
-                          width: isSmall ? 20 : 24,
-                          height: isSmall ? 20 : 24,
-                          child: const Center(
-                            child: Icon(
-                              Icons.image_not_supported,
-                              color: Colors.grey,
-                            ),
-                          ),
-                        );
-                      },
+                      errorBuilder: (context, error, stackTrace) => Container(
+                        color: Colors.grey[300],
+                        width: 24,
+                        height: 24,
+                        child: const Center(
+                          child: Icon(Icons.image_not_supported,
+                              color: Colors.grey),
+                        ),
+                      ),
                     ),
                   ),
-                  SizedBox(width: isSmall ? 8 : 12),
+                  const SizedBox(width: 12),
                   Expanded(
                     child: Wrap(
-                      spacing: isSmall ? 6 : 8,
+                      spacing: 8,
                       runSpacing: 4,
                       alignment: WrapAlignment.start,
                       children: [
                         TextButton(
-                          onPressed: onNavigateHome,
-                          child: const Text(
-                            'Home',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                            onPressed: onNavigateHome,
+                            child: const Text('Home')),
                         TextButton(
-                          onPressed: () =>
-                              NavigationController.goCollections(context),
-                          child: const Text(
-                            'Collections',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                            onPressed: () =>
+                                NavigationController.goCollections(context),
+                            child: const Text('Collections')),
                         TextButton(
-                          onPressed: onAboutPressed,
-                          child: const Text(
-                            'About',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                            onPressed: onAboutPressed,
+                            child: const Text('About')),
                         TextButton(
-                          onPressed: () => NavigationController.goSale(context),
-                          child: const Text(
-                            'Sale',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
+                            onPressed: () =>
+                                NavigationController.goSale(context),
+                            child: const Text('Sale')),
                         if (onPrintShackPressed != null)
                           TextButton(
-                            onPressed: onPrintShackPressed,
-                            child: const Text(
-                              'Print Shack',
-                              style: TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
+                              onPressed: onPrintShackPressed,
+                              child: const Text('Print Shack')),
                       ],
                     ),
                   ),
@@ -159,44 +117,26 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       IconButton(
-                        icon: const Icon(
-                          Icons.search,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: onSearchPressed,
-                      ),
+                          icon: const Icon(Icons.search,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: onSearchPressed),
                       IconButton(
-                        icon: const Icon(
-                          Icons.person_outline,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: onLoginPressed,
-                      ),
+                          icon: const Icon(Icons.person_outline,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: onLoginPressed),
                       IconButton(
-                        icon: const Icon(
-                          Icons.shopping_bag_outlined,
-                          size: 18,
-                          color: Colors.grey,
-                        ),
-                        padding: const EdgeInsets.all(8),
-                        constraints: const BoxConstraints(
-                          minWidth: 32,
-                          minHeight: 32,
-                        ),
-                        onPressed: onCartPressed,
-                      ),
+                          icon: const Icon(Icons.shopping_bag_outlined,
+                              size: 18, color: Colors.grey),
+                          padding: const EdgeInsets.all(8),
+                          constraints:
+                              const BoxConstraints(minWidth: 32, minHeight: 32),
+                          onPressed: onCartPressed),
                     ],
                   ),
                 ],
