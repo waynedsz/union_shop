@@ -37,9 +37,9 @@ class CartPage extends StatelessWidget {
           Navigator.pushNamed(context, '/login');
         },
         onCartPressed: () {
-          // Already on cart; keep or no-op as you like.
           Navigator.pushNamed(context, '/cart');
         },
+        onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
