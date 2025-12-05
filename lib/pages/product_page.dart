@@ -92,26 +92,28 @@ class _ProductPageState extends State<ProductPage> {
                     Text(
                       '£${product.price.toStringAsFixed(2)}',
                       style: const TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.bold,
+                        fontSize: 28,
+                        fontWeight: FontWeight.w700,
                         color: Color(0xFF4d2963),
                       ),
                     ),
-                    const SizedBox(height: 24),
+                    const SizedBox(height: 20),
+                    const Divider(
+                        height: 32, thickness: 1, color: Colors.black12),
                     const Text(
                       'Description',
                       style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
                       ),
                     ),
-                    const SizedBox(height: 12),
+                    const SizedBox(height: 10),
                     Text(
                       product.description,
                       style: const TextStyle(
                         fontSize: 16,
-                        height: 1.5,
-                        color: Colors.grey,
+                        height: 1.6,
+                        color: Colors.black87,
                       ),
                     ),
                     const SizedBox(height: 24),
