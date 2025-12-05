@@ -143,6 +143,32 @@ class _ProductPageState extends State<ProductPage> {
                         ),
                       ],
                     ),
+                    Row(
+                      children: [
+                        IconButton(
+                          onPressed: () {
+                            if (_quantity > 1) {
+                              setState(() => _quantity--);
+                            }
+                          },
+                          icon: const Icon(Icons.remove_circle_outline),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                          child: Text(
+                            '$_quantity',
+                            style: const TextStyle(
+                                fontSize: 18, fontWeight: FontWeight.w600),
+                          ),
+                        ),
+                        IconButton(
+                          onPressed: () {
+                            setState(() => _quantity++);
+                          },
+                          icon: const Icon(Icons.add_circle_outline),
+                        ),
+                      ],
+                    ),
                     const SizedBox(height: 16),
                     ElevatedButton(
                       onPressed: () {
