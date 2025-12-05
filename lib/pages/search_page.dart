@@ -125,6 +125,7 @@ class _SearchPageState extends State<SearchPage>
                   onSubmitted: (_) => _applyFilters(),
                 ),
               ),
+              const SizedBox(height: 8),
               Expanded(
                 child: filteredProducts.isEmpty
                     ? Padding(
