@@ -10,7 +10,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     required this.onAboutPressed,
     required this.onLoginPressed,
     required this.onCartPressed,
-    required this.onPrintShackPressed,
+    this.onPrintShackPressed,
   });
 
   final String title;
@@ -19,7 +19,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onAboutPressed;
   final VoidCallback onLoginPressed;
   final VoidCallback onCartPressed;
-  final VoidCallback onPrintShackPressed;
+  final VoidCallback? onPrintShackPressed;
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
@@ -27,6 +27,8 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     final canGoBack = Navigator.canPop(context);
+    final width = MediaQuery.of(context).size.width;
+    final isSmall = width < 400;
 
     return Container(
       height: 100,
@@ -64,20 +66,22 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           ),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(
+                horizontal: isSmall ? 6 : 10,
+              ),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: onNavigateHome,
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                      height: 18,
+                      height: isSmall ? 20 : 24,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) {
                         return Container(
                           color: Colors.grey[300],
-                          width: 18,
-                          height: 18,
+                          width: isSmall ? 20 : 24,
+                          height: isSmall ? 20 : 24,
                           child: const Center(
                             child: Icon(
                               Icons.image_not_supported,
@@ -88,10 +92,10 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                       },
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: isSmall ? 8 : 12),
                   Expanded(
                     child: Wrap(
-                      spacing: 8,
+                      spacing: isSmall ? 6 : 8,
                       runSpacing: 4,
                       alignment: WrapAlignment.start,
                       children: [
@@ -136,66 +140,64 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ),
                         ),
-                        TextButton(
-                          onPressed: onPrintShackPressed,
-                          child: const Text(
-                            'Print Shack',
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600,
+                        if (onPrintShackPressed != null)
+                          TextButton(
+                            onPressed: onPrintShackPressed,
+                            child: const Text(
+                              'Print Shack',
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
                           ),
-                        ),
                       ],
                     ),
                   ),
                   const Spacer(),
-                  ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 600),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        IconButton(
-                          icon: const Icon(
-                            Icons.search,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onSearchPressed,
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: const Icon(
+                          Icons.search,
+                          size: 18,
+                          color: Colors.grey,
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.person_outline,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onLoginPressed,
+                        padding: const EdgeInsets.all(8),
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
                         ),
-                        IconButton(
-                          icon: const Icon(
-                            Icons.shopping_bag_outlined,
-                            size: 18,
-                            color: Colors.grey,
-                          ),
-                          padding: const EdgeInsets.all(8),
-                          constraints: const BoxConstraints(
-                            minWidth: 32,
-                            minHeight: 32,
-                          ),
-                          onPressed: onCartPressed,
+                        onPressed: onSearchPressed,
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.person_outline,
+                          size: 18,
+                          color: Colors.grey,
                         ),
-                      ],
-                    ),
+                        padding: const EdgeInsets.all(8),
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
+                        ),
+                        onPressed: onLoginPressed,
+                      ),
+                      IconButton(
+                        icon: const Icon(
+                          Icons.shopping_bag_outlined,
+                          size: 18,
+                          color: Colors.grey,
+                        ),
+                        padding: const EdgeInsets.all(8),
+                        constraints: const BoxConstraints(
+                          minWidth: 32,
+                          minHeight: 32,
+                        ),
+                        onPressed: onCartPressed,
+                      ),
+                    ],
                   ),
                 ],
               ),
