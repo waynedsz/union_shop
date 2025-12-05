@@ -19,7 +19,7 @@ class HomeHero extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AspectRatio(
-      aspectRatio: 16 / 9,
+      aspectRatio: MediaQuery.of(context).size.width < 360 ? 14 / 9 : 16 / 9,
       child: Stack(
         children: [
           Positioned.fill(
