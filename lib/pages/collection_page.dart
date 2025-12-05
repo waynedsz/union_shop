@@ -55,7 +55,7 @@ class _CollectionPageState extends State<CollectionPage> {
         case 'Oldest First':
           final aDate = normalizeDate(a);
           final bDate = normalizeDate(b);
-          return aDate.compareTo(bDate);
+          return aDate.compareTo(aDate);
         case 'Sort A-Z':
         default:
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
@@ -78,71 +78,80 @@ class _CollectionPageState extends State<CollectionPage> {
         },
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: Column(
-            children: [
-              const SizedBox(height: 12),
-              const Text(
-                'Browse a curated selection of products.',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 14, color: Colors.black54),
-              ),
-              const SizedBox(height: 20),
-              DropdownButton<String>(
-                value: _selectedSort,
-                items: const [
-                  DropdownMenuItem(value: 'Sort A-Z', child: Text('Sort A-Z')),
-                  DropdownMenuItem(value: 'Sort Z-A', child: Text('Sort Z-A')),
-                  DropdownMenuItem(
-                      value: 'Price: Low → High',
-                      child: Text('Price: Low → High')),
-                  DropdownMenuItem(
-                      value: 'Price: High → Low',
-                      child: Text('Price: High → Low')),
-                  DropdownMenuItem(
-                      value: 'Newest First', child: Text('Newest First')),
-                  DropdownMenuItem(
-                      value: 'Oldest First', child: Text('Oldest First')),
-                ],
-                onChanged: (value) {
-                  if (value == null) return;
-                  setState(() => _selectedSort = value);
-                },
-              ),
-              const SizedBox(height: 10),
-              Expanded(
-                child: GridView.builder(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    mainAxisSpacing: 20,
-                    crossAxisSpacing: 16,
-                    childAspectRatio: 0.70,
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth;
+          final columns = width < 360 ? 1 : 2;
+
+          return Align(
+            alignment: Alignment.topCenter,
+            child: ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 500),
+              child: Column(
+                children: [
+                  const SizedBox(height: 12),
+                  const Text(
+                    'Browse a curated selection of products.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14, color: Colors.black54),
                   ),
-                  itemCount: products.length,
-                  itemBuilder: (context, index) {
-                    final product = products[index];
-                    return ProductTile(
-                      product: product,
-                      onTap: () {
-                        Navigator.pushNamed(
-                          context,
-                          '/product',
-                          arguments: product,
+                  const SizedBox(height: 20),
+                  DropdownButton<String>(
+                    value: _selectedSort,
+                    items: const [
+                      DropdownMenuItem(
+                          value: 'Sort A-Z', child: Text('Sort A-Z')),
+                      DropdownMenuItem(
+                          value: 'Sort Z-A', child: Text('Sort Z-A')),
+                      DropdownMenuItem(
+                          value: 'Price: Low → High',
+                          child: Text('Price: Low → High')),
+                      DropdownMenuItem(
+                          value: 'Price: High → Low',
+                          child: Text('Price: High → Low')),
+                      DropdownMenuItem(
+                          value: 'Newest First', child: Text('Newest First')),
+                      DropdownMenuItem(
+                          value: 'Oldest First', child: Text('Oldest First')),
+                    ],
+                    onChanged: (value) {
+                      if (value == null) return;
+                      setState(() => _selectedSort = value);
+                    },
+                  ),
+                  const SizedBox(height: 10),
+                  Expanded(
+                    child: GridView.builder(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 16, vertical: 10),
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: columns,
+                        mainAxisSpacing: 20,
+                        crossAxisSpacing: 16,
+                        childAspectRatio: 0.70,
+                      ),
+                      itemCount: products.length,
+                      itemBuilder: (context, index) {
+                        final product = products[index];
+                        return ProductTile(
+                          product: product,
+                          onTap: () {
+                            Navigator.pushNamed(
+                              context,
+                              '/product',
+                              arguments: product,
+                            );
+                          },
                         );
                       },
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                  const Footer(),
+                ],
               ),
-              const Footer(),
-            ],
-          ),
-        ),
+            ),
+          );
+        },
       ),
     );
   }
