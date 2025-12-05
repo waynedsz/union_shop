@@ -71,6 +71,7 @@ class _CollectionPageState extends State<CollectionPage> {
         builder: (context, constraints) {
           final width = constraints.maxWidth;
 
+          // horizontal padding exactly like CollectionsPage
           final horizontalPadding = width < 500
               ? 16.0
               : width < 900
@@ -140,7 +141,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     crossAxisCount: columns,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 16,
-                    childAspectRatio: 0.95,
+                    childAspectRatio: 0.95, // same as CollectionsPage
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
@@ -174,7 +175,7 @@ class _CollectionPageState extends State<CollectionPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 8),
+                          const SizedBox(height: 12),
                           Text(
                             product.name,
                             textAlign: TextAlign.center,
