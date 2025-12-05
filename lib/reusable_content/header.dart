@@ -86,7 +86,6 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    // Commit 2: collapse links into menu on mobile
                     child: isMobile
                         ? PopupMenuButton<String>(
                             icon: const Icon(Icons.menu, color: Colors.black87),
