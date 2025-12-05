@@ -10,6 +10,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     required this.onAboutPressed,
     required this.onLoginPressed,
     required this.onCartPressed,
+    required this.onPrintShackPressed,
   });
 
   final String title;
@@ -18,6 +19,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
   final VoidCallback onAboutPressed;
   final VoidCallback onLoginPressed;
   final VoidCallback onCartPressed;
+  final VoidCallback onPrintShackPressed;
 
   @override
   Size get preferredSize => const Size.fromHeight(100);
