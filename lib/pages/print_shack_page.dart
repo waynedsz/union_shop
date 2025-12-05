@@ -13,6 +13,7 @@ class PrintShackPage extends StatefulWidget {
 class _PrintShackPageState extends State<PrintShackPage> {
   String _selectedProduct = 'T-Shirt';
   String _customMessage = '';
+  String _selectedSize = 'M'; // NEW
 
   @override
   Widget build(BuildContext context) {
@@ -58,8 +59,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
                       },
                     ),
                     const SizedBox(height: 20),
-
-                    // TextField (NEW)
                     TextField(
                       decoration: const InputDecoration(
                         labelText: 'Enter custom message',
@@ -69,10 +68,43 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         setState(() => _customMessage = value);
                       },
                     ),
-
                     const SizedBox(height: 20),
                     Text(
                       'Message: $_customMessage',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    DropdownButton<String>(
+                      value: _selectedSize,
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'S',
+                          child: Text('Small (S)'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'M',
+                          child: Text('Medium (M)'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'L',
+                          child: Text('Large (L)'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'XL',
+                          child: Text('XL'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() => _selectedSize = value);
+                        }
+                      },
+                    ),
+                    Text(
+                      'Size: $_selectedSize',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[700],
