@@ -71,86 +71,104 @@ class _CollectionPageState extends State<CollectionPage> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
+
+          final horizontalPadding = width < 380
+              ? 8.0
+              : width < 650
+                  ? 12.0
+                  : width < 900
+                      ? 16.0
+                      : 24.0;
+
           final columns = width < 360 ? 1 : 2;
 
-          return Align(
-            alignment: Alignment.topCenter,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 650),
-              child: Column(
-                children: [
-                  const SizedBox(height: 20),
-                  const Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 24),
-                    child: Text(
-                      'Browse a curated selection of products.',
-                      textAlign: TextAlign.center,
-                      style: TextStyle(fontSize: 14, color: Colors.black54),
+          return Column(
+            children: [
+              const SizedBox(height: 20),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: const Text(
+                  'Browse a curated selection of products.',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontSize: 14, color: Colors.black54),
+                ),
+              ),
+              const SizedBox(height: 24),
+              Padding(
+                padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+                child: DropdownButtonFormField<String>(
+                  value: _selectedSort,
+                  decoration: InputDecoration(
+                    labelText: 'Sort',
+                    contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 12, vertical: 10),
+                    border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(12),
                     ),
                   ),
-                  const SizedBox(height: 24),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
-                    child: DropdownButtonFormField<String>(
-                      value: _selectedSort,
-                      decoration: InputDecoration(
-                        labelText: 'Sort',
-                        contentPadding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 10),
-                        border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                      ),
-                      items: const [
-                        DropdownMenuItem(
-                            value: 'Sort A-Z', child: Text('Sort A-Z')),
-                        DropdownMenuItem(
-                            value: 'Sort Z-A', child: Text('Sort Z-A')),
-                        DropdownMenuItem(
-                            value: 'Price: Low → High',
-                            child: Text('Price: Low → High')),
-                        DropdownMenuItem(
-                            value: 'Price: High → Low',
-                            child: Text('Price: High → Low')),
-                        DropdownMenuItem(
-                            value: 'Newest First', child: Text('Newest First')),
-                        DropdownMenuItem(
-                            value: 'Oldest First', child: Text('Oldest First')),
-                      ],
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setState(() => _selectedSort = value);
-                      },
-                    ),
+                  items: const [
+                    DropdownMenuItem(
+                        value: 'Sort A-Z', child: Text('Sort A-Z')),
+                    DropdownMenuItem(
+                        value: 'Sort Z-A', child: Text('Sort Z-A')),
+                    DropdownMenuItem(
+                        value: 'Price: Low → High',
+                        child: Text('Price: Low → High')),
+                    DropdownMenuItem(
+                        value: 'Price: High → Low',
+                        child: Text('Price: High → Low')),
+                    DropdownMenuItem(
+                        value: 'Newest First', child: Text('Newest First')),
+                    DropdownMenuItem(
+                        value: 'Oldest First', child: Text('Oldest First')),
+                  ],
+                  onChanged: (value) {
+                    if (value == null) return;
+                    setState(() => _selectedSort = value);
+                  },
+                ),
+              ),
+              const SizedBox(height: 20),
+              Expanded(
+                child: GridView.builder(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: horizontalPadding, vertical: 10),
+                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: columns,
+                    mainAxisSpacing: 20,
+                    crossAxisSpacing: 16,
+                    childAspectRatio: 0.70,
                   ),
-                  const SizedBox(height: 20),
-                  Expanded(
-                    child: GridView.builder(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 16, vertical: 10),
-                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                        crossAxisCount: columns,
-                        mainAxisSpacing: 20,
-                        crossAxisSpacing: 16,
-                        childAspectRatio: 0.70,
+                  itemCount: products.length,
+                  itemBuilder: (context, index) {
+                    final product = products[index];
+                    return Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(12),
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 6,
+                            offset: const Offset(0, 3),
+                          ),
+                        ],
                       ),
-                      itemCount: products.length,
-                      itemBuilder: (context, index) {
-                        final product = products[index];
-                        return ProductTile(
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(12),
+                        child: ProductTile(
                           product: product,
                           onTap: () {
                             Navigator.pushNamed(context, '/product',
                                 arguments: product);
                           },
-                        );
-                      },
-                    ),
-                  ),
-                  const Footer(),
-                ],
+                        ),
+                      ),
+                    );
+                  },
+                ),
               ),
-            ),
+              const Footer(),
+            ],
           );
         },
       ),
