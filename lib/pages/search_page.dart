@@ -101,56 +101,62 @@ class _SearchPageState extends State<SearchPage>
         onCartPressed: () => NavigationController.goCart(context),
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
-      body: Column(
-        children: [
-          Padding(
-            padding: const EdgeInsets.all(16.0),
-            child: TextField(
-              controller: _searchController,
-              decoration: InputDecoration(
-                labelText: 'Search',
-                border: const OutlineInputBorder(),
-                suffixIcon: query.isEmpty
-                    ? null
-                    : IconButton(
-                        icon: const Icon(Icons.clear),
-                        onPressed: _clearSearch,
-                      ),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: Column(
+            children: [
+              Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: TextField(
+                  controller: _searchController,
+                  decoration: InputDecoration(
+                    labelText: 'Search',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: query.isEmpty
+                        ? null
+                        : IconButton(
+                            icon: const Icon(Icons.clear),
+                            onPressed: _clearSearch,
+                          ),
+                  ),
+                  onSubmitted: (_) => _applyFilters(),
+                ),
               ),
-              onSubmitted: (_) => _applyFilters(),
-            ),
-          ),
-          Expanded(
-            child: filteredProducts.isEmpty
-                ? SearchEmptyState(
-                    title: query.isEmpty
-                        ? 'Start typing to search'
-                        : 'No products match your search',
-                    subtitle: query.isEmpty
-                        ? 'Find products by name, e.g. "hoodie" or "mug".'
-                        : 'Try a different keyword or category.',
-                  )
-                : Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                    child: FadeTransition(
-                      opacity: _fadeAnimation,
-                      child: ScaleTransition(
-                        scale: _scaleAnimation,
-                        child: SearchResultsGrid(
-                          products: filteredProducts,
-                          onProductTap: (product) {
-                            Navigator.pushNamed(
-                              context,
-                              '/product',
-                              arguments: product,
-                            );
-                          },
+              Expanded(
+                child: filteredProducts.isEmpty
+                    ? SearchEmptyState(
+                        title: query.isEmpty
+                            ? 'Start typing to search'
+                            : 'No products match your search',
+                        subtitle: query.isEmpty
+                            ? 'Find products by name, e.g. "hoodie" or "mug".'
+                            : 'Try a different keyword or category.',
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        child: FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: ScaleTransition(
+                            scale: _scaleAnimation,
+                            child: SearchResultsGrid(
+                              products: filteredProducts,
+                              onProductTap: (product) {
+                                Navigator.pushNamed(
+                                  context,
+                                  '/product',
+                                  arguments: product,
+                                );
+                              },
+                            ),
+                          ),
                         ),
                       ),
-                    ),
-                  ),
+              ),
+            ],
           ),
-        ],
+        ),
       ),
     );
   }
