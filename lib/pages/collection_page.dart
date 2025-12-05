@@ -80,13 +80,12 @@ class _CollectionPageState extends State<CollectionPage> {
               child: Column(
                 children: [
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 24),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 24),
                     child: Text(
                       'Browse a curated selection of products.',
                       textAlign: TextAlign.center,
-                      style:
-                          const TextStyle(fontSize: 14, color: Colors.black54),
+                      style: TextStyle(fontSize: 14, color: Colors.black54),
                     ),
                   ),
                   const SizedBox(height: 24),

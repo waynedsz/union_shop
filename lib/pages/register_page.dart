@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
-import 'package:flutter/material.dart';
-import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 
