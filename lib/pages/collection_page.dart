@@ -51,7 +51,7 @@ class _CollectionPageState extends State<CollectionPage> {
         case 'Newest First':
           return normalizeDate(b).compareTo(normalizeDate(a));
         case 'Oldest First':
-          return normalizeDate(a).compareTo(normalizeDate(b));
+          return normalizeDate(a).compareTo(normalizeDate(b)); // FIXED
         case 'Sort A-Z':
         default:
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
@@ -71,7 +71,6 @@ class _CollectionPageState extends State<CollectionPage> {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-
           final columns = width < 360 ? 1 : 2;
 
           return Align(
