@@ -13,6 +13,14 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
+  final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void dispose() {
+    _passwordController.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +65,12 @@ class _RegisterPageState extends State<RegisterPage> {
                                 borderRadius: BorderRadius.circular(8),
                               ),
                             ),
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Please enter your name';
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 20),
                           TextFormField(
@@ -69,9 +83,16 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                             keyboardType: TextInputType.emailAddress,
+                            validator: (value) {
+                              if (value == null || value.trim().isEmpty) {
+                                return 'Please enter your email';
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 20),
                           TextFormField(
+                            controller: _passwordController,
                             decoration: InputDecoration(
                               labelText: 'Password',
                               prefixIcon:
@@ -81,6 +102,12 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                             obscureText: true,
+                            validator: (value) {
+                              if (value == null || value.length < 6) {
+                                return 'Password must be at least 6 characters';
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 20),
                           TextFormField(
@@ -93,6 +120,23 @@ class _RegisterPageState extends State<RegisterPage> {
                               ),
                             ),
                             obscureText: true,
+                            validator: (value) {
+                              if (value == null ||
+                                  value != _passwordController.text) {
+                                return 'Passwords do not match';
+                              }
+                              return null;
+                            },
+                          ),
+                          const SizedBox(height: 32),
+                          SizedBox(
+                            width: double.infinity,
+                            child: ElevatedButton(
+                              onPressed: () {
+                                _formKey.currentState!.validate();
+                              },
+                              child: const Text('Register'),
+                            ),
                           ),
                           const SizedBox(height: 32),
                         ],
