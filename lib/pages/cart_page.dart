@@ -30,53 +30,44 @@ class CartPage extends StatelessWidget {
         title: 'Your Cart',
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
-        onAboutPressed: () {
-          Navigator.pushNamed(context, '/about');
-        },
-        onLoginPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-        onCartPressed: () {
-          Navigator.pushNamed(context, '/cart');
-        },
+        onAboutPressed: () => Navigator.pushNamed(context, '/about'),
+        onLoginPressed: () => Navigator.pushNamed(context, '/login'),
+        onCartPressed: () => Navigator.pushNamed(context, '/cart'),
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: LayoutBuilder(
-            builder: (context, constraints) {
-              final height = constraints.maxHeight;
-              const baseHeight = 800.0;
-              final scale = (height / baseHeight).clamp(0.7, 1.2);
-              final verticalOffset = 0.05 * scale;
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth;
 
-              return Column(
-                children: [
-                  Expanded(
-                    child: items.isEmpty
-                        ? Padding(
-                            padding: const EdgeInsets.only(top: 24),
-                            child: const EmptyCartView(),
-                          )
+          final horizontalPadding = width < 500
+              ? 16.0
+              : width < 900
+                  ? 32.0
+                  : 48.0;
+
+          final height = constraints.maxHeight;
+          const baseHeight = 800.0;
+          final scale = (height / baseHeight).clamp(0.7, 1.2);
+          final verticalOffset = 0.05 * scale;
+
+          return Align(
+            alignment: Alignment.topCenter,
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: width),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    const SizedBox(height: 24),
+                    items.isEmpty
+                        ? const EmptyCartView()
                         : ListView.builder(
-                            padding: EdgeInsets.only(
-                              top: 12,
-                              bottom: 90.0 * scale,
-                            ),
-                            itemCount: items.length + 1,
+                            physics: const NeverScrollableScrollPhysics(),
+                            shrinkWrap: true,
+                            padding: EdgeInsets.only(bottom: 32),
+                            itemCount: items.length,
                             itemBuilder: (context, index) {
-                              if (index == items.length) {
-                                return Padding(
-                                  padding: EdgeInsets.only(
-                                    top: 16.0 * scale,
-                                    bottom: 12.0 * scale,
-                                  ),
-                                  child: const Footer(),
-                                );
-                              }
-
                               final cartItem = items[index];
                               return AnimatedSwitcher(
                                 duration: Duration(
@@ -97,9 +88,9 @@ class CartPage extends StatelessWidget {
                                   );
                                 },
                                 child: Padding(
+                                  key: ValueKey(cartItem.product.name),
                                   padding: const EdgeInsets.only(bottom: 8),
                                   child: CartItemTile(
-                                    key: ValueKey(cartItem.product),
                                     cartItem: cartItem,
                                     cartState: cartState,
                                   ),
@@ -107,12 +98,14 @@ class CartPage extends StatelessWidget {
                               );
                             },
                           ),
-                  ),
-                ],
-              );
-            },
-          ),
-        ),
+                    const SizedBox(height: 32),
+                    const Footer(),
+                  ],
+                ),
+              ),
+            ),
+          );
+        },
       ),
       bottomNavigationBar: CartBottomBar(
         total: total,
