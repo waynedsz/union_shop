@@ -16,13 +16,33 @@ class _PrintShackPageState extends State<PrintShackPage> {
   String _selectedSize = 'M';
   String _selectedColor = 'Black';
 
+  IconData _iconForSection(String text) {
+    if (text.contains('product')) return Icons.shopping_bag_outlined;
+    if (text.contains('message')) return Icons.edit_outlined;
+    if (text.contains('size')) return Icons.straighten;
+    if (text.contains('colour') || text.contains('color'))
+      return Icons.color_lens_outlined;
+    if (text.contains('Preview')) return Icons.visibility_outlined;
+    return Icons.circle_outlined;
+  }
+
   Widget _sectionTitle(String text) {
-    return Text(
-      text,
-      style: const TextStyle(
-        fontSize: 18,
-        fontWeight: FontWeight.w700,
-      ),
+    return Row(
+      children: [
+        Icon(
+          _iconForSection(text),
+          size: 20,
+          color: Colors.black87,
+        ),
+        const SizedBox(width: 8),
+        Text(
+          text,
+          style: const TextStyle(
+            fontSize: 18,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      ],
     );
   }
 
@@ -269,7 +289,8 @@ class _PrintShackPageState extends State<PrintShackPage> {
                 backgroundColor: const Color(0xFF4d2963),
                 foregroundColor: Colors.white,
                 shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12)),
+                  borderRadius: BorderRadius.circular(12),
+                ),
               ),
               onPressed: () {
                 ScaffoldMessenger.of(context).showSnackBar(
