@@ -2,8 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
-import 'package:union_shop/reusable_content/print_shack/print_shack_section_card.dart';
-import 'package:union_shop/reusable_content/print_shack/print_shack_dropdown.dart';
+import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_section_card.dart';
+import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_dropdown.dart';
+import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_preview_card.dart';
 
 class PrintShackPage extends StatefulWidget {
   const PrintShackPage({super.key});
@@ -61,9 +62,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 32),
-
                           const Center(
                             child: Text(
                               'Custom university printing made easy.',
@@ -74,10 +73,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ),
                             ),
                           ),
-
                           const SizedBox(height: 40),
-
-                          // Choose Product
                           PrintShackSectionCard(
                             title: 'Choose a product',
                             child: PrintShackDropdown(
@@ -96,8 +92,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               },
                             ),
                           ),
-
-                          // Custom Message
                           PrintShackSectionCard(
                             title: 'Custom message',
                             child: Column(
@@ -121,8 +115,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ],
                             ),
                           ),
-
-                          // Select Size
                           PrintShackSectionCard(
                             title: 'Select size',
                             child: PrintShackDropdown(
@@ -143,8 +135,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               },
                             ),
                           ),
-
-                          // Select Colour
                           PrintShackSectionCard(
                             title: 'Select colour',
                             child: PrintShackDropdown(
@@ -165,25 +155,12 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               },
                             ),
                           ),
-
-                          // Preview
-                          PrintShackSectionCard(
-                            title: 'Preview',
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text('Product: $_selectedProduct',
-                                    style: const TextStyle(fontSize: 16)),
-                                Text('Message: $_customMessage',
-                                    style: const TextStyle(fontSize: 16)),
-                                Text('Size: $_selectedSize',
-                                    style: const TextStyle(fontSize: 16)),
-                                Text('Color: $_selectedColor',
-                                    style: const TextStyle(fontSize: 16)),
-                              ],
-                            ),
+                          PrintShackPreviewCard(
+                            product: _selectedProduct,
+                            message: _customMessage,
+                            size: _selectedSize,
+                            color: _selectedColor,
                           ),
-
                           Center(
                             child: TextButton(
                               onPressed: () => Navigator.pushNamed(
