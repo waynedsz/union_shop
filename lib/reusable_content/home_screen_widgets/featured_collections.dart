@@ -1,125 +1,108 @@
 import 'package:flutter/material.dart';
+import 'package:union_shop/reusable_content/header.dart';
+import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
+import 'package:union_shop/reusable_content/product_widgets/product.dart';
+import 'package:union_shop/reusable_content/home_screen_widgets/featured_collections.dart';
+import 'package:union_shop/reusable_content/home_screen_widgets/home_hero.dart';
 
-class FeaturedCollections extends StatelessWidget {
-  const FeaturedCollections({super.key});
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({super.key});
 
-  void _openCollection(BuildContext context, String label) {
-    Navigator.pushNamed(
-      context,
-      '/collection',
-      arguments: {
-        'label': label,
-        'products': collectionProducts[label],
-      },
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen>
+    with SingleTickerProviderStateMixin {
+  late final AnimationController _fadeController;
+  late final Animation<double> _fadeAnimation;
+
+  @override
+  void initState() {
+    super.initState();
+    _fadeController = AnimationController(
+      vsync: this,
+      duration: const Duration(milliseconds: 500),
     );
+    _fadeAnimation =
+        CurvedAnimation(parent: _fadeController, curve: Curves.easeInOut);
+    _fadeController.forward();
+  }
+
+  @override
+  void dispose() {
+    _fadeController.dispose();
+    super.dispose();
+  }
+
+  List<Product> _buildShowcaseProducts() {
+    return collectionProducts.values
+        .map((products) => products.isNotEmpty ? products.first : null)
+        .where((p) => p != null)
+        .cast<Product>()
+        .toList();
   }
 
   @override
   Widget build(BuildContext context) {
-    final labels = collectionProducts.keys.take(2).toList();
+    final height = MediaQuery.of(context).size.height;
+    final width = MediaQuery.of(context).size.width;
+    final isSmall = width < 400;
 
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const Text(
-            'Featured Collections',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              fontSize: 20,
-              color: Colors.black,
-              letterSpacing: 1,
-              fontWeight: FontWeight.bold,
+    final heroHeight = isSmall ? height * 0.45 : 400.0;
+
+    return Scaffold(
+      appBar: Header(
+        title: 'Home',
+        onNavigateHome: () => NavigationController.goHome(context),
+        onSearchPressed: () {
+          Navigator.pushNamed(context, '/search');
+        },
+        onAboutPressed: () => NavigationController.goAbout(context),
+        onLoginPressed: () => NavigationController.goLogin(context),
+        onCartPressed: () => NavigationController.goCart(context),
+      ),
+      body: CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: SizedBox(
+              height: heroHeight,
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: HomeHero(
+                  title: 'Placeholder Hero Title',
+                  subtitle: 'This is placeholder text for the hero section.',
+                  buttonText: 'BROWSE PRODUCTS',
+                  imageUrl:
+                      'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                  onButtonPressed: () {
+                    Navigator.pushNamed(context, '/collections');
+                  },
+                ),
+              ),
             ),
           ),
-          const SizedBox(height: 16),
-          LayoutBuilder(
-            builder: (context, constraints) {
-              final maxWidth = constraints.maxWidth;
-              final crossAxisCount = maxWidth > 700 ? 3 : 2;
-
-              final aspectRatio = maxWidth < 500 ? 3 / 4 : 4 / 3;
-
-              return GridView.count(
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                crossAxisCount: crossAxisCount,
-                mainAxisSpacing: 14,
-                crossAxisSpacing: 14,
-                childAspectRatio: aspectRatio,
-                children: labels.map((label) {
-                  final products = collectionProducts[label] ?? [];
-                  final firstProduct =
-                      products.isNotEmpty ? products.first : null;
-                  final imageUrl = firstProduct?.imagePath;
-
-                  return GestureDetector(
-                    onTap: () => _openCollection(context, label),
-                    child: Container(
-                      decoration: BoxDecoration(
-                        color: Colors.grey[100],
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.05),
-                            blurRadius: 6,
-                            offset: const Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          Expanded(
-                            child: ClipRRect(
-                              borderRadius: const BorderRadius.vertical(
-                                top: Radius.circular(12),
-                              ),
-                              child: imageUrl == null
-                                  ? Container(
-                                      color: Colors.grey[300],
-                                      child: const Icon(
-                                        Icons.image_not_supported,
-                                        color: Colors.grey,
-                                      ),
-                                    )
-                                  : Image.network(
-                                      imageUrl,
-                                      fit: BoxFit.cover,
-                                      errorBuilder: (_, __, ___) => Container(
-                                        color: Colors.grey[300],
-                                        child: const Icon(
-                                          Icons.image_not_supported,
-                                          color: Colors.grey,
-                                        ),
-                                      ),
-                                    ),
-                            ),
-                          ),
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                                vertical: 6, horizontal: 8),
-                            child: Text(
-                              label,
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                              textAlign: TextAlign.center,
-                              style: const TextStyle(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  );
-                }).toList(),
-              );
-            },
+          SliverToBoxAdapter(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: isSmall ? 16 : 24),
+              child: FadeTransition(
+                opacity: _fadeAnimation,
+                child: const FeaturedCollections(),
+              ),
+            ),
+          ),
+          SliverToBoxAdapter(
+            child: Container(
+              padding: EdgeInsets.all(isSmall ? 16 : 24),
+              width: double.infinity,
+              color: Colors.grey[50],
+              child: const Text(
+                'Placeholder Footer',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 16, color: Colors.grey),
+              ),
+            ),
           ),
         ],
       ),
