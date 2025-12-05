@@ -16,6 +16,16 @@ class _PrintShackPageState extends State<PrintShackPage> {
   String _selectedSize = 'M';
   String _selectedColor = 'Black';
 
+  Widget _sectionTitle(String text) {
+    return Text(
+      text,
+      style: const TextStyle(
+        fontSize: 18,
+        fontWeight: FontWeight.w700,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,16 +50,21 @@ class _PrintShackPageState extends State<PrintShackPage> {
                     padding: const EdgeInsets.symmetric(
                         horizontal: 20, vertical: 24),
                     child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          'Custom university printing made easy.',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                            color: Colors.black87,
+                        const Center(
+                          child: Text(
+                            'Custom university printing made easy.',
+                            style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w500,
+                              color: Colors.black87,
+                            ),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
+                        _sectionTitle('Choose a product'),
+                        const SizedBox(height: 12),
                         DropdownButton<String>(
                           value: _selectedProduct,
                           items: const [
@@ -64,7 +79,9 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               setState(() => _selectedProduct = value);
                           },
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 32),
+                        _sectionTitle('Custom message'),
+                        const SizedBox(height: 12),
                         TextField(
                           decoration: const InputDecoration(
                             labelText: 'Enter custom message',
@@ -74,13 +91,15 @@ class _PrintShackPageState extends State<PrintShackPage> {
                             setState(() => _customMessage = value);
                           },
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 12),
                         Text(
-                          'Message: $_customMessage',
+                          'Message preview: $_customMessage',
                           style:
                               TextStyle(fontSize: 16, color: Colors.grey[700]),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 32),
+                        _sectionTitle('Select size'),
+                        const SizedBox(height: 12),
                         DropdownButton<String>(
                           value: _selectedSize,
                           items: const [
@@ -97,12 +116,9 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               setState(() => _selectedSize = value);
                           },
                         ),
-                        Text(
-                          'Size: $_selectedSize',
-                          style:
-                              TextStyle(fontSize: 16, color: Colors.grey[700]),
-                        ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 32),
+                        _sectionTitle('Select colour'),
+                        const SizedBox(height: 12),
                         DropdownButton<String>(
                           value: _selectedColor,
                           items: const [
@@ -119,12 +135,9 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               setState(() => _selectedColor = value);
                           },
                         ),
-                        Text(
-                          'Color: $_selectedColor',
-                          style:
-                              TextStyle(fontSize: 16, color: Colors.grey[700]),
-                        ),
-                        const SizedBox(height: 30),
+                        const SizedBox(height: 40),
+                        _sectionTitle('Preview'),
+                        const SizedBox(height: 12),
                         Container(
                           padding: const EdgeInsets.all(16),
                           decoration: BoxDecoration(
@@ -132,16 +145,8 @@ class _PrintShackPageState extends State<PrintShackPage> {
                             borderRadius: BorderRadius.circular(8),
                           ),
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Text(
-                                'Preview:',
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
-                                  color: Colors.grey[800],
-                                ),
-                              ),
-                              const SizedBox(height: 10),
                               Text('Product: $_selectedProduct',
                                   style: const TextStyle(fontSize: 16)),
                               Text('Message: $_customMessage',
@@ -153,15 +158,17 @@ class _PrintShackPageState extends State<PrintShackPage> {
                             ],
                           ),
                         ),
-                        const SizedBox(height: 30),
-                        TextButton(
-                          onPressed: () => Navigator.pushNamed(
-                              context, '/print-shack-about'),
-                          child: const Text(
-                            'Learn more about Print Shack',
-                            style: TextStyle(
-                              fontSize: 16,
-                              decoration: TextDecoration.underline,
+                        const SizedBox(height: 40),
+                        Center(
+                          child: TextButton(
+                            onPressed: () => Navigator.pushNamed(
+                                context, '/print-shack-about'),
+                            child: const Text(
+                              'Learn more about Print Shack',
+                              style: TextStyle(
+                                fontSize: 16,
+                                decoration: TextDecoration.underline,
+                              ),
                             ),
                           ),
                         ),
