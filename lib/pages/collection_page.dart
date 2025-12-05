@@ -51,7 +51,7 @@ class _CollectionPageState extends State<CollectionPage> {
         case 'Newest First':
           return normalizeDate(b).compareTo(normalizeDate(a));
         case 'Oldest First':
-          return normalizeDate(a).compareTo(normalizeDate(b)); // FIXED
+          return normalizeDate(a).compareTo(normalizeDate(b));
         case 'Sort A-Z':
         default:
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
@@ -86,28 +86,39 @@ class _CollectionPageState extends State<CollectionPage> {
                     style: TextStyle(fontSize: 14, color: Colors.black54),
                   ),
                   const SizedBox(height: 20),
-                  DropdownButton<String>(
-                    value: _selectedSort,
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'Sort A-Z', child: Text('Sort A-Z')),
-                      DropdownMenuItem(
-                          value: 'Sort Z-A', child: Text('Sort Z-A')),
-                      DropdownMenuItem(
-                          value: 'Price: Low → High',
-                          child: Text('Price: Low → High')),
-                      DropdownMenuItem(
-                          value: 'Price: High → Low',
-                          child: Text('Price: High → Low')),
-                      DropdownMenuItem(
-                          value: 'Newest First', child: Text('Newest First')),
-                      DropdownMenuItem(
-                          value: 'Oldest First', child: Text('Oldest First')),
-                    ],
-                    onChanged: (value) {
-                      if (value == null) return;
-                      setState(() => _selectedSort = value);
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: DropdownButtonFormField<String>(
+                      value: _selectedSort,
+                      decoration: InputDecoration(
+                        labelText: 'Sort',
+                        contentPadding: const EdgeInsets.symmetric(
+                            horizontal: 12, vertical: 10),
+                        border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                      ),
+                      items: const [
+                        DropdownMenuItem(
+                            value: 'Sort A-Z', child: Text('Sort A-Z')),
+                        DropdownMenuItem(
+                            value: 'Sort Z-A', child: Text('Sort Z-A')),
+                        DropdownMenuItem(
+                            value: 'Price: Low → High',
+                            child: Text('Price: Low → High')),
+                        DropdownMenuItem(
+                            value: 'Price: High → Low',
+                            child: Text('Price: High → Low')),
+                        DropdownMenuItem(
+                            value: 'Newest First', child: Text('Newest First')),
+                        DropdownMenuItem(
+                            value: 'Oldest First', child: Text('Oldest First')),
+                      ],
+                      onChanged: (value) {
+                        if (value == null) return;
+                        setState(() => _selectedSort = value);
+                      },
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Expanded(
