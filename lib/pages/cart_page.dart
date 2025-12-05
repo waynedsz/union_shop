@@ -56,18 +56,21 @@ class CartPage extends StatelessWidget {
                 children: [
                   Expanded(
                     child: items.isEmpty
-                        ? const EmptyCartView()
+                        ? Padding(
+                            padding: const EdgeInsets.only(top: 24),
+                            child: const EmptyCartView(),
+                          )
                         : ListView.builder(
                             padding: EdgeInsets.only(
-                              bottom: 80.0 * scale,
+                              bottom: 90.0 * scale,
                             ),
                             itemCount: items.length + 1,
                             itemBuilder: (context, index) {
                               if (index == items.length) {
                                 return Padding(
                                   padding: EdgeInsets.only(
-                                    top: 8.0 * scale,
-                                    bottom: 8.0 * scale,
+                                    top: 16.0 * scale,
+                                    bottom: 12.0 * scale,
                                   ),
                                   child: const Footer(),
                                 );
@@ -92,10 +95,13 @@ class CartPage extends StatelessWidget {
                                     ),
                                   );
                                 },
-                                child: CartItemTile(
-                                  key: ValueKey(cartItem.product),
-                                  cartItem: cartItem,
-                                  cartState: cartState,
+                                child: Padding(
+                                  padding: const EdgeInsets.only(bottom: 8),
+                                  child: CartItemTile(
+                                    key: ValueKey(cartItem.product),
+                                    cartItem: cartItem,
+                                    cartState: cartState,
+                                  ),
                                 ),
                               );
                             },
