@@ -3,6 +3,7 @@ import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 import 'package:union_shop/reusable_content/print_shack/print_shack_section_card.dart';
+import 'package:union_shop/reusable_content/print_shack/print_shack_dropdown.dart';
 
 class PrintShackPage extends StatefulWidget {
   const PrintShackPage({super.key});
@@ -16,27 +17,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
   String _customMessage = '';
   String _selectedSize = 'M';
   String _selectedColor = 'Black';
-
-  Widget _styledDropdown({
-    required String value,
-    required List<DropdownMenuItem<String>> items,
-    required ValueChanged<String?> onChanged,
-  }) {
-    return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 12),
-      decoration: BoxDecoration(
-        border: Border.all(color: Colors.black26),
-        borderRadius: BorderRadius.circular(8),
-      ),
-      child: DropdownButton<String>(
-        value: value,
-        items: items,
-        isExpanded: true,
-        underline: const SizedBox.shrink(),
-        onChanged: onChanged,
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -81,7 +61,9 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ),
                             ),
                           ),
+
                           const SizedBox(height: 32),
+
                           const Center(
                             child: Text(
                               'Custom university printing made easy.',
@@ -92,10 +74,13 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ),
                             ),
                           ),
+
                           const SizedBox(height: 40),
+
+                          // Choose Product
                           PrintShackSectionCard(
                             title: 'Choose a product',
-                            child: _styledDropdown(
+                            child: PrintShackDropdown(
                               value: _selectedProduct,
                               items: const [
                                 DropdownMenuItem(
@@ -111,6 +96,8 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               },
                             ),
                           ),
+
+                          // Custom Message
                           PrintShackSectionCard(
                             title: 'Custom message',
                             child: Column(
@@ -134,9 +121,11 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ],
                             ),
                           ),
+
+                          // Select Size
                           PrintShackSectionCard(
                             title: 'Select size',
-                            child: _styledDropdown(
+                            child: PrintShackDropdown(
                               value: _selectedSize,
                               items: const [
                                 DropdownMenuItem(
@@ -154,9 +143,11 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               },
                             ),
                           ),
+
+                          // Select Colour
                           PrintShackSectionCard(
                             title: 'Select colour',
-                            child: _styledDropdown(
+                            child: PrintShackDropdown(
                               value: _selectedColor,
                               items: const [
                                 DropdownMenuItem(
@@ -174,6 +165,8 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               },
                             ),
                           ),
+
+                          // Preview
                           PrintShackSectionCard(
                             title: 'Preview',
                             child: Column(
@@ -190,6 +183,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ],
                             ),
                           ),
+
                           Center(
                             child: TextButton(
                               onPressed: () => Navigator.pushNamed(
