@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
+import 'package:flutter/material.dart';
+import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 
@@ -155,6 +157,16 @@ class _RegisterPageState extends State<RegisterPage> {
                                 }
                               },
                               child: const Text('Register'),
+                            ),
+                          ),
+                          const SizedBox(height: 16),
+                          TextButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/login');
+                            },
+                            child: const Text(
+                              'Already have an account? Login',
+                              style: TextStyle(fontSize: 12),
                             ),
                           ),
                           const SizedBox(height: 32),
