@@ -17,103 +17,55 @@ class CartItemTile extends StatelessWidget {
     final product = cartItem.product;
     final itemTotal = product.price * cartItem.quantity;
 
-    final width = MediaQuery.of(context).size.width;
-
-    // Dynamic horizontal padding
-    final outerHPad = width < 500
-        ? 16.0
-        : width < 900
-            ? 32.0
-            : 48.0;
-    final outerVPad = 8.0;
-    final cardRadius = 12.0;
-    final cardElevation = 3.0;
-    final innerPad = 12.0;
-    final imageSize = 60.0;
-    final imageRadius = 8.0;
-    final gapAfterImage = 12.0;
-    final gapNameToLine = 4.0;
-    final gapBetweenLines = 2.0;
-    final controlsGap = 8.0;
-    final qtyHPad = 4.0;
-
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: outerHPad, vertical: outerVPad),
-      child: Card(
-        elevation: cardElevation,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(cardRadius),
-        ),
-        child: Padding(
-          padding: EdgeInsets.all(innerPad),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Hero(
-                tag: product.name,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(imageRadius),
-                  child: Image.asset(
-                    product.imagePath,
-                    width: imageSize,
-                    height: imageSize,
-                    fit: BoxFit.cover,
-                  ),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+      elevation: 3,
+      child: Padding(
+        padding: const EdgeInsets.all(12),
+        child: Row(
+          children: [
+            Hero(
+              tag: product.name,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  product.imagePath,
+                  width: 60,
+                  height: 60,
+                  fit: BoxFit.cover,
                 ),
               ),
-              SizedBox(width: gapAfterImage),
-              Expanded(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text(
-                      product.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                      style: TextStyle(fontWeight: FontWeight.w600),
-                    ),
-                    SizedBox(height: gapNameToLine),
-                    Text(
-                      '£${product.price.toStringAsFixed(2)} x ${cartItem.quantity} = £${itemTotal.toStringAsFixed(2)}',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                    SizedBox(height: gapBetweenLines),
-                    Text(
-                      '£${product.price.toStringAsFixed(2)}',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                  ],
-                ),
-              ),
-              SizedBox(width: controlsGap),
-              Row(
-                mainAxisSize: MainAxisSize.min,
+            ),
+            const SizedBox(width: 12),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  IconButton(
-                    icon: const Icon(Icons.remove_circle_outline),
-                    constraints: const BoxConstraints(),
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      cartState.removeFromCart(product);
-                    },
-                  ),
-                  Padding(
-                    padding: EdgeInsets.symmetric(horizontal: qtyHPad),
-                    child: Text('${cartItem.quantity}'),
-                  ),
-                  IconButton(
-                    icon: const Icon(Icons.add_circle_outline),
-                    constraints: const BoxConstraints(),
-                    padding: EdgeInsets.zero,
-                    onPressed: () {
-                      cartState.addToCart(product);
-                    },
+                  Text(product.name,
+                      style: const TextStyle(fontWeight: FontWeight.w600)),
+                  const SizedBox(height: 4),
+                  Text(
+                    '£${product.price.toStringAsFixed(2)} x ${cartItem.quantity} = £${itemTotal.toStringAsFixed(2)}',
+                    style: const TextStyle(color: Colors.grey),
                   ),
                 ],
               ),
-            ],
-          ),
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  icon: const Icon(Icons.remove_circle_outline),
+                  onPressed: () => cartState.removeFromCart(product),
+                ),
+                Text('${cartItem.quantity}'),
+                IconButton(
+                  icon: const Icon(Icons.add_circle_outline),
+                  onPressed: () => cartState.addToCart(product),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
     );
