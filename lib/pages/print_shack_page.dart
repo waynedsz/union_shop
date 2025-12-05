@@ -26,6 +26,27 @@ class _PrintShackPageState extends State<PrintShackPage> {
     );
   }
 
+  Widget _styledDropdown({
+    required String value,
+    required List<DropdownMenuItem<String>> items,
+    required ValueChanged<String?> onChanged,
+  }) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 12),
+      decoration: BoxDecoration(
+        border: Border.all(color: Colors.black26),
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: DropdownButton<String>(
+        value: value,
+        items: items,
+        isExpanded: true,
+        underline: const SizedBox.shrink(),
+        onChanged: onChanged,
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -65,7 +86,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         const SizedBox(height: 32),
                         _sectionTitle('Choose a product'),
                         const SizedBox(height: 12),
-                        DropdownButton<String>(
+                        _styledDropdown(
                           value: _selectedProduct,
                           items: const [
                             DropdownMenuItem(
@@ -100,7 +121,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         const SizedBox(height: 32),
                         _sectionTitle('Select size'),
                         const SizedBox(height: 12),
-                        DropdownButton<String>(
+                        _styledDropdown(
                           value: _selectedSize,
                           items: const [
                             DropdownMenuItem(
@@ -119,7 +140,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         const SizedBox(height: 32),
                         _sectionTitle('Select colour'),
                         const SizedBox(height: 12),
-                        DropdownButton<String>(
+                        _styledDropdown(
                           value: _selectedColor,
                           items: const [
                             DropdownMenuItem(
