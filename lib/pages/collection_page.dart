@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
-import 'package:union_shop/reusable_content/product_widgets/product_tile.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
 
 class CollectionPage extends StatefulWidget {
@@ -143,32 +142,47 @@ class _CollectionPageState extends State<CollectionPage> {
                     crossAxisCount: columns,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 16,
-                    childAspectRatio: 0.95, // matches CollectionsPage
+                    childAspectRatio: 0.95,
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
                     final product = products[index];
-                    return Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 6,
-                            offset: const Offset(0, 3),
+                    return Column(
+                      crossAxisAlignment: CrossAxisAlignment.stretch,
+                      children: [
+                        Expanded(
+                          child: Container(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(12),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: Colors.black.withOpacity(0.1),
+                                  blurRadius: 6,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(12),
+                              child: Image.network(
+                                product.imagePath,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
                           ),
-                        ],
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: ProductTile(
-                          product: product,
-                          onTap: () {
-                            Navigator.pushNamed(context, '/product',
-                                arguments: product);
-                          },
                         ),
-                      ),
+                        const SizedBox(height: 8),
+                        Text(
+                          product.name,
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        Text(
+                          '\$${product.price.toStringAsFixed(2)}',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(color: Colors.black54),
+                        ),
+                      ],
                     );
                   },
                 ),
