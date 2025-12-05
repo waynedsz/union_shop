@@ -29,6 +29,9 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
     final canGoBack = Navigator.canPop(context);
     final width = MediaQuery.of(context).size.width;
     final isMobile = width < 500;
+    final logoSize = isMobile ? 20.0 : 24.0;
+    final horizontalPadding = isMobile ? 6.0 : 10.0;
+    final linkSpacing = isMobile ? 6.0 : 8.0;
 
     return Container(
       height: 100,
@@ -64,19 +67,19 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
           ),
           Expanded(
             child: Container(
-              padding: const EdgeInsets.symmetric(horizontal: 10),
+              padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
               child: Row(
                 children: [
                   GestureDetector(
                     onTap: onNavigateHome,
                     child: Image.network(
                       'https://shop.upsu.net/cdn/shop/files/upsu_300x300.png?v=1614735854',
-                      height: 24,
+                      height: logoSize,
                       fit: BoxFit.cover,
                       errorBuilder: (context, error, stackTrace) => Container(
                         color: Colors.grey[300],
-                        width: 24,
-                        height: 24,
+                        width: logoSize,
+                        height: logoSize,
                         child: const Center(
                           child: Icon(Icons.image_not_supported,
                               color: Colors.grey),
@@ -84,7 +87,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                       ),
                     ),
                   ),
-                  const SizedBox(width: 12),
+                  SizedBox(width: horizontalPadding),
                   Expanded(
                     child: isMobile
                         ? PopupMenuButton<String>(
@@ -126,7 +129,7 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             ],
                           )
                         : Wrap(
-                            spacing: 8,
+                            spacing: linkSpacing,
                             runSpacing: 4,
                             alignment: WrapAlignment.start,
                             children: [
