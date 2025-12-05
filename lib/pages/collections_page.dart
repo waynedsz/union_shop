@@ -41,7 +41,7 @@ class CollectionsPage extends StatelessWidget {
                       ? 3
                       : 4;
 
-          final maxGridWidth = width < 900 ? width : 900.0;
+          final maxGridWidth = width < 600 ? width : 1000.0;
 
           return SingleChildScrollView(
             child: Center(
