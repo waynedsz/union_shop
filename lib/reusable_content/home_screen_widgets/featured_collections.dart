@@ -20,7 +20,7 @@ class FeaturedCollections extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 140,
+          height: 180,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: labels.length,
@@ -41,19 +41,33 @@ class FeaturedCollections extends StatelessWidget {
                     },
                   );
                 },
-                child: Container(
-                  width: 180,
-                  decoration: BoxDecoration(
-                    color: Colors.grey[100],
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  clipBehavior: Clip.antiAlias,
-                  child: first == null
-                      ? Container(color: Colors.grey[300])
-                      : Image.network(
-                          first.imagePath,
-                          fit: BoxFit.cover,
-                        ),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      width: 180,
+                      height: 130,
+                      decoration: BoxDecoration(
+                        color: Colors.grey[100],
+                        borderRadius: BorderRadius.circular(12),
+                      ),
+                      clipBehavior: Clip.antiAlias,
+                      child: first == null
+                          ? Container(color: Colors.grey[300])
+                          : Image.network(
+                              first.imagePath,
+                              fit: BoxFit.cover,
+                            ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      label,
+                      style: const TextStyle(
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
                 ),
               );
             },
