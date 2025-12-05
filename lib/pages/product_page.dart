@@ -183,6 +183,7 @@ class _ProductPageState extends State<ProductPage> {
                           ],
                         ),
                         const SizedBox(height: 20),
+                        const SizedBox(height: 12)
                       ],
                     ),
                   ),
