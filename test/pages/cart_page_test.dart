@@ -10,7 +10,8 @@ import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 
 void main() {
-  testWidgets('CartPage shows empty cart and footer', (WidgetTester tester) async {
+  testWidgets('CartPage shows empty cart and footer',
+      (WidgetTester tester) async {
     await tester.pumpWidget(
       ChangeNotifierProvider(
         create: (_) => CartState(),
@@ -30,7 +31,8 @@ void main() {
     expect(find.byType(Footer), findsOneWidget);
   });
 
-  testWidgets('CartPage shows items and bottom bar total', (WidgetTester tester) async {
+  testWidgets('CartPage shows items and bottom bar total',
+      (WidgetTester tester) async {
     final cartState = CartState();
 
     // Add mock product
@@ -62,8 +64,16 @@ void main() {
     final totalText = find.text('£10.00');
     expect(totalText, findsOneWidget);
 
-    // Tap increment and decrement buttons
+    // Tap increment button
     final increment = find.byIcon(Icons.add_circle_outline);
+    await tester.tap(increment);
+    await tester.pump();
+    expect(find.text('2'), findsOneWidget);
+
+    // Tap decrement button
     final decrement = find.byIcon(Icons.remove_circle_outline);
-    expect(increment, findsOneWidget);
-    expect(decrement, findsOneWidget);
+    await tester.tap(decrement);
+    await tester.pump();
+    expect(find.text('1'), findsOneWidget);
+  });
+}
