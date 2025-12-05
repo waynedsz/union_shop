@@ -37,7 +37,9 @@ class HomeHero extends StatelessWidget {
           ),
           Center(
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 24),
+              padding: EdgeInsets.symmetric(
+                horizontal: MediaQuery.of(context).size.width < 360 ? 16 : 24,
+              ),
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
