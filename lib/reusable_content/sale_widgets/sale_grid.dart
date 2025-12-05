@@ -16,7 +16,13 @@ class SaleGrid extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final crossAxisCount = constraints.maxWidth > 700 ? 3 : 2;
+        final width = constraints.maxWidth;
+        final crossAxisCount = width < 360
+            ? 1
+            : width > 700
+                ? 3
+                : 2;
+
         return GridView.builder(
           itemCount: saleProducts.length,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
