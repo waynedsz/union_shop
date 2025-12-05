@@ -5,7 +5,7 @@ import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:provider/provider.dart';
 
-class ProductPage extends StatelessWidget {
+class ProductPage extends StatefulWidget {
   final Product product;
 
   const ProductPage({
@@ -21,6 +21,13 @@ class ProductPage extends StatelessWidget {
     );
   }
 
+  @override
+  State<ProductPage> createState() => _ProductPageState();
+}
+
+class _ProductPageState extends State<ProductPage> {
+  int _quantity = 1;
+
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -29,6 +36,8 @@ class ProductPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final product = widget.product;
+
     return Scaffold(
       appBar: Header(
         title: product.name,
