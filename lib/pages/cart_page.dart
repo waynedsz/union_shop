@@ -38,7 +38,6 @@ class CartPage extends StatelessWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-
           final horizontalPadding = width < 500
               ? 16.0
               : width < 900
@@ -50,58 +49,68 @@ class CartPage extends StatelessWidget {
           final scale = (height / baseHeight).clamp(0.7, 1.2);
           final verticalOffset = 0.05 * scale;
 
+          final columns = width < 650
+              ? 1
+              : width < 900
+                  ? 2
+                  : 3;
+
           return Align(
             alignment: Alignment.topCenter,
             child: SingleChildScrollView(
               padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: width),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    const SizedBox(height: 24),
-                    items.isEmpty
-                        ? const EmptyCartView()
-                        : ListView.builder(
-                            physics: const NeverScrollableScrollPhysics(),
-                            shrinkWrap: true,
-                            padding: EdgeInsets.only(bottom: 32),
-                            itemCount: items.length,
-                            itemBuilder: (context, index) {
-                              final cartItem = items[index];
-                              return AnimatedSwitcher(
-                                duration: Duration(
-                                  milliseconds:
-                                      (250 * scale).clamp(150, 350).toInt(),
-                                ),
-                                transitionBuilder: (child, animation) {
-                                  final offsetAnimation = Tween<Offset>(
-                                    begin: Offset(0, verticalOffset),
-                                    end: Offset.zero,
-                                  ).animate(animation);
-                                  return FadeTransition(
-                                    opacity: animation,
-                                    child: SlideTransition(
-                                      position: offsetAnimation,
-                                      child: child,
-                                    ),
-                                  );
-                                },
-                                child: Padding(
-                                  key: ValueKey(cartItem.product.name),
-                                  padding: const EdgeInsets.only(bottom: 8),
-                                  child: CartItemTile(
-                                    cartItem: cartItem,
-                                    cartState: cartState,
-                                  ),
-                                ),
-                              );
-                            },
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  const SizedBox(height: 24),
+                  items.isEmpty
+                      ? const EmptyCartView()
+                      : GridView.builder(
+                          physics: const NeverScrollableScrollPhysics(),
+                          shrinkWrap: true,
+                          padding: EdgeInsets.only(bottom: 32),
+                          itemCount: items.length,
+                          gridDelegate:
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: columns,
+                            mainAxisSpacing: 16,
+                            crossAxisSpacing: 16,
+                            childAspectRatio: 4.0, // wider for cart items
                           ),
-                    const SizedBox(height: 32),
-                    const Footer(),
-                  ],
-                ),
+                          itemBuilder: (context, index) {
+                            final cartItem = items[index];
+                            return AnimatedSwitcher(
+                              duration: Duration(
+                                milliseconds:
+                                    (250 * scale).clamp(150, 350).toInt(),
+                              ),
+                              transitionBuilder: (child, animation) {
+                                final offsetAnimation = Tween<Offset>(
+                                  begin: Offset(0, verticalOffset),
+                                  end: Offset.zero,
+                                ).animate(animation);
+                                return FadeTransition(
+                                  opacity: animation,
+                                  child: SlideTransition(
+                                    position: offsetAnimation,
+                                    child: child,
+                                  ),
+                                );
+                              },
+                              child: Padding(
+                                key: ValueKey(cartItem.product.name),
+                                padding: const EdgeInsets.all(8.0),
+                                child: CartItemTile(
+                                  cartItem: cartItem,
+                                  cartState: cartState,
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                  const SizedBox(height: 32),
+                  const Footer(),
+                ],
               ),
             ),
           );
