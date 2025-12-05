@@ -21,7 +21,7 @@ class FeaturedCollections extends StatelessWidget {
 
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.all(40),
+      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -35,7 +35,7 @@ class FeaturedCollections extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 32),
+          const SizedBox(height: 24),
           LayoutBuilder(
             builder: (context, constraints) {
               final maxWidth = constraints.maxWidth;
