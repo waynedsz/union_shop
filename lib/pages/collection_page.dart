@@ -71,13 +71,11 @@ class _CollectionPageState extends State<CollectionPage> {
         builder: (context, constraints) {
           final width = constraints.maxWidth;
 
-          final horizontalPadding = width < 380
-              ? 8.0
-              : width < 650
-                  ? 12.0
-                  : width < 900
-                      ? 16.0
-                      : 24.0;
+          final horizontalPadding = width < 500
+              ? 16.0
+              : width < 900
+                  ? 32.0
+                  : 48.0;
 
           final columns = width < 380
               ? 1
@@ -89,7 +87,7 @@ class _CollectionPageState extends State<CollectionPage> {
 
           return Column(
             children: [
-              const SizedBox(height: 20),
+              const SizedBox(height: 24),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                 child: const Text(
@@ -133,11 +131,11 @@ class _CollectionPageState extends State<CollectionPage> {
                   },
                 ),
               ),
-              const SizedBox(height: 20),
+              const SizedBox(height: 28),
               Expanded(
                 child: GridView.builder(
                   padding: EdgeInsets.symmetric(
-                      horizontal: horizontalPadding, vertical: 10),
+                      horizontal: horizontalPadding, vertical: 20),
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: columns,
                     mainAxisSpacing: 20,
@@ -193,6 +191,7 @@ class _CollectionPageState extends State<CollectionPage> {
                   },
                 ),
               ),
+              const SizedBox(height: 32),
               const Footer(),
             ],
           );
