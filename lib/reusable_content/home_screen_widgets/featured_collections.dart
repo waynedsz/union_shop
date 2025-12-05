@@ -41,13 +41,17 @@ class FeaturedCollections extends StatelessWidget {
               final maxWidth = constraints.maxWidth;
               final crossAxisCount = maxWidth > 700 ? 3 : 2;
 
+              final aspectRatio = maxWidth < 500
+                  ? 3 / 4
+                  : 4 / 3; // ★ NEW: mobile-friendly ratio
+
               return GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: crossAxisCount,
                 mainAxisSpacing: 16,
                 crossAxisSpacing: 16,
-                childAspectRatio: 4 / 3,
+                childAspectRatio: aspectRatio,
                 children: labels.map((label) {
                   final products = collectionProducts[label] ?? [];
                   final firstProduct =
