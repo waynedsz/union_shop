@@ -50,6 +50,7 @@ class _ProductPageState extends State<ProductPage> {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
+        onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: Column(
         children: [
