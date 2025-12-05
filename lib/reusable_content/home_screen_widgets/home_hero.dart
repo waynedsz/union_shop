@@ -31,7 +31,9 @@ class HomeHero extends StatelessWidget {
                 ),
               ),
               child: Container(
-                color: Colors.black54,
+                color: MediaQuery.of(context).size.width < 360
+                    ? Colors.black.withOpacity(0.60)
+                    : Colors.black.withOpacity(0.54),
               ),
             ),
           ),
