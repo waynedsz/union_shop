@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-
 import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 import 'package:union_shop/pages/home_screen.dart';
 import 'package:union_shop/pages/about_page.dart';
@@ -12,6 +11,9 @@ import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/pages/product_page.dart';
 import 'package:union_shop/pages/search_page.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
+
+// ✅ NEW import
+import 'package:union_shop/pages/print_shack_page.dart';
 
 void main() {
   runApp(
@@ -44,6 +46,7 @@ class UnionShopApp extends StatelessWidget {
         '/cart': (context) => const CartPage(),
         '/search': (context) => const SearchPage(),
         '/sale': (context) => const SaleCollection(),
+        '/print-shack': (context) => const PrintShackPage(),
       },
       onGenerateRoute: (settings) {
         if (settings.name == '/product') {
