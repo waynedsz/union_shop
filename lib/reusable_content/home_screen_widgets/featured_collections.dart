@@ -7,6 +7,9 @@ class FeaturedCollections extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final labels = collectionProducts.keys.take(2).toList();
+    final width = MediaQuery.of(context).size.width;
+    final tileWidth = width < 380 ? 150.0 : 180.0;
+    final tileHeight = width < 380 ? 120.0 : 130.0;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -20,7 +23,7 @@ class FeaturedCollections extends StatelessWidget {
         ),
         const SizedBox(height: 16),
         SizedBox(
-          height: 180,
+          height: tileHeight + 50,
           child: ListView.separated(
             scrollDirection: Axis.horizontal,
             itemCount: labels.length,
@@ -45,8 +48,8 @@ class FeaturedCollections extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      width: 180,
-                      height: 130,
+                      width: tileWidth,
+                      height: tileHeight,
                       decoration: BoxDecoration(
                         color: Colors.grey[100],
                         borderRadius: BorderRadius.circular(12),
@@ -60,11 +63,16 @@ class FeaturedCollections extends StatelessWidget {
                             ),
                     ),
                     const SizedBox(height: 8),
-                    Text(
-                      label,
-                      style: const TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
+                    SizedBox(
+                      width: tileWidth,
+                      child: Text(
+                        label,
+                        maxLines: 1,
+                        overflow: TextOverflow.ellipsis,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                        ),
                       ),
                     ),
                   ],
