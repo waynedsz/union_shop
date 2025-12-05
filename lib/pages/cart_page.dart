@@ -62,6 +62,7 @@ class CartPage extends StatelessWidget {
                           )
                         : ListView.builder(
                             padding: EdgeInsets.only(
+                              top: 12,
                               bottom: 90.0 * scale,
                             ),
                             itemCount: items.length + 1,
