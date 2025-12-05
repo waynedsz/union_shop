@@ -5,6 +5,7 @@ import 'package:union_shop/reusable_content/home_screen_widgets/navigation_contr
 import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_section_card.dart';
 import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_dropdown.dart';
 import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_preview_card.dart';
+import 'package:union_shop/reusable_content/print_shack_widgets/print_shack_banner.dart';
 
 class PrintShackPage extends StatefulWidget {
   const PrintShackPage({super.key});
@@ -47,21 +48,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          ClipRRect(
-                            borderRadius: BorderRadius.circular(12),
-                            child: Container(
-                              height: 160,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                color: Colors.grey.shade300,
-                                image: const DecorationImage(
-                                  image: AssetImage(
-                                      'assets/images/print_banner.png'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ),
+                          const PrintShackBanner(),
                           const SizedBox(height: 32),
                           const Center(
                             child: Text(
