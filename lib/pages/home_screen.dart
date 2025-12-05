@@ -63,35 +63,53 @@ class _HomeScreenState extends State<HomeScreen>
       body: CustomScrollView(
         slivers: [
           SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: HomeHero(
-                title: 'Placeholder Hero Title',
-                subtitle: 'This is placeholder text for the hero section.',
-                buttonText: 'BROWSE PRODUCTS',
-                imageUrl:
-                    'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
-                onButtonPressed: () {
-                  Navigator.pushNamed(context, '/collections');
-                },
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: HomeHero(
+                    title: 'Placeholder Hero Title',
+                    subtitle: 'This is placeholder text for the hero section.',
+                    buttonText: 'BROWSE PRODUCTS',
+                    imageUrl:
+                        'https://shop.upsu.net/cdn/shop/files/PortsmouthCityPostcard2_1024x1024@2x.jpg?v=1752232561',
+                    onButtonPressed: () {
+                      Navigator.pushNamed(context, '/collections');
+                    },
+                  ),
+                ),
               ),
             ),
           ),
           SliverToBoxAdapter(
-            child: FadeTransition(
-              opacity: _fadeAnimation,
-              child: const FeaturedCollections(),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: FadeTransition(
+                  opacity: _fadeAnimation,
+                  child: const FeaturedCollections(),
+                ),
+              ),
             ),
           ),
           SliverToBoxAdapter(
-            child: Container(
-              padding: const EdgeInsets.all(24),
-              width: double.infinity,
-              color: Colors.grey[50],
-              child: const Text(
-                'Placeholder Footer',
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 16, color: Colors.grey),
+            child: Align(
+              alignment: Alignment.topCenter,
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 500),
+                child: Container(
+                  padding: const EdgeInsets.all(24),
+                  width: double.infinity,
+                  color: Colors.grey[50],
+                  child: const Text(
+                    'Placeholder Footer',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 16, color: Colors.grey),
+                  ),
+                ),
               ),
             ),
           ),
