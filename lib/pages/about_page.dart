@@ -27,9 +27,11 @@ class AboutPage extends StatelessWidget {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
+        onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: Column(
         children: [
+          const SizedBox(height: 16),
           Expanded(
             child: SingleChildScrollView(
               child: Center(
@@ -37,7 +39,9 @@ class AboutPage extends StatelessWidget {
                   constraints: const BoxConstraints(maxWidth: 900),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 24.0, vertical: 32.0),
+                      horizontal: 24.0,
+                      vertical: 32.0,
+                    ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -64,7 +68,8 @@ class AboutPage extends StatelessWidget {
                                   ],
                                   image: const DecorationImage(
                                     image: AssetImage(
-                                        'assets/images/about_banner.png'),
+                                      'assets/images/about_banner.png',
+                                    ),
                                     fit: BoxFit.cover,
                                   ),
                                 ),
