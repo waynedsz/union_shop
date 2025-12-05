@@ -27,11 +27,13 @@ class CollectionsPage extends StatelessWidget {
         builder: (context, constraints) {
           final width = constraints.maxWidth;
 
-          final horizontalPadding = width < 500
-              ? 16.0
-              : width < 900
-                  ? 32.0
-                  : 48.0;
+          final horizontalPadding = width < 380
+              ? 8.0
+              : width < 650
+                  ? 12.0
+                  : width < 900
+                      ? 16.0
+                      : 24.0;
 
           final columns = width < 380
               ? 1
@@ -41,14 +43,10 @@ class CollectionsPage extends StatelessWidget {
                       ? 3
                       : 4;
 
-          final maxGridWidth = width < 900 ? width : 900.0;
-          final childAspectRatio = width / (columns * 220);
-
-          return SingleChildScrollView(
-            child: Center(
-              child: ConstrainedBox(
-                constraints: BoxConstraints(maxWidth: maxGridWidth),
-                child: Padding(
+          return Column(
+            children: [
+              Expanded(
+                child: SingleChildScrollView(
                   padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -80,7 +78,7 @@ class CollectionsPage extends StatelessWidget {
                           crossAxisCount: columns,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 20,
-                          childAspectRatio: childAspectRatio,
+                          childAspectRatio: 0.95,
                         ),
                         itemBuilder: (context, index) {
                           final label = collectionProducts.keys.toList()[index];
@@ -91,13 +89,12 @@ class CollectionsPage extends StatelessWidget {
                         },
                       ),
                       const SizedBox(height: 32),
-                      const Footer(),
-                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
               ),
-            ),
+              const Footer(),
+            ],
           );
         },
       ),
