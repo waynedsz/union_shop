@@ -49,13 +49,9 @@ class _CollectionPageState extends State<CollectionPage> {
         case 'Price: High → Low':
           return b.price.compareTo(a.price);
         case 'Newest First':
-          final aDate = normalizeDate(a);
-          final bDate = normalizeDate(b);
-          return bDate.compareTo(aDate);
+          return normalizeDate(b).compareTo(normalizeDate(a));
         case 'Oldest First':
-          final aDate = normalizeDate(a);
-          final bDate = normalizeDate(b);
-          return aDate.compareTo(bDate);
+          return normalizeDate(a).compareTo(normalizeDate(b));
         case 'Sort A-Z':
         default:
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
@@ -67,26 +63,21 @@ class _CollectionPageState extends State<CollectionPage> {
         title: collectionName,
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: placeholderCallback,
-        onAboutPressed: () {
-          Navigator.pushNamed(context, '/about');
-        },
-        onLoginPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-        onCartPressed: () {
-          Navigator.pushNamed(context, '/cart');
-        },
+        onAboutPressed: () => Navigator.pushNamed(context, '/about'),
+        onLoginPressed: () => Navigator.pushNamed(context, '/login'),
+        onCartPressed: () => Navigator.pushNamed(context, '/cart'),
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
+
           final columns = width < 360 ? 1 : 2;
 
           return Align(
             alignment: Alignment.topCenter,
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 500),
+              constraints: const BoxConstraints(maxWidth: 650),
               child: Column(
                 children: [
                   const SizedBox(height: 12),
@@ -96,31 +87,28 @@ class _CollectionPageState extends State<CollectionPage> {
                     style: TextStyle(fontSize: 14, color: Colors.black54),
                   ),
                   const SizedBox(height: 20),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: DropdownButton<String>(
-                      value: _selectedSort,
-                      items: const [
-                        DropdownMenuItem(
-                            value: 'Sort A-Z', child: Text('Sort A-Z')),
-                        DropdownMenuItem(
-                            value: 'Sort Z-A', child: Text('Sort Z-A')),
-                        DropdownMenuItem(
-                            value: 'Price: Low → High',
-                            child: Text('Price: Low → High')),
-                        DropdownMenuItem(
-                            value: 'Price: High → Low',
-                            child: Text('Price: High → Low')),
-                        DropdownMenuItem(
-                            value: 'Newest First', child: Text('Newest First')),
-                        DropdownMenuItem(
-                            value: 'Oldest First', child: Text('Oldest First')),
-                      ],
-                      onChanged: (value) {
-                        if (value == null) return;
-                        setState(() => _selectedSort = value);
-                      },
-                    ),
+                  DropdownButton<String>(
+                    value: _selectedSort,
+                    items: const [
+                      DropdownMenuItem(
+                          value: 'Sort A-Z', child: Text('Sort A-Z')),
+                      DropdownMenuItem(
+                          value: 'Sort Z-A', child: Text('Sort Z-A')),
+                      DropdownMenuItem(
+                          value: 'Price: Low → High',
+                          child: Text('Price: Low → High')),
+                      DropdownMenuItem(
+                          value: 'Price: High → Low',
+                          child: Text('Price: High → Low')),
+                      DropdownMenuItem(
+                          value: 'Newest First', child: Text('Newest First')),
+                      DropdownMenuItem(
+                          value: 'Oldest First', child: Text('Oldest First')),
+                    ],
+                    onChanged: (value) {
+                      if (value == null) return;
+                      setState(() => _selectedSort = value);
+                    },
                   ),
                   const SizedBox(height: 10),
                   Expanded(
