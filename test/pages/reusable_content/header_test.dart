@@ -37,21 +37,24 @@ void main() {
 
   testWidgets('Header shows menu button on mobile',
       (WidgetTester tester) async {
-    // Set a small screen width for mobile
+    // Mobile screen width
     const size = Size(400, 800);
 
     await tester.binding.setSurfaceSize(size);
 
     await tester.pumpWidget(
       MaterialApp(
-        home: Scaffold(
-          appBar: Header(
-            title: 'Test Header',
-            onNavigateHome: () {},
-            onSearchPressed: () {},
-            onAboutPressed: () {},
-            onLoginPressed: () {},
-            onCartPressed: () {},
+        home: MediaQuery(
+          data: const MediaQueryData(size: size),
+          child: Scaffold(
+            body: Header(
+              title: 'Test Header',
+              onNavigateHome: () {},
+              onSearchPressed: () {},
+              onAboutPressed: () {},
+              onLoginPressed: () {},
+              onCartPressed: () {},
+            ),
           ),
         ),
       ),
@@ -66,5 +69,8 @@ void main() {
     expect(find.byIcon(Icons.search), findsOneWidget);
     expect(find.byIcon(Icons.person_outline), findsOneWidget);
     expect(find.byIcon(Icons.shopping_bag_outlined), findsOneWidget);
+
+    // Reset surface size after test
+    await tester.binding.setSurfaceSize(null);
   });
 }
