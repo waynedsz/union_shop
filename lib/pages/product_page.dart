@@ -190,18 +190,6 @@ class _ProductPageState extends State<ProductPage> {
                       ),
                     ),
                     const SizedBox(height: 24),
-                    ElevatedButton(
-                      onPressed: () {
-                        Provider.of<CartState>(context, listen: false)
-                            .addMultiple(product, _quantity);
-
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(
-                              content: Text('${product.name} added to cart')),
-                        );
-                      },
-                      child: const Text('Add to Cart'),
-                    ),
                   ],
                 ),
               ),
