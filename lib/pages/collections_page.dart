@@ -3,6 +3,7 @@ import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/collection_widgets/collection_tile.dart';
 import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
 import 'package:union_shop/reusable_content/header.dart';
+import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
 
 class CollectionsPage extends StatelessWidget {
   const CollectionsPage({super.key});
@@ -29,6 +30,7 @@ class CollectionsPage extends StatelessWidget {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
+        onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
