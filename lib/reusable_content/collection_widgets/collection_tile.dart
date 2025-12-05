@@ -29,14 +29,16 @@ class CollectionTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final double tileHeight = constraints.maxWidth * 0.9;
+        final w = constraints.maxWidth;
+        final imgHeight = w * 0.85;
+        final fontSize = (w * 0.08).clamp(12, 18).toDouble();
 
         return GestureDetector(
           onTap: onTap,
           child: Column(
             children: [
               Container(
-                height: tileHeight,
+                height: imgHeight,
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(16),
                 ),
@@ -50,8 +52,8 @@ class CollectionTile extends StatelessWidget {
               Text(
                 label,
                 textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 16,
+                style: TextStyle(
+                  fontSize: fontSize,
                   fontWeight: FontWeight.w600,
                 ),
               ),
