@@ -51,7 +51,8 @@ class HomeHero extends StatelessWidget {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 12),
+                  SizedBox(
+                      height: MediaQuery.of(context).size.width < 360 ? 8 : 12),
                   Text(
                     subtitle,
                     textAlign: TextAlign.center,
