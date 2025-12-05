@@ -17,44 +17,35 @@ class CartItemTile extends StatelessWidget {
     final product = cartItem.product;
     final itemTotal = product.price * cartItem.quantity;
 
-    final size = MediaQuery.of(context).size;
-    final shortestSide = size.shortestSide;
-    final scale = (shortestSide / 400).clamp(0.8, 1.2);
+    final width = MediaQuery.of(context).size.width;
 
-    final outerHPad = 12.0 * scale;
-    final outerVPad = 8.0 * scale;
-    final cardRadius = 12.0 * scale;
-    final cardElevation = 3.0 * scale;
-    final innerPad = 12.0 * scale;
-    final imageSize = 60.0 * scale;
-    final imageRadius = 8.0 * scale;
-    final gapAfterImage = 12.0 * scale;
-    final gapNameToLine = 4.0 * scale;
-    final gapBetweenLines = 2.0 * scale;
-    final controlsGap = 8.0 * scale;
-    final qtyHPad = 4.0 * scale;
-
-    final nameFontSize = 16.0 * scale;
-    final lineFontSize = 12.0 * scale;
-    final unitPriceFontSize = 14.0 * scale;
-    final qtyFontSize = 16.0 * scale;
-    final iconSize = 24.0 * scale;
+    // Dynamic horizontal padding
+    final outerHPad = width < 500
+        ? 16.0
+        : width < 900
+            ? 32.0
+            : 48.0;
+    final outerVPad = 8.0;
+    final cardRadius = 12.0;
+    final cardElevation = 3.0;
+    final innerPad = 12.0;
+    final imageSize = 60.0;
+    final imageRadius = 8.0;
+    final gapAfterImage = 12.0;
+    final gapNameToLine = 4.0;
+    final gapBetweenLines = 2.0;
+    final controlsGap = 8.0;
+    final qtyHPad = 4.0;
 
     return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: outerHPad,
-        vertical: outerVPad,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: outerHPad, vertical: outerVPad),
       child: Card(
         elevation: cardElevation,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(cardRadius),
         ),
         child: Padding(
-          padding: EdgeInsets.symmetric(
-            horizontal: innerPad,
-            vertical: innerPad,
-          ),
+          padding: EdgeInsets.all(innerPad),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
@@ -80,26 +71,17 @@ class CartItemTile extends StatelessWidget {
                       product.name,
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
-                      style: TextStyle(
-                        fontSize: nameFontSize,
-                        fontWeight: FontWeight.w600,
-                      ),
+                      style: TextStyle(fontWeight: FontWeight.w600),
                     ),
                     SizedBox(height: gapNameToLine),
                     Text(
                       '£${product.price.toStringAsFixed(2)} x ${cartItem.quantity} = £${itemTotal.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: lineFontSize,
-                        color: Colors.grey,
-                      ),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                     SizedBox(height: gapBetweenLines),
                     Text(
                       '£${product.price.toStringAsFixed(2)}',
-                      style: TextStyle(
-                        fontSize: unitPriceFontSize,
-                        color: Colors.grey,
-                      ),
+                      style: const TextStyle(color: Colors.grey),
                     ),
                   ],
                 ),
@@ -109,10 +91,7 @@ class CartItemTile extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   IconButton(
-                    icon: Icon(
-                      Icons.remove_circle_outline,
-                      size: iconSize,
-                    ),
+                    icon: const Icon(Icons.remove_circle_outline),
                     constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
                     onPressed: () {
@@ -120,19 +99,11 @@ class CartItemTile extends StatelessWidget {
                     },
                   ),
                   Padding(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: qtyHPad,
-                    ),
-                    child: Text(
-                      '${cartItem.quantity}',
-                      style: TextStyle(fontSize: qtyFontSize),
-                    ),
+                    padding: EdgeInsets.symmetric(horizontal: qtyHPad),
+                    child: Text('${cartItem.quantity}'),
                   ),
                   IconButton(
-                    icon: Icon(
-                      Icons.add_circle_outline,
-                      size: iconSize,
-                    ),
+                    icon: const Icon(Icons.add_circle_outline),
                     constraints: const BoxConstraints(),
                     padding: EdgeInsets.zero,
                     onPressed: () {
