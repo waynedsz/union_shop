@@ -147,7 +147,8 @@ class _ProductPageState extends State<ProductPage> {
                     ElevatedButton(
                       onPressed: () {
                         Provider.of<CartState>(context, listen: false)
-                            .addToCart(product);
+                            .addMultiple(product, _quantity);
+
                         ScaffoldMessenger.of(context).showSnackBar(
                           SnackBar(
                               content: Text('${product.name} added to cart')),
