@@ -60,6 +60,9 @@ class _HomeScreenState extends State<HomeScreen>
         onSearchPressed: () {
           Navigator.pushNamed(context, '/search');
         },
+        onPrintShackPressed: () {
+          Navigator.pushNamed(context, '/print-shack');
+        },
         onAboutPressed: () => NavigationController.goAbout(context),
         onLoginPressed: () => NavigationController.goLogin(context),
         onCartPressed: () => NavigationController.goCart(context),

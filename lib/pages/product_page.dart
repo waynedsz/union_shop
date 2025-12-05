@@ -41,150 +41,150 @@ class _ProductPageState extends State<ProductPage> {
         title: product.name,
         onNavigateHome: () => navigateToHome(context),
         onSearchPressed: () {},
-        onAboutPressed: () {
-          Navigator.pushNamed(context, '/about');
-        },
-        onLoginPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-        onCartPressed: () {
-          Navigator.pushNamed(context, '/cart');
-        },
+        onAboutPressed: () => Navigator.pushNamed(context, '/about'),
+        onLoginPressed: () => Navigator.pushNamed(context, '/login'),
+        onCartPressed: () => Navigator.pushNamed(context, '/cart'),
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
-      body: Align(
-        alignment: Alignment.topCenter,
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(maxWidth: 500),
-          child: SingleChildScrollView(
-            child: Padding(
-              padding: const EdgeInsets.all(24),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Center(
-                    child: ConstrainedBox(
-                      constraints: const BoxConstraints(
-                        maxWidth: 450,
-                        maxHeight: 450,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(12),
-                        child: Hero(
-                          tag: product.name,
-                          child: Stack(
-                            children: [
-                              Positioned.fill(
-                                child: Image.asset(
-                                  product.imagePath,
-                                  fit: BoxFit.contain,
-                                ),
+      body: LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth;
+          final horizontalPadding = width < 500
+              ? 16.0
+              : width < 900
+                  ? 32.0
+                  : 48.0;
+
+          final imageMaxSize = width < 600 ? width - 32 : 450.0;
+
+          return SingleChildScrollView(
+            padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
+              children: [
+                const SizedBox(height: 24),
+                Center(
+                  child: Container(
+                    width: imageMaxSize,
+                    height: imageMaxSize,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(12),
+                      child: Hero(
+                        tag: product.name,
+                        child: Stack(
+                          children: [
+                            Positioned.fill(
+                              child: Image.asset(
+                                product.imagePath,
+                                fit: BoxFit.contain,
                               ),
-                              if (product.isOnSale)
-                                Positioned(
-                                  top: 12,
-                                  left: 12,
-                                  child: Container(
-                                    padding: const EdgeInsets.symmetric(
-                                        horizontal: 12, vertical: 6),
-                                    decoration: BoxDecoration(
-                                      color: Colors.red.shade600,
-                                      borderRadius: BorderRadius.circular(8),
-                                    ),
-                                    child: Text(
-                                      '-${product.discountPercent?.toStringAsFixed(0)}%',
-                                      style: const TextStyle(
-                                        color: Colors.white,
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 14,
-                                      ),
+                            ),
+                            if (product.isOnSale)
+                              Positioned(
+                                top: 12,
+                                left: 12,
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 12, vertical: 6),
+                                  decoration: BoxDecoration(
+                                    color: Colors.red.shade600,
+                                    borderRadius: BorderRadius.circular(8),
+                                  ),
+                                  child: Text(
+                                    '-${product.discountPercent?.toStringAsFixed(0)}%',
+                                    style: const TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 14,
                                     ),
                                   ),
                                 ),
-                            ],
-                          ),
+                              ),
+                          ],
                         ),
                       ),
                     ),
                   ),
-                  const SizedBox(height: 32),
-                  Text(
-                    product.name,
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.bold,
-                    ),
+                ),
+                const SizedBox(height: 32),
+                Text(
+                  product.name,
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
                   ),
-                  const SizedBox(height: 8),
-                  Text(
-                    '£${product.price.toStringAsFixed(2)}',
-                    style: const TextStyle(
-                      fontSize: 28,
-                      fontWeight: FontWeight.w700,
-                      color: Color(0xFF4d2963),
-                    ),
+                ),
+                const SizedBox(height: 8),
+                Text(
+                  '£${product.price.toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 28,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF4d2963),
                   ),
-                  const SizedBox(height: 16),
-                  const Divider(
-                      height: 32, thickness: 1, color: Colors.black12),
-                  const SizedBox(height: 16),
-                  const Text(
-                    'Description',
-                    style: TextStyle(
-                      fontSize: 20,
-                      fontWeight: FontWeight.w700,
-                    ),
+                ),
+                const SizedBox(height: 16),
+                const Divider(height: 32, thickness: 1, color: Colors.black12),
+                const SizedBox(height: 16),
+                const Text(
+                  'Description',
+                  style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.w700,
                   ),
-                  const SizedBox(height: 10),
-                  Text(
-                    product.description,
-                    style: const TextStyle(
-                      fontSize: 16,
-                      height: 1.6,
-                      color: Colors.black87,
-                    ),
+                ),
+                const SizedBox(height: 10),
+                Text(
+                  product.description,
+                  style: const TextStyle(
+                    fontSize: 16,
+                    height: 1.6,
+                    color: Colors.black87,
                   ),
-                  const SizedBox(height: 28),
-                  Row(
-                    children: [
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        icon: const Icon(Icons.remove),
-                        onPressed: () {
-                          if (_quantity > 1) {
-                            setState(() => _quantity--);
-                          }
-                        },
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12),
-                        child: Text(
-                          '$_quantity',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.w700,
-                          ),
+                ),
+                const SizedBox(height: 28),
+                Row(
+                  children: [
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      icon: const Icon(Icons.remove),
+                      onPressed: () {
+                        if (_quantity > 1) {
+                          setState(() => _quantity--);
+                        }
+                      },
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 12),
+                      child: Text(
+                        '$_quantity',
+                        style: const TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
-                      IconButton(
-                        padding: EdgeInsets.zero,
-                        constraints: const BoxConstraints(),
-                        icon: const Icon(Icons.add),
-                        onPressed: () {
-                          setState(() => _quantity++);
-                        },
-                      ),
-                    ],
-                  ),
-                  const SizedBox(height: 32),
-
-                  Footer(), // Moved inside the scroll so layout is safe
-                ],
-              ),
+                    ),
+                    IconButton(
+                      padding: EdgeInsets.zero,
+                      constraints: const BoxConstraints(),
+                      icon: const Icon(Icons.add),
+                      onPressed: () {
+                        setState(() => _quantity++);
+                      },
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 32),
+                const Footer(),
+                const SizedBox(height: 32),
+              ],
             ),
-          ),
-        ),
+          );
+        },
       ),
       bottomNavigationBar: Container(
         padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
