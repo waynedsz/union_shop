@@ -41,65 +41,71 @@ class CartPage extends StatelessWidget {
         },
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
-      body: LayoutBuilder(
-        builder: (context, constraints) {
-          final height = constraints.maxHeight;
-          const baseHeight = 800.0;
-          final scale = (height / baseHeight).clamp(0.7, 1.2);
-          final verticalOffset = 0.05 * scale;
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: LayoutBuilder(
+            builder: (context, constraints) {
+              final height = constraints.maxHeight;
+              const baseHeight = 800.0;
+              final scale = (height / baseHeight).clamp(0.7, 1.2);
+              final verticalOffset = 0.05 * scale;
 
-          return Column(
-            children: [
-              Expanded(
-                child: items.isEmpty
-                    ? const EmptyCartView()
-                    : ListView.builder(
-                        padding: EdgeInsets.only(
-                          bottom: 80.0 * scale,
-                        ),
-                        itemCount: items.length + 1,
-                        itemBuilder: (context, index) {
-                          if (index == items.length) {
-                            return Padding(
-                              padding: EdgeInsets.only(
-                                top: 8.0 * scale,
-                                bottom: 8.0 * scale,
-                              ),
-                              child: const Footer(),
-                            );
-                          }
-
-                          final cartItem = items[index];
-                          return AnimatedSwitcher(
-                            duration: Duration(
-                              milliseconds:
-                                  (250 * scale).clamp(150, 350).toInt(),
+              return Column(
+                children: [
+                  Expanded(
+                    child: items.isEmpty
+                        ? const EmptyCartView()
+                        : ListView.builder(
+                            padding: EdgeInsets.only(
+                              bottom: 80.0 * scale,
                             ),
-                            transitionBuilder: (child, animation) {
-                              final offsetAnimation = Tween<Offset>(
-                                begin: Offset(0, verticalOffset),
-                                end: Offset.zero,
-                              ).animate(animation);
-                              return FadeTransition(
-                                opacity: animation,
-                                child: SlideTransition(
-                                  position: offsetAnimation,
-                                  child: child,
+                            itemCount: items.length + 1,
+                            itemBuilder: (context, index) {
+                              if (index == items.length) {
+                                return Padding(
+                                  padding: EdgeInsets.only(
+                                    top: 8.0 * scale,
+                                    bottom: 8.0 * scale,
+                                  ),
+                                  child: const Footer(),
+                                );
+                              }
+
+                              final cartItem = items[index];
+                              return AnimatedSwitcher(
+                                duration: Duration(
+                                  milliseconds:
+                                      (250 * scale).clamp(150, 350).toInt(),
+                                ),
+                                transitionBuilder: (child, animation) {
+                                  final offsetAnimation = Tween<Offset>(
+                                    begin: Offset(0, verticalOffset),
+                                    end: Offset.zero,
+                                  ).animate(animation);
+                                  return FadeTransition(
+                                    opacity: animation,
+                                    child: SlideTransition(
+                                      position: offsetAnimation,
+                                      child: child,
+                                    ),
+                                  );
+                                },
+                                child: CartItemTile(
+                                  key: ValueKey(cartItem.product),
+                                  cartItem: cartItem,
+                                  cartState: cartState,
                                 ),
                               );
                             },
-                            child: CartItemTile(
-                              key: ValueKey(cartItem.product),
-                              cartItem: cartItem,
-                              cartState: cartState,
-                            ),
-                          );
-                        },
-                      ),
-              ),
-            ],
-          );
-        },
+                          ),
+                  ),
+                ],
+              );
+            },
+          ),
+        ),
       ),
       bottomNavigationBar: CartBottomBar(
         total: total,
