@@ -42,6 +42,7 @@ class CollectionsPage extends StatelessWidget {
                       : 4;
 
           final maxGridWidth = width < 900 ? width : 900.0;
+          final childAspectRatio = width / (columns * 220);
 
           return SingleChildScrollView(
             child: Center(
@@ -79,7 +80,7 @@ class CollectionsPage extends StatelessWidget {
                           crossAxisCount: columns,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 20,
-                          childAspectRatio: 0.95,
+                          childAspectRatio: childAspectRatio,
                         ),
                         itemBuilder: (context, index) {
                           final label = collectionProducts.keys.toList()[index];
@@ -91,6 +92,7 @@ class CollectionsPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       const Footer(),
+                      const SizedBox(height: 24),
                     ],
                   ),
                 ),
