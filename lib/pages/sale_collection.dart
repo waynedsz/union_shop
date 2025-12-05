@@ -65,6 +65,7 @@ class _SaleCollectionState extends State<SaleCollection>
         onAboutPressed: () => NavigationController.goAbout(context),
         onLoginPressed: () => NavigationController.goLogin(context),
         onCartPressed: () => NavigationController.goCart(context),
+        onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: Column(
         children: [
