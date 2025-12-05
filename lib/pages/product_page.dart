@@ -111,7 +111,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 32),
                         Text(
                           product.name,
                           style: const TextStyle(
@@ -119,7 +119,7 @@ class _ProductPageState extends State<ProductPage> {
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 8),
                         Text(
                           '£${product.price.toStringAsFixed(2)}',
                           style: const TextStyle(
@@ -128,10 +128,10 @@ class _ProductPageState extends State<ProductPage> {
                             color: Color(0xFF4d2963),
                           ),
                         ),
-                        const SizedBox(height: 20),
+                        const SizedBox(height: 16),
                         const Divider(
                             height: 32, thickness: 1, color: Colors.black12),
-                        const SizedBox(height: 12),
+                        const SizedBox(height: 16),
                         const Text(
                           'Description',
                           style: TextStyle(
@@ -148,7 +148,7 @@ class _ProductPageState extends State<ProductPage> {
                             color: Colors.black87,
                           ),
                         ),
-                        const SizedBox(height: 24),
+                        const SizedBox(height: 28),
                         Row(
                           children: [
                             IconButton(
@@ -182,7 +182,7 @@ class _ProductPageState extends State<ProductPage> {
                             ),
                           ],
                         ),
-                        const SizedBox(height: 16),
+                        const SizedBox(height: 20),
                       ],
                     ),
                   ),
