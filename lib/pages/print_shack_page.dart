@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/navigation_controller.dart';
+import 'package:union_shop/reusable_content/print_shack/print_shack_section_card.dart';
 
 class PrintShackPage extends StatefulWidget {
   const PrintShackPage({super.key});
@@ -15,49 +16,6 @@ class _PrintShackPageState extends State<PrintShackPage> {
   String _customMessage = '';
   String _selectedSize = 'M';
   String _selectedColor = 'Black';
-
-  IconData _iconForSection(String text) {
-    if (text.contains('product')) return Icons.shopping_bag_outlined;
-    if (text.contains('message')) return Icons.edit_outlined;
-    if (text.contains('size')) return Icons.straighten;
-    if (text.contains('colour') || text.contains('color'))
-      return Icons.color_lens_outlined;
-    if (text.contains('Preview')) return Icons.visibility_outlined;
-    return Icons.circle_outlined;
-  }
-
-  Widget _sectionTitle(String text) {
-    return Row(
-      children: [
-        Icon(
-          _iconForSection(text),
-          size: 20,
-          color: Colors.black87,
-        ),
-        const SizedBox(width: 8),
-        Text(
-          text,
-          style: const TextStyle(
-            fontSize: 18,
-            fontWeight: FontWeight.w700,
-          ),
-        ),
-      ],
-    );
-  }
-
-  Widget _sectionCard(Widget child) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.only(bottom: 40),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black12),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: child,
-    );
-  }
 
   Widget _styledDropdown({
     required String value,
@@ -135,37 +93,29 @@ class _PrintShackPageState extends State<PrintShackPage> {
                             ),
                           ),
                           const SizedBox(height: 40),
-                          _sectionCard(
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _sectionTitle('Choose a product'),
-                                const SizedBox(height: 12),
-                                _styledDropdown(
-                                  value: _selectedProduct,
-                                  items: const [
-                                    DropdownMenuItem(
-                                        value: 'T-Shirt',
-                                        child: Text('T-Shirt')),
-                                    DropdownMenuItem(
-                                        value: 'Hoodie', child: Text('Hoodie')),
-                                    DropdownMenuItem(
-                                        value: 'Mug', child: Text('Mug')),
-                                  ],
-                                  onChanged: (value) {
-                                    if (value != null)
-                                      setState(() => _selectedProduct = value);
-                                  },
-                                ),
+                          PrintShackSectionCard(
+                            title: 'Choose a product',
+                            child: _styledDropdown(
+                              value: _selectedProduct,
+                              items: const [
+                                DropdownMenuItem(
+                                    value: 'T-Shirt', child: Text('T-Shirt')),
+                                DropdownMenuItem(
+                                    value: 'Hoodie', child: Text('Hoodie')),
+                                DropdownMenuItem(
+                                    value: 'Mug', child: Text('Mug')),
                               ],
+                              onChanged: (value) {
+                                if (value != null)
+                                  setState(() => _selectedProduct = value);
+                              },
                             ),
                           ),
-                          _sectionCard(
-                            Column(
+                          PrintShackSectionCard(
+                            title: 'Custom message',
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _sectionTitle('Custom message'),
-                                const SizedBox(height: 12),
                                 TextField(
                                   decoration: const InputDecoration(
                                     labelText: 'Enter custom message',
@@ -184,64 +134,51 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ],
                             ),
                           ),
-                          _sectionCard(
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _sectionTitle('Select size'),
-                                const SizedBox(height: 12),
-                                _styledDropdown(
-                                  value: _selectedSize,
-                                  items: const [
-                                    DropdownMenuItem(
-                                        value: 'S', child: Text('Small (S)')),
-                                    DropdownMenuItem(
-                                        value: 'M', child: Text('Medium (M)')),
-                                    DropdownMenuItem(
-                                        value: 'L', child: Text('Large (L)')),
-                                    DropdownMenuItem(
-                                        value: 'XL', child: Text('XL')),
-                                  ],
-                                  onChanged: (value) {
-                                    if (value != null)
-                                      setState(() => _selectedSize = value);
-                                  },
-                                ),
+                          PrintShackSectionCard(
+                            title: 'Select size',
+                            child: _styledDropdown(
+                              value: _selectedSize,
+                              items: const [
+                                DropdownMenuItem(
+                                    value: 'S', child: Text('Small (S)')),
+                                DropdownMenuItem(
+                                    value: 'M', child: Text('Medium (M)')),
+                                DropdownMenuItem(
+                                    value: 'L', child: Text('Large (L)')),
+                                DropdownMenuItem(
+                                    value: 'XL', child: Text('XL')),
                               ],
+                              onChanged: (value) {
+                                if (value != null)
+                                  setState(() => _selectedSize = value);
+                              },
                             ),
                           ),
-                          _sectionCard(
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                _sectionTitle('Select colour'),
-                                const SizedBox(height: 12),
-                                _styledDropdown(
-                                  value: _selectedColor,
-                                  items: const [
-                                    DropdownMenuItem(
-                                        value: 'Black', child: Text('Black')),
-                                    DropdownMenuItem(
-                                        value: 'White', child: Text('White')),
-                                    DropdownMenuItem(
-                                        value: 'Red', child: Text('Red')),
-                                    DropdownMenuItem(
-                                        value: 'Blue', child: Text('Blue')),
-                                  ],
-                                  onChanged: (value) {
-                                    if (value != null)
-                                      setState(() => _selectedColor = value);
-                                  },
-                                ),
+                          PrintShackSectionCard(
+                            title: 'Select colour',
+                            child: _styledDropdown(
+                              value: _selectedColor,
+                              items: const [
+                                DropdownMenuItem(
+                                    value: 'Black', child: Text('Black')),
+                                DropdownMenuItem(
+                                    value: 'White', child: Text('White')),
+                                DropdownMenuItem(
+                                    value: 'Red', child: Text('Red')),
+                                DropdownMenuItem(
+                                    value: 'Blue', child: Text('Blue')),
                               ],
+                              onChanged: (value) {
+                                if (value != null)
+                                  setState(() => _selectedColor = value);
+                              },
                             ),
                           ),
-                          _sectionCard(
-                            Column(
+                          PrintShackSectionCard(
+                            title: 'Preview',
+                            child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                _sectionTitle('Preview'),
-                                const SizedBox(height: 12),
                                 Text('Product: $_selectedProduct',
                                     style: const TextStyle(fontSize: 16)),
                                 Text('Message: $_customMessage',
