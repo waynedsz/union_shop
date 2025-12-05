@@ -76,6 +76,7 @@ class _CollectionPageState extends State<CollectionPage> {
         onCartPressed: () {
           Navigator.pushNamed(context, '/cart');
         },
+        onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: Column(
         children: [
