@@ -133,7 +133,16 @@ class _RegisterPageState extends State<RegisterPage> {
                             width: double.infinity,
                             child: ElevatedButton(
                               onPressed: () {
-                                _formKey.currentState!.validate();
+                                final valid = _formKey.currentState!.validate();
+                                if (valid) {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Account created successfully',
+                                      ),
+                                    ),
+                                  );
+                                }
                               },
                               child: const Text('Register'),
                             ),
