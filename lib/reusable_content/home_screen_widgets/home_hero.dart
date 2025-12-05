@@ -44,8 +44,9 @@ class HomeHero extends StatelessWidget {
                   Text(
                     title,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 28,
+                    style: TextStyle(
+                      fontSize:
+                          MediaQuery.of(context).size.width < 360 ? 22 : 28,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
                     ),
@@ -54,8 +55,9 @@ class HomeHero extends StatelessWidget {
                   Text(
                     subtitle,
                     textAlign: TextAlign.center,
-                    style: const TextStyle(
-                      fontSize: 18,
+                    style: TextStyle(
+                      fontSize:
+                          MediaQuery.of(context).size.width < 360 ? 14 : 18,
                       color: Colors.white,
                     ),
                   ),
