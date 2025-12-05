@@ -4,7 +4,6 @@ import 'package:union_shop/reusable_content/product_widgets/product.dart';
 import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 import 'package:union_shop/reusable_content/header.dart';
 import 'package:provider/provider.dart';
-import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
 
 class ProductPage extends StatefulWidget {
   final Product product;
