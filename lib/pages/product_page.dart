@@ -170,6 +170,37 @@ class _ProductPageState extends State<ProductPage> {
                       ],
                     ),
                     const SizedBox(height: 16),
+                    const Text(
+                      'Price Breakdown',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      'Unit Price: £${product.price.toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    Text(
+                      'Quantity: $_quantity',
+                      style: const TextStyle(
+                        fontSize: 16,
+                        color: Colors.black87,
+                      ),
+                    ),
+                    Text(
+                      'Subtotal: £${(product.price * _quantity).toStringAsFixed(2)}',
+                      style: const TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: Color(0xFF4d2963),
+                      ),
+                    ),
+                    const SizedBox(height: 24),
                     ElevatedButton(
                       onPressed: () {
                         Provider.of<CartState>(context, listen: false)
