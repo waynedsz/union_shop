@@ -54,6 +54,63 @@ class _ProductPageState extends State<ProductPage> {
         },
       ),
       body: Column(
+        bottomNavigationBar: Container(
+          padding: const EdgeInsets.fromLTRB(20, 12, 20, 20),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withOpacity(0.05),
+                blurRadius: 6,
+                offset: const Offset(0, -3),
+              ),
+            ],
+          ),
+          child: SafeArea(
+            top: false,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  '£${(product.price * _quantity).toStringAsFixed(2)}',
+                  style: const TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.w700,
+                    color: Color(0xFF4d2963),
+                  ),
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 24,
+                      vertical: 14,
+                    ),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    backgroundColor: const Color(0xFF4d2963),
+                    foregroundColor: Colors.white,
+                  ),
+                  onPressed: () {
+                    Provider.of<CartState>(context, listen: false)
+                        .addMultiple(product, _quantity);
+
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('${product.name} added to cart')),
+                    );
+                  },
+                  child: const Text(
+                    'Add to Cart',
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
         children: [
           Expanded(
             child: SingleChildScrollView(
