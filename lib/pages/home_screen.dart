@@ -5,6 +5,7 @@ import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/featured_collections.dart';
 import 'package:union_shop/reusable_content/home_screen_widgets/home_hero.dart';
+import 'package:union_shop/reusable_content/footer.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -100,16 +101,7 @@ class _HomeScreenState extends State<HomeScreen>
               alignment: Alignment.topCenter,
               child: ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
-                child: Container(
-                  padding: const EdgeInsets.all(24),
-                  width: double.infinity,
-                  color: Colors.grey[50],
-                  child: const Text(
-                    'Placeholder Footer',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 16, color: Colors.grey),
-                  ),
-                ),
+                child: const Footer(),
               ),
             ),
           ),
