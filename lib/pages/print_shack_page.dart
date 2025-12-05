@@ -29,7 +29,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
   Widget _sectionCard(Widget child) {
     return Container(
       padding: const EdgeInsets.all(16),
-      margin: const EdgeInsets.only(bottom: 32),
+      margin: const EdgeInsets.only(bottom: 40),
       decoration: BoxDecoration(
         color: Colors.white,
         border: Border.all(color: Colors.black12),
@@ -103,7 +103,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 24),
+                          const SizedBox(height: 32),
                           const Center(
                             child: Text(
                               'Custom university printing made easy.',
@@ -114,7 +114,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 32),
+                          const SizedBox(height: 40),
                           _sectionCard(
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
