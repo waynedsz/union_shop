@@ -57,6 +57,7 @@ class _SearchPageState extends State<SearchPage>
       filteredProducts = newFiltered;
       if (filteredProducts.isEmpty || query.trim().isEmpty) {
         _resultsController.reset();
+        _resultsController.forward();
       } else {
         _resultsController
           ..reset()
@@ -128,13 +129,16 @@ class _SearchPageState extends State<SearchPage>
                 child: filteredProducts.isEmpty
                     ? Padding(
                         padding: const EdgeInsets.only(top: 12),
-                        child: SearchEmptyState(
-                          title: query.isEmpty
-                              ? 'Start typing to search'
-                              : 'No products match your search',
-                          subtitle: query.isEmpty
-                              ? 'Find products by name, e.g. "hoodie" or "mug".'
-                              : 'Try a different keyword or category.',
+                        child: FadeTransition(
+                          opacity: _fadeAnimation,
+                          child: SearchEmptyState(
+                            title: query.isEmpty
+                                ? 'Start typing to search'
+                                : 'No products match your search',
+                            subtitle: query.isEmpty
+                                ? 'Find products by name, e.g. "hoodie" or "mug".'
+                                : 'Try a different keyword or category.',
+                          ),
                         ),
                       )
                     : Padding(
