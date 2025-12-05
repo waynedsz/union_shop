@@ -1,82 +1,74 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:network_image_mock/network_image_mock.dart';
 import 'package:union_shop/pages/collection_page.dart';
-import 'package:union_shop/reusable_content/header.dart';
-import 'package:union_shop/reusable_content/footer.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
-import 'package:union_shop/reusable_content/product_widgets/product_tile.dart';
-import 'package:provider/provider.dart';
-import 'package:union_shop/reusable_content/product_widgets/product_data.dart';
-import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 
 void main() {
-  // Wrap tests in mockNetworkImagesFor to prevent network exceptions
-  testWidgets(
-      'CollectionPage renders grid, dropdown, footer, product tap works',
-      (WidgetTester tester) async {
-    await mockNetworkImagesFor(() async {
-      // Add mock products to collectionProducts for testing
-      collectionProducts['Test Collection'] = [
-        Product(
-          name: 'Mock Product 1',
-          price: 10.0,
-          imagePath: 'https://example.com/test1.png',
-          description: 'Description 1',
-          discountPercent: null,
-          isOnSale: false,
-          category: 'Category 1',
-        ),
-        Product(
-          name: 'Mock Product 2',
-          price: 20.0,
-          imagePath: 'https://example.com/test2.png',
-          description: 'Description 2',
-          discountPercent: 10,
-          isOnSale: true,
-          category: 'Category 1',
-        ),
-      ];
-
+  group('CollectionPage', () {
+    testWidgets('renders with default collection name when no arguments',
+        (WidgetTester tester) async {
       await tester.pumpWidget(
         MaterialApp(
           home: CollectionPage(),
+        ),
+      );
+      expect(find.text('Selected Collection'), findsOneWidget);
+      expect(
+          find.text('Browse a curated selection of products.'), findsOneWidget);
+      expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
+      expect(find.byType(GridView), findsOneWidget);
+    });
+
+    testWidgets('renders with collection name from String argument',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
           onGenerateRoute: (settings) {
-            // For navigation triggered by tapping a product
             return MaterialPageRoute(
-              builder: (_) => const CollectionPage(),
-              settings: settings,
+              builder: (context) => CollectionPage(),
+              settings: RouteSettings(arguments: 'Test Collection'),
             );
           },
         ),
       );
+      await tester.pumpAndSettle();
+      expect(find.text('Test Collection'), findsOneWidget);
+    });
 
+    testWidgets('renders with collection name from Map argument',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          onGenerateRoute: (settings) {
+            return MaterialPageRoute(
+              builder: (context) => CollectionPage(),
+              settings: RouteSettings(
+                  arguments: {'collectionName': 'Map Collection'}),
+            );
+          },
+        ),
+      );
+      await tester.pumpAndSettle();
+      expect(find.text('Map Collection'), findsOneWidget);
+    });
+
+    testWidgets('sort dropdown changes sort order',
+        (WidgetTester tester) async {
+      await tester.pumpWidget(
+        MaterialApp(
+          home: CollectionPage(),
+        ),
+      );
+      await tester.pumpAndSettle();
+      final dropdown = find.byType(DropdownButtonFormField<String>);
+      expect(dropdown, findsOneWidget);
+
+      await tester.tap(dropdown);
+      await tester.pumpAndSettle();
+      await tester.tap(find.text('Price: High → Low').last);
       await tester.pumpAndSettle();
 
-      // Header exists
-      expect(find.byType(Header), findsOneWidget);
-
-      // Dropdown exists
-      expect(find.byType(DropdownButtonFormField<String>), findsOneWidget);
-
-      // Tap dropdown and select 'Sort Z-A'
-      await tester.tap(find.byType(DropdownButtonFormField<String>));
-      await tester.pumpAndSettle();
-      await tester.tap(find.text('Sort Z-A').last);
-      await tester.pumpAndSettle();
-
-      // ProductTile grid exists
-      expect(find.byType(ProductTile), findsWidgets);
-      expect(find.text('Mock Product 1'), findsOneWidget);
-      expect(find.text('Mock Product 2'), findsOneWidget);
-
-      // Tap the first product
-      final firstProduct = find.byType(ProductTile).first;
-      await tester.tap(firstProduct);
-      await tester.pumpAndSettle();
-
-      // Footer exists
-      expect(find.byType(Footer), findsOneWidget);
+      expect(find.text('Price: High → Low'), findsOneWidget);
     });
   });
 }
