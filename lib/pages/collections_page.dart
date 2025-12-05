@@ -18,18 +18,10 @@ class CollectionsPage extends StatelessWidget {
       appBar: Header(
         title: 'Collections',
         onNavigateHome: () => navigateToHome(context),
-        onSearchPressed: () {
-          Navigator.pushNamed(context, '/search');
-        },
-        onAboutPressed: () {
-          Navigator.pushNamed(context, '/about');
-        },
-        onLoginPressed: () {
-          Navigator.pushNamed(context, '/login');
-        },
-        onCartPressed: () {
-          Navigator.pushNamed(context, '/cart');
-        },
+        onSearchPressed: () => Navigator.pushNamed(context, '/search'),
+        onAboutPressed: () => Navigator.pushNamed(context, '/about'),
+        onLoginPressed: () => Navigator.pushNamed(context, '/login'),
+        onCartPressed: () => Navigator.pushNamed(context, '/cart'),
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
       body: LayoutBuilder(
@@ -38,61 +30,63 @@ class CollectionsPage extends StatelessWidget {
           final columns = width < 360 ? 1 : 2;
 
           return SingleChildScrollView(
-            child: Align(
-              alignment: Alignment.topCenter,
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 500),
-                child: ConstrainedBox(
-                  constraints: BoxConstraints(minHeight: constraints.maxHeight),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: [
-                        const Text(
-                          "Browse Our Collections",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 24,
-                            fontWeight: FontWeight.bold,
+            child: Column(
+              children: [
+                Align(
+                  alignment: Alignment.topCenter,
+                  child: ConstrainedBox(
+                    constraints: const BoxConstraints(maxWidth: 500),
+                    child: Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.stretch,
+                        children: [
+                          const Text(
+                            "Browse Our Collections",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 24,
+                              fontWeight: FontWeight.bold,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        const Text(
-                          "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 14,
-                            color: Colors.black54,
+                          const SizedBox(height: 20),
+                          const Text(
+                            "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: Colors.black54,
+                            ),
                           ),
-                        ),
-                        const SizedBox(height: 20),
-                        GridView.builder(
-                          shrinkWrap: true,
-                          physics: const NeverScrollableScrollPhysics(),
-                          gridDelegate:
-                              SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: columns,
-                            crossAxisSpacing: 16,
-                            mainAxisSpacing: 16,
+                          const SizedBox(height: 20),
+                          GridView.builder(
+                            shrinkWrap: true,
+                            physics: const NeverScrollableScrollPhysics(),
+                            gridDelegate:
+                                SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: columns,
+                              crossAxisSpacing: 16,
+                              mainAxisSpacing: 16,
+                              childAspectRatio: 0.85,
+                            ),
+                            itemCount: collectionProducts.keys.length,
+                            itemBuilder: (context, index) {
+                              final label =
+                                  collectionProducts.keys.toList()[index];
+                              return CollectionTile(
+                                label: label,
+                                onTap: () => _open(context, label),
+                              );
+                            },
                           ),
-                          itemCount: collectionProducts.keys.length,
-                          itemBuilder: (context, index) {
-                            final label =
-                                collectionProducts.keys.toList()[index];
-                            return CollectionTile(
-                              label: label,
-                              onTap: () => _open(context, label),
-                            );
-                          },
-                        ),
-                        const SizedBox(height: 20),
-                        const Footer(),
-                      ],
+                          const SizedBox(height: 40),
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
+                const Footer(),
+              ],
             ),
           );
         },
