@@ -67,8 +67,11 @@ class HomeHero extends StatelessWidget {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF4d2963),
                       foregroundColor: Colors.white,
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 24, vertical: 12),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical:
+                            MediaQuery.of(context).size.width < 360 ? 8 : 12,
+                      ),
                     ),
                     child: Text(
                       buttonText,
