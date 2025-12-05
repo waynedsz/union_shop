@@ -21,7 +21,7 @@ class FeaturedCollections extends StatelessWidget {
 
     return Container(
       color: Colors.white,
-      padding: const EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+      padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 16),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
@@ -35,22 +35,20 @@ class FeaturedCollections extends StatelessWidget {
               fontWeight: FontWeight.bold,
             ),
           ),
-          const SizedBox(height: 24),
+          const SizedBox(height: 16),
           LayoutBuilder(
             builder: (context, constraints) {
               final maxWidth = constraints.maxWidth;
               final crossAxisCount = maxWidth > 700 ? 3 : 2;
 
-              final aspectRatio = maxWidth < 500
-                  ? 3 / 4
-                  : 4 / 3; // ★ NEW: mobile-friendly ratio
+              final aspectRatio = maxWidth < 500 ? 3 / 4 : 4 / 3;
 
               return GridView.count(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
                 crossAxisCount: crossAxisCount,
-                mainAxisSpacing: 16,
-                crossAxisSpacing: 16,
+                mainAxisSpacing: 14,
+                crossAxisSpacing: 14,
                 childAspectRatio: aspectRatio,
                 children: labels.map((label) {
                   final products = collectionProducts[label] ?? [];
@@ -102,7 +100,8 @@ class FeaturedCollections extends StatelessWidget {
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 6, horizontal: 8),
                             child: Text(
                               label,
                               maxLines: 1,
