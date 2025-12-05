@@ -12,19 +12,6 @@ class CollectionsPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  int _calculateColumns(double width) {
-    if (width < 360) return 1;
-    if (width < 700) return 2;
-    if (width < 1100) return 3;
-    return 4;
-  }
-
-  double _calculateAspectRatio(double width, int columns) {
-    final tileWidth = width / columns;
-    final tileHeight = tileWidth * 1.15;
-    return tileWidth / tileHeight;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,25 +27,42 @@ class CollectionsPage extends StatelessWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-          final columns = _calculateColumns(width);
-          final aspectRatio = _calculateAspectRatio(width, columns);
+
+          final horizontalPadding = width < 500
+              ? 16.0
+              : width < 900
+                  ? 32.0
+                  : 48.0;
+
+          final columns = width < 380
+              ? 1
+              : width < 650
+                  ? 2
+                  : width < 1000
+                      ? 3
+                      : 4;
+
+          final maxGridWidth = width < 900 ? width : 900.0;
 
           return SingleChildScrollView(
-            child: Column(
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(16.0),
+            child: Center(
+              child: ConstrainedBox(
+                constraints: BoxConstraints(maxWidth: maxGridWidth),
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
                   child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
+                      const SizedBox(height: 24),
                       const Text(
                         "Browse Our Collections",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 24,
+                          fontSize: 26,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 16),
                       const Text(
                         "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
                         textAlign: TextAlign.center,
@@ -67,17 +71,17 @@ class CollectionsPage extends StatelessWidget {
                           color: Colors.black54,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      const SizedBox(height: 28),
                       GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
+                        itemCount: collectionProducts.keys.length,
                         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: columns,
                           crossAxisSpacing: 16,
-                          mainAxisSpacing: 16,
-                          childAspectRatio: aspectRatio,
+                          mainAxisSpacing: 20,
+                          childAspectRatio: 0.95,
                         ),
-                        itemCount: collectionProducts.keys.length,
                         itemBuilder: (context, index) {
                           final label = collectionProducts.keys.toList()[index];
                           return CollectionTile(
@@ -86,12 +90,12 @@ class CollectionsPage extends StatelessWidget {
                           );
                         },
                       ),
-                      const SizedBox(height: 40),
+                      const SizedBox(height: 32),
+                      const Footer(),
                     ],
                   ),
                 ),
-                const Footer(),
-              ],
+              ),
             ),
           );
         },
@@ -103,10 +107,7 @@ class CollectionsPage extends StatelessWidget {
     Navigator.pushNamed(
       context,
       '/collection',
-      arguments: {
-        'label': label,
-        'products': collectionProducts[label],
-      },
+      arguments: {'label': label, 'products': collectionProducts[label]},
     );
   }
 }
