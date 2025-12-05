@@ -55,7 +55,7 @@ class _CollectionPageState extends State<CollectionPage> {
         case 'Oldest First':
           final aDate = normalizeDate(a);
           final bDate = normalizeDate(b);
-          return aDate.compareTo(aDate);
+          return aDate.compareTo(bDate);
         case 'Sort A-Z':
         default:
           return a.name.toLowerCase().compareTo(b.name.toLowerCase());
