@@ -12,23 +12,22 @@ class CartBottomBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final size = MediaQuery.of(context).size;
-    final shortestSide = size.shortestSide;
-    final scale = (shortestSide / 400).clamp(0.8, 1.2);
+    final width = MediaQuery.of(context).size.width;
 
-    final horizontalPadding = 16.0 * scale;
-    final verticalPadding = (8.0 * scale).clamp(6.0, 10.0);
-    final innerHorizontal = 12.0 * scale;
-    final innerVertical = 10.0 * scale;
-    final boxBlur = 4.0 * scale;
-    final borderRadius = 12.0 * scale;
-    final buttonRadius = 24.0 * scale;
-    final buttonVertPadding = (14.0 * scale).clamp(10.0, 16.0);
-    final gap = (8.0 * scale).clamp(6.0, 10.0);
-
-    final totalLabelSize = 17.0 * scale;
-    final totalValueSize = 20.0 * scale;
-    final buttonTextSize = 16.0 * scale;
+    // Dynamic horizontal padding
+    final horizontalPadding = width < 500
+        ? 16.0
+        : width < 900
+            ? 32.0
+            : 48.0;
+    final verticalPadding = 8.0;
+    final innerHorizontal = 12.0;
+    final innerVertical = 10.0;
+    final boxBlur = 4.0;
+    final borderRadius = 12.0;
+    final buttonRadius = 24.0;
+    final buttonVertPadding = 14.0;
+    final gap = 8.0;
 
     return Container(
       padding: EdgeInsets.fromLTRB(
@@ -43,7 +42,7 @@ class CartBottomBar extends StatelessWidget {
           BoxShadow(
             color: Colors.black.withOpacity(0.05),
             blurRadius: boxBlur,
-            offset: Offset(0, -2 * scale),
+            offset: const Offset(0, -2),
           ),
         ],
       ),
@@ -65,17 +64,15 @@ class CartBottomBar extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  Text(
+                  const Text(
                     'Total',
                     style: TextStyle(
-                      fontSize: totalLabelSize,
                       fontWeight: FontWeight.w600,
                     ),
                   ),
                   Text(
                     '£${total.toStringAsFixed(2)}',
-                    style: TextStyle(
-                      fontSize: totalValueSize,
+                    style: const TextStyle(
                       fontWeight: FontWeight.w800,
                     ),
                   ),
@@ -94,12 +91,12 @@ class CartBottomBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(buttonRadius),
                   ),
                 ),
-                child: Text(
+                child: const Text(
                   'Checkout',
                   style: TextStyle(
-                      fontSize: buttonTextSize,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white),
+                    fontWeight: FontWeight.w600,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ),
