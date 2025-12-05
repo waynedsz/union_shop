@@ -80,7 +80,13 @@ class _CollectionPageState extends State<CollectionPage> {
                       ? 16.0
                       : 24.0;
 
-          final columns = width < 360 ? 1 : 2;
+          final columns = width < 380
+              ? 1
+              : width < 650
+                  ? 2
+                  : width < 1000
+                      ? 3
+                      : 4;
 
           return Column(
             children: [
@@ -137,7 +143,7 @@ class _CollectionPageState extends State<CollectionPage> {
                     crossAxisCount: columns,
                     mainAxisSpacing: 20,
                     crossAxisSpacing: 16,
-                    childAspectRatio: 0.70,
+                    childAspectRatio: 0.95, // matches CollectionsPage
                   ),
                   itemCount: products.length,
                   itemBuilder: (context, index) {
