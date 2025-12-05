@@ -32,8 +32,6 @@ class _ProductPageState extends State<ProductPage> {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
-  void placeholderCallback() {}
-
   @override
   Widget build(BuildContext context) {
     final product = widget.product;
@@ -42,7 +40,7 @@ class _ProductPageState extends State<ProductPage> {
       appBar: Header(
         title: product.name,
         onNavigateHome: () => navigateToHome(context),
-        onSearchPressed: placeholderCallback,
+        onSearchPressed: () {},
         onAboutPressed: () {
           Navigator.pushNamed(context, '/about');
         },
