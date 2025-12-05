@@ -80,7 +80,11 @@ class HomeHero extends StatelessWidget {
                     ),
                     child: Text(
                       buttonText,
-                      style: const TextStyle(letterSpacing: 1),
+                      style: TextStyle(
+                        fontSize:
+                            MediaQuery.of(context).size.width < 360 ? 13 : 15,
+                        letterSpacing: 1,
+                      ),
                     ),
                   ),
                 ],
