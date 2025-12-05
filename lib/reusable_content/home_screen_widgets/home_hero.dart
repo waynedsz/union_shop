@@ -62,7 +62,9 @@ class HomeHero extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  const SizedBox(height: 24),
+                  SizedBox(
+                      height:
+                          MediaQuery.of(context).size.width < 360 ? 16 : 24),
                   ElevatedButton(
                     onPressed: onButtonPressed,
                     style: ElevatedButton.styleFrom(
