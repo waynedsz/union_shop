@@ -18,9 +18,8 @@ class HomeHero extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      height: 400,
-      width: double.infinity,
+    return AspectRatio(
+      aspectRatio: 16 / 9,
       child: Stack(
         children: [
           Positioned.fill(
@@ -36,42 +35,46 @@ class HomeHero extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            left: 24,
-            right: 24,
-            top: 80,
-            child: Column(
-              children: [
-                Text(
-                  title,
-                  style: const TextStyle(
-                    fontSize: 32,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+          Center(
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    title,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 28,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  subtitle,
-                  textAlign: TextAlign.center,
-                  style: const TextStyle(
-                    fontSize: 20,
-                    color: Colors.white,
+                  const SizedBox(height: 12),
+                  Text(
+                    subtitle,
+                    textAlign: TextAlign.center,
+                    style: const TextStyle(
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
                   ),
-                ),
-                const SizedBox(height: 32),
-                ElevatedButton(
-                  onPressed: onButtonPressed,
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF4d2963),
-                    foregroundColor: Colors.white,
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: onButtonPressed,
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF4d2963),
+                      foregroundColor: Colors.white,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 24, vertical: 12),
+                    ),
+                    child: Text(
+                      buttonText,
+                      style: const TextStyle(letterSpacing: 1),
+                    ),
                   ),
-                  child: Text(
-                    buttonText,
-                    style: const TextStyle(letterSpacing: 1),
-                  ),
-                ),
-              ],
+                ],
+              ),
             ),
           ),
         ],
