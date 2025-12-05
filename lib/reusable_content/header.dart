@@ -136,6 +136,16 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                             ),
                           ),
                         ),
+                        TextButton(
+                          onPressed: onPrintShackPressed,
+                          child: const Text(
+                            'Print Shack',
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                        ),
                       ],
                     ),
                   ),
