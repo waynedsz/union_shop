@@ -34,6 +34,9 @@ class CollectionsPage extends StatelessWidget {
       ),
       body: LayoutBuilder(
         builder: (context, constraints) {
+          final width = constraints.maxWidth;
+          final columns = width < 360 ? 1 : 2;
+
           return SingleChildScrollView(
             child: Align(
               alignment: Alignment.topCenter,
@@ -68,8 +71,8 @@ class CollectionsPage extends StatelessWidget {
                           shrinkWrap: true,
                           physics: const NeverScrollableScrollPhysics(),
                           gridDelegate:
-                              const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
+                              SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: columns,
                             crossAxisSpacing: 16,
                             mainAxisSpacing: 16,
                           ),
