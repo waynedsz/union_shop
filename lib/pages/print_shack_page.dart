@@ -86,6 +86,22 @@ class _PrintShackPageState extends State<PrintShackPage> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        ClipRRect(
+                          borderRadius: BorderRadius.circular(12),
+                          child: Container(
+                            height: 160,
+                            width: double.infinity,
+                            decoration: BoxDecoration(
+                              color: Colors.grey.shade300,
+                              image: const DecorationImage(
+                                image: AssetImage(
+                                    'assets/images/print_banner.png'),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 24),
                         const Center(
                           child: Text(
                             'Custom university printing made easy.',
