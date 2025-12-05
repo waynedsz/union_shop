@@ -30,6 +30,7 @@ class _PrintShackPageState extends State<PrintShackPage> {
       ),
       body: Column(
         children: [
+          const SizedBox(height: 16),
           Expanded(
             child: SingleChildScrollView(
               child: Center(
@@ -40,6 +41,15 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         horizontal: 20, vertical: 24),
                     child: Column(
                       children: [
+                        const Text(
+                          'Custom university printing made easy.',
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black87,
+                          ),
+                        ),
+                        const SizedBox(height: 24),
                         DropdownButton<String>(
                           value: _selectedProduct,
                           items: const [
@@ -145,9 +155,8 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         ),
                         const SizedBox(height: 30),
                         TextButton(
-                          onPressed: () {
-                            Navigator.pushNamed(context, '/print-shack-about');
-                          },
+                          onPressed: () => Navigator.pushNamed(
+                              context, '/print-shack-about'),
                           child: const Text(
                             'Learn more about Print Shack',
                             style: TextStyle(
