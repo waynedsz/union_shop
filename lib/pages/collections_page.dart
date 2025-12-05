@@ -43,6 +43,13 @@ class CollectionsPage extends StatelessWidget {
 
           final maxGridWidth = width < 600 ? width : 1000.0;
 
+          // NEW: dynamic tile aspect ratio
+          final aspectRatio = width < 600
+              ? 0.85
+              : width < 900
+                  ? 1.05
+                  : 1.2;
+
           return SingleChildScrollView(
             child: Center(
               child: ConstrainedBox(
@@ -79,7 +86,7 @@ class CollectionsPage extends StatelessWidget {
                           crossAxisCount: columns,
                           crossAxisSpacing: 16,
                           mainAxisSpacing: 20,
-                          childAspectRatio: 0.95,
+                          childAspectRatio: aspectRatio,
                         ),
                         itemBuilder: (context, index) {
                           final label = collectionProducts.keys.toList()[index];
