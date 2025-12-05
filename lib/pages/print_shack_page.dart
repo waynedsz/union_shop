@@ -145,6 +145,44 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         color: Colors.grey[700],
                       ),
                     ),
+                    const SizedBox(height: 30),
+                    Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        border: Border.all(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            'Preview:',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                              color: Colors.grey[800],
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+                          Text(
+                            'Product: $_selectedProduct',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            'Message: $_customMessage',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            'Size: $_selectedSize',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          Text(
+                            'Color: $_selectedColor',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                        ],
+                      ),
+                    ),
                   ],
                 ),
               ),
