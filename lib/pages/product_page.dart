@@ -104,6 +104,7 @@ class _ProductPageState extends State<ProductPage> {
                     const SizedBox(height: 20),
                     const Divider(
                         height: 32, thickness: 1, color: Colors.black12),
+                    const SizedBox(height: 12),
                     const Text(
                       'Description',
                       style: TextStyle(
