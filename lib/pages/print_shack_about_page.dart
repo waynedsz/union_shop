@@ -12,11 +12,10 @@ class PrintShackAboutPage extends StatelessWidget {
       appBar: Header(
         title: 'About Print Shack',
         onNavigateHome: () => NavigationController.goHome(context),
-        onSearchPressed: () => NavigationController.goSearch(context),
         onAboutPressed: () => NavigationController.goAbout(context),
         onLoginPressed: () => NavigationController.goLogin(context),
         onCartPressed: () => NavigationController.goCart(context),
-        onPrintShackPressed: () => NavigationController.goPrintShack(context),
+        onSearchPressed: () {},
       ),
       body: Column(
         children: [
