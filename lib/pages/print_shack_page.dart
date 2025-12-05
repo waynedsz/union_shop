@@ -12,6 +12,7 @@ class PrintShackPage extends StatefulWidget {
 
 class _PrintShackPageState extends State<PrintShackPage> {
   String _selectedProduct = 'T-Shirt';
+  String _customMessage = '';
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +58,21 @@ class _PrintShackPageState extends State<PrintShackPage> {
                       },
                     ),
                     const SizedBox(height: 20),
+
+                    // TextField (NEW)
+                    TextField(
+                      decoration: const InputDecoration(
+                        labelText: 'Enter custom message',
+                        border: OutlineInputBorder(),
+                      ),
+                      onChanged: (value) {
+                        setState(() => _customMessage = value);
+                      },
+                    ),
+
+                    const SizedBox(height: 20),
                     Text(
-                      'Selected product: $_selectedProduct',
+                      'Message: $_customMessage',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[700],
