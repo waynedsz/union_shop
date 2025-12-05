@@ -86,31 +86,72 @@ class Header extends StatelessWidget implements PreferredSizeWidget {
                   ),
                   const SizedBox(width: 12),
                   Expanded(
-                    child: Wrap(
-                      spacing: 8,
-                      runSpacing: 4,
-                      alignment: WrapAlignment.start,
-                      children: [
-                        TextButton(
-                            onPressed: onNavigateHome,
-                            child: const Text('Home')),
-                        TextButton(
-                            onPressed: () =>
-                                NavigationController.goCollections(context),
-                            child: const Text('Collections')),
-                        TextButton(
-                            onPressed: onAboutPressed,
-                            child: const Text('About')),
-                        TextButton(
-                            onPressed: () =>
-                                NavigationController.goSale(context),
-                            child: const Text('Sale')),
-                        if (onPrintShackPressed != null)
-                          TextButton(
-                              onPressed: onPrintShackPressed,
-                              child: const Text('Print Shack')),
-                      ],
-                    ),
+                    // Commit 2: collapse links into menu on mobile
+                    child: isMobile
+                        ? PopupMenuButton<String>(
+                            icon: const Icon(Icons.menu, color: Colors.black87),
+                            onSelected: (value) {
+                              switch (value) {
+                                case 'Home':
+                                  onNavigateHome();
+                                  break;
+                                case 'Collections':
+                                  NavigationController.goCollections(context);
+                                  break;
+                                case 'About':
+                                  onAboutPressed();
+                                  break;
+                                case 'Sale':
+                                  NavigationController.goSale(context);
+                                  break;
+                                case 'Print Shack':
+                                  if (onPrintShackPressed != null)
+                                    onPrintShackPressed!();
+                                  break;
+                              }
+                            },
+                            itemBuilder: (context) => [
+                              const PopupMenuItem(
+                                  value: 'Home', child: Text('Home')),
+                              const PopupMenuItem(
+                                  value: 'Collections',
+                                  child: Text('Collections')),
+                              const PopupMenuItem(
+                                  value: 'About', child: Text('About')),
+                              const PopupMenuItem(
+                                  value: 'Sale', child: Text('Sale')),
+                              if (onPrintShackPressed != null)
+                                const PopupMenuItem(
+                                    value: 'Print Shack',
+                                    child: Text('Print Shack')),
+                            ],
+                          )
+                        : Wrap(
+                            spacing: 8,
+                            runSpacing: 4,
+                            alignment: WrapAlignment.start,
+                            children: [
+                              TextButton(
+                                  onPressed: onNavigateHome,
+                                  child: const Text('Home')),
+                              TextButton(
+                                  onPressed: () =>
+                                      NavigationController.goCollections(
+                                          context),
+                                  child: const Text('Collections')),
+                              TextButton(
+                                  onPressed: onAboutPressed,
+                                  child: const Text('About')),
+                              TextButton(
+                                  onPressed: () =>
+                                      NavigationController.goSale(context),
+                                  child: const Text('Sale')),
+                              if (onPrintShackPressed != null)
+                                TextButton(
+                                    onPressed: onPrintShackPressed,
+                                    child: const Text('Print Shack')),
+                            ],
+                          ),
                   ),
                   const Spacer(),
                   Row(
