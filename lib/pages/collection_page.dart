@@ -96,28 +96,31 @@ class _CollectionPageState extends State<CollectionPage> {
                     style: TextStyle(fontSize: 14, color: Colors.black54),
                   ),
                   const SizedBox(height: 20),
-                  DropdownButton<String>(
-                    value: _selectedSort,
-                    items: const [
-                      DropdownMenuItem(
-                          value: 'Sort A-Z', child: Text('Sort A-Z')),
-                      DropdownMenuItem(
-                          value: 'Sort Z-A', child: Text('Sort Z-A')),
-                      DropdownMenuItem(
-                          value: 'Price: Low → High',
-                          child: Text('Price: Low → High')),
-                      DropdownMenuItem(
-                          value: 'Price: High → Low',
-                          child: Text('Price: High → Low')),
-                      DropdownMenuItem(
-                          value: 'Newest First', child: Text('Newest First')),
-                      DropdownMenuItem(
-                          value: 'Oldest First', child: Text('Oldest First')),
-                    ],
-                    onChanged: (value) {
-                      if (value == null) return;
-                      setState(() => _selectedSort = value);
-                    },
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                    child: DropdownButton<String>(
+                      value: _selectedSort,
+                      items: const [
+                        DropdownMenuItem(
+                            value: 'Sort A-Z', child: Text('Sort A-Z')),
+                        DropdownMenuItem(
+                            value: 'Sort Z-A', child: Text('Sort Z-A')),
+                        DropdownMenuItem(
+                            value: 'Price: Low → High',
+                            child: Text('Price: Low → High')),
+                        DropdownMenuItem(
+                            value: 'Price: High → Low',
+                            child: Text('Price: High → Low')),
+                        DropdownMenuItem(
+                            value: 'Newest First', child: Text('Newest First')),
+                        DropdownMenuItem(
+                            value: 'Oldest First', child: Text('Oldest First')),
+                      ],
+                      onChanged: (value) {
+                        if (value == null) return;
+                        setState(() => _selectedSort = value);
+                      },
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Expanded(
