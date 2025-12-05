@@ -183,6 +183,19 @@ class _PrintShackPageState extends State<PrintShackPage> {
                         ],
                       ),
                     ),
+                    const SizedBox(height: 30),
+                    TextButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/print-shack-about');
+                      },
+                      child: const Text(
+                        'Learn more about Print Shack',
+                        style: TextStyle(
+                          fontSize: 16,
+                          decoration: TextDecoration.underline,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               ),
