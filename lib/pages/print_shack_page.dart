@@ -29,7 +29,12 @@ class _PrintShackPageState extends State<PrintShackPage> {
         onAboutPressed: () => NavigationController.goAbout(context),
         onLoginPressed: () => NavigationController.goLogin(context),
         onCartPressed: () => NavigationController.goCart(context),
-        onSearchPressed: () {},
+        onSearchPressed: () {
+          Navigator.pushNamed(context, '/search');
+        },
+        onPrintShackPressed: () {
+          Navigator.pushNamed(context, '/print-shack');
+        },
       ),
       body: Column(
         children: [
