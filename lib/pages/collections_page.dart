@@ -12,6 +12,19 @@ class CollectionsPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
+  int _calculateColumns(double width) {
+    if (width < 360) return 1;
+    if (width < 700) return 2;
+    if (width < 1100) return 3;
+    return 4;
+  }
+
+  double _calculateAspectRatio(double width, int columns) {
+    final tileWidth = width / columns;
+    final tileHeight = tileWidth * 1.15;
+    return tileWidth / tileHeight;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,62 +40,54 @@ class CollectionsPage extends StatelessWidget {
       body: LayoutBuilder(
         builder: (context, constraints) {
           final width = constraints.maxWidth;
-          final columns = width < 360 ? 1 : 2;
+          final columns = _calculateColumns(width);
+          final aspectRatio = _calculateAspectRatio(width, columns);
 
           return SingleChildScrollView(
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.topCenter,
-                  child: ConstrainedBox(
-                    constraints: const BoxConstraints(maxWidth: 500),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.stretch,
-                        children: [
-                          const Text(
-                            "Browse Our Collections",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 24,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          const Text(
-                            "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.black54,
-                            ),
-                          ),
-                          const SizedBox(height: 20),
-                          GridView.builder(
-                            shrinkWrap: true,
-                            physics: const NeverScrollableScrollPhysics(),
-                            gridDelegate:
-                                SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: columns,
-                              crossAxisSpacing: 16,
-                              mainAxisSpacing: 16,
-                              childAspectRatio: 0.85,
-                            ),
-                            itemCount: collectionProducts.keys.length,
-                            itemBuilder: (context, index) {
-                              final label =
-                                  collectionProducts.keys.toList()[index];
-                              return CollectionTile(
-                                label: label,
-                                onTap: () => _open(context, label),
-                              );
-                            },
-                          ),
-                          const SizedBox(height: 40),
-                        ],
+                Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    children: [
+                      const Text(
+                        "Browse Our Collections",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 14,
+                          color: Colors.black54,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      GridView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: columns,
+                          crossAxisSpacing: 16,
+                          mainAxisSpacing: 16,
+                          childAspectRatio: aspectRatio,
+                        ),
+                        itemCount: collectionProducts.keys.length,
+                        itemBuilder: (context, index) {
+                          final label = collectionProducts.keys.toList()[index];
+                          return CollectionTile(
+                            label: label,
+                            onTap: () => _open(context, label),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 40),
+                    ],
                   ),
                 ),
                 const Footer(),
