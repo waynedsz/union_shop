@@ -67,34 +67,40 @@ class _SaleCollectionState extends State<SaleCollection>
         onCartPressed: () => NavigationController.goCart(context),
         onPrintShackPressed: () => Navigator.pushNamed(context, '/print-shack'),
       ),
-      body: Column(
-        children: [
-          if (saleProducts.isNotEmpty)
-            SaleSortBar(
-              sortOption: _sortOption,
-              onSortChanged: (newValue) {
-                _sortOption = newValue;
-                _applySort();
-              },
-            ),
-          Expanded(
-            child: saleProducts.isEmpty
-                ? Center(
-                    child: Text(
-                      'No products are on sale right now.',
-                      style: Theme.of(context).textTheme.bodyLarge,
-                    ),
-                  )
-                : Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: SaleGrid(
-                      saleProducts: saleProducts,
-                      fadeAnimation: _fadeAnimation,
-                    ),
-                  ),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 500),
+          child: Column(
+            children: [
+              if (saleProducts.isNotEmpty)
+                SaleSortBar(
+                  sortOption: _sortOption,
+                  onSortChanged: (newValue) {
+                    _sortOption = newValue;
+                    _applySort();
+                  },
+                ),
+              Expanded(
+                child: saleProducts.isEmpty
+                    ? Center(
+                        child: Text(
+                          'No products are on sale right now.',
+                          style: Theme.of(context).textTheme.bodyLarge,
+                        ),
+                      )
+                    : Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: SaleGrid(
+                          saleProducts: saleProducts,
+                          fadeAnimation: _fadeAnimation,
+                        ),
+                      ),
+              ),
+              const Footer(),
+            ],
           ),
-          const Footer(),
-        ],
+        ),
       ),
     );
   }
