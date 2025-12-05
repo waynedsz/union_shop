@@ -13,7 +13,9 @@ class CartState extends ChangeNotifier {
 
   // Add a single product
   void addToCart(Product product) {
-    final index = items.indexWhere((item) => item.product.id == product.id);
+    final index = items.indexWhere((item) =>
+        item.product.name == product.name &&
+        item.product.category == product.category);
     if (index != -1) {
       items[index] = CartItem(
         product: items[index].product,
@@ -28,7 +30,9 @@ class CartState extends ChangeNotifier {
 
   // Add multiple quantities
   void addMultiple(Product product, int qty) {
-    final index = items.indexWhere((item) => item.product.id == product.id);
+    final index = items.indexWhere((item) =>
+        item.product.name == product.name &&
+        item.product.category == product.category);
     if (index != -1) {
       items[index] = CartItem(
         product: product,
@@ -43,7 +47,9 @@ class CartState extends ChangeNotifier {
 
   // Remove one quantity of a product
   void removeFromCart(Product product) {
-    final index = items.indexWhere((item) => item.product.id == product.id);
+    final index = items.indexWhere((item) =>
+        item.product.name == product.name &&
+        item.product.category == product.category);
     if (index != -1) {
       final existing = items[index];
       if (existing.quantity > 1) {
@@ -72,8 +78,8 @@ class CartState extends ChangeNotifier {
       final p = item.product;
       return {
         'product': {
-          'id': p.id,
           'name': p.name,
+          'category': p.category,
           'price': p.price,
           'imagePath': p.imagePath,
           'discountPercent': p.discountPercent,
@@ -97,8 +103,8 @@ class CartState extends ChangeNotifier {
           final p = itemJson['product'];
           items.add(CartItem(
             product: Product(
-              id: p['id'],
               name: p['name'],
+              category: p['category'],
               price: (p['price'] as num).toDouble(),
               imagePath: p['imagePath'],
               discountPercent: p['discountPercent'] != null
