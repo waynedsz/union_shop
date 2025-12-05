@@ -70,39 +70,6 @@ class _ProductPageState extends State<ProductPage> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Row(
-                      children: [
-                        GestureDetector(
-                          onTap: () => Navigator.pushNamed(context, '/'),
-                          child: const Text(
-                            'Home',
-                            style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: Color(0xFF4d2963),
-                            ),
-                          ),
-                        ),
-                        const Text('  >  ',
-                            style: TextStyle(color: Colors.black54)),
-                        Text(
-                          widget.product.category,
-                          style: const TextStyle(
-                            fontWeight: FontWeight.w600,
-                            color: Colors.black87,
-                          ),
-                        ),
-                        const Text('  >  ',
-                            style: TextStyle(color: Colors.black54)),
-                        Expanded(
-                          child: Text(
-                            widget.product.name,
-                            overflow: TextOverflow.ellipsis,
-                            style: const TextStyle(color: Colors.black87),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 32),
                     Center(
                       child: ConstrainedBox(
                         constraints: const BoxConstraints(
