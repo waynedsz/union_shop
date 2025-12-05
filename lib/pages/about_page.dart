@@ -60,6 +60,7 @@ class AboutPage extends StatelessWidget {
                                   color: Colors.blueGrey.shade50,
                                   boxShadow: [
                                     BoxShadow(
+                                      // ignore: deprecated_member_use
                                       color: Colors.black.withOpacity(0.06),
                                       blurRadius: 14,
                                       spreadRadius: 1,
