@@ -126,16 +126,19 @@ class _SearchPageState extends State<SearchPage>
               ),
               Expanded(
                 child: filteredProducts.isEmpty
-                    ? SearchEmptyState(
-                        title: query.isEmpty
-                            ? 'Start typing to search'
-                            : 'No products match your search',
-                        subtitle: query.isEmpty
-                            ? 'Find products by name, e.g. "hoodie" or "mug".'
-                            : 'Try a different keyword or category.',
+                    ? Padding(
+                        padding: const EdgeInsets.only(top: 12),
+                        child: SearchEmptyState(
+                          title: query.isEmpty
+                              ? 'Start typing to search'
+                              : 'No products match your search',
+                          subtitle: query.isEmpty
+                              ? 'Find products by name, e.g. "hoodie" or "mug".'
+                              : 'Try a different keyword or category.',
+                        ),
                       )
                     : Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                        padding: const EdgeInsets.fromLTRB(16, 12, 16, 0),
                         child: FadeTransition(
                           opacity: _fadeAnimation,
                           child: ScaleTransition(
