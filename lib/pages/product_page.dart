@@ -29,13 +29,6 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   int _quantity = 1;
 
-  List<Product> _getRelatedProducts(Product product) {
-    return allProductsList
-        .where((p) => p.category == product.category && p.name != product.name)
-        .take(4)
-        .toList();
-  }
-
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
