@@ -11,6 +11,24 @@ class CollectionsPage extends StatelessWidget {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
 
+  double _titleSize(double width) {
+    if (width < 380) return 20;
+    if (width < 700) return 24;
+    return 28;
+  }
+
+  double _subtitleSize(double width) {
+    if (width < 380) return 12;
+    if (width < 700) return 14;
+    return 16;
+  }
+
+  double _sectionSpacing(double width) {
+    if (width < 380) return 16;
+    if (width < 700) return 24;
+    return 32;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,12 +61,15 @@ class CollectionsPage extends StatelessWidget {
 
           final maxGridWidth = width < 600 ? width : 1000.0;
 
-          // NEW: dynamic tile aspect ratio
           final aspectRatio = width < 600
               ? 0.85
               : width < 900
                   ? 1.05
                   : 1.2;
+
+          final titleSize = _titleSize(width);
+          final subtitleSize = _subtitleSize(width);
+          final sectionSpacing = _sectionSpacing(width);
 
           return SingleChildScrollView(
             child: Center(
@@ -59,25 +80,25 @@ class CollectionsPage extends StatelessWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      const SizedBox(height: 24),
-                      const Text(
+                      SizedBox(height: sectionSpacing),
+                      Text(
                         "Browse Our Collections",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 26,
+                          fontSize: titleSize,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      const SizedBox(height: 16),
-                      const Text(
+                      SizedBox(height: sectionSpacing * 0.6),
+                      Text(
                         "Explore curated groups of products to quickly find styles and items that fit what you're looking for.",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          fontSize: 14,
+                          fontSize: subtitleSize,
                           color: Colors.black54,
                         ),
                       ),
-                      const SizedBox(height: 28),
+                      SizedBox(height: sectionSpacing),
                       GridView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
@@ -96,7 +117,7 @@ class CollectionsPage extends StatelessWidget {
                           );
                         },
                       ),
-                      const SizedBox(height: 32),
+                      SizedBox(height: sectionSpacing),
                       const Footer(),
                     ],
                   ),
@@ -113,7 +134,10 @@ class CollectionsPage extends StatelessWidget {
     Navigator.pushNamed(
       context,
       '/collection',
-      arguments: {'label': label, 'products': collectionProducts[label]},
+      arguments: {
+        'label': label,
+        'products': collectionProducts[label],
+      },
     );
   }
 }
