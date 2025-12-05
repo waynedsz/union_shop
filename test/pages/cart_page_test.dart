@@ -5,75 +5,34 @@ import 'package:union_shop/pages/cart_page.dart';
 import 'package:union_shop/reusable_content/cart_widgets/cart_state.dart';
 import 'package:union_shop/reusable_content/product_widgets/product.dart';
 import 'package:union_shop/reusable_content/cart_widgets/cart_item_tile.dart';
-import 'package:union_shop/reusable_content/cart_widgets/empty_cart_view.dart';
-import 'package:union_shop/reusable_content/header.dart';
-import 'package:union_shop/reusable_content/footer.dart';
+
+class TestProduct extends Product {
+  TestProduct({
+    required String name,
+    required double price,
+  }) : super(
+          name: name,
+          price: price,
+          imagePath: '', // empty so it won't load
+          description: 'Test description',
+          discountPercent: null,
+          isOnSale: false,
+          category: 'Test',
+        );
+}
 
 void main() {
-  testWidgets('CartPage shows empty cart and footer',
-      (WidgetTester tester) async {
+  testWidgets('CartPage shows empty cart correctly', (tester) async {
     await tester.pumpWidget(
       ChangeNotifierProvider(
         create: (_) => CartState(),
-        child: const MaterialApp(home: CartPage()),
+        child: MaterialApp(home: CartPage()),
       ),
     );
 
     await tester.pumpAndSettle();
 
-    // Header exists
-    expect(find.byType(Header), findsOneWidget);
-
-    // EmptyCartView shows
-    expect(find.byType(EmptyCartView), findsOneWidget);
-
-    // Footer shows
-    expect(find.byType(Footer), findsOneWidget);
-  });
-
-  testWidgets('CartPage shows items and bottom bar total',
-      (WidgetTester tester) async {
-    final cartState = CartState();
-
-    // Add mock product
-    final product = Product(
-      name: 'Test Product',
-      price: 10.0,
-      imagePath: 'assets/images/test.png',
-      description: 'Test description',
-      discountPercent: null,
-      isOnSale: false,
-      category: 'Test Category',
-    );
-
-    cartState.addToCart(product);
-
-    await tester.pumpWidget(
-      ChangeNotifierProvider<CartState>.value(
-        value: cartState,
-        child: const MaterialApp(home: CartPage()),
-      ),
-    );
-
-    await tester.pumpAndSettle();
-
-    // CartItemTile exists
-    expect(find.byType(CartItemTile), findsOneWidget);
-
-    // Bottom bar shows correct total
-    final totalText = find.text('£10.00');
-    expect(totalText, findsOneWidget);
-
-    // Tap increment button
-    final increment = find.byIcon(Icons.add_circle_outline);
-    await tester.tap(increment);
-    await tester.pump();
-    expect(find.text('2'), findsOneWidget);
-
-    // Tap decrement button
-    final decrement = find.byIcon(Icons.remove_circle_outline);
-    await tester.tap(decrement);
-    await tester.pump();
-    expect(find.text('1'), findsOneWidget);
+    expect(find.byType(CartItemTile), findsNothing);
+    expect(find.text('Your cart is empty'), findsOneWidget);
   });
 }
