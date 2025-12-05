@@ -18,6 +18,19 @@ class CartState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void addMultiple(Product product, int qty) {
+    final index = items.indexWhere((item) => item.product == product);
+    if (index != -1) {
+      items[index] = CartItem(
+        product: product,
+        quantity: items[index].quantity + qty,
+      );
+    } else {
+      items.add(CartItem(product: product, quantity: qty));
+    }
+    notifyListeners();
+  }
+
   void removeFromCart(Product product) {
     final index = items.indexWhere((item) => item.product == product);
     if (index != -1) {
