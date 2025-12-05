@@ -13,7 +13,8 @@ class PrintShackPage extends StatefulWidget {
 class _PrintShackPageState extends State<PrintShackPage> {
   String _selectedProduct = 'T-Shirt';
   String _customMessage = '';
-  String _selectedSize = 'M'; // NEW
+  String _selectedSize = 'M';
+  String _selectedColor = 'Black';
 
   @override
   Widget build(BuildContext context) {
@@ -105,6 +106,40 @@ class _PrintShackPageState extends State<PrintShackPage> {
                     ),
                     Text(
                       'Size: $_selectedSize',
+                      style: TextStyle(
+                        fontSize: 16,
+                        color: Colors.grey[700],
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    DropdownButton<String>(
+                      value: _selectedColor,
+                      items: const [
+                        DropdownMenuItem(
+                          value: 'Black',
+                          child: Text('Black'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'White',
+                          child: Text('White'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Red',
+                          child: Text('Red'),
+                        ),
+                        DropdownMenuItem(
+                          value: 'Blue',
+                          child: Text('Blue'),
+                        ),
+                      ],
+                      onChanged: (value) {
+                        if (value != null) {
+                          setState(() => _selectedColor = value);
+                        }
+                      },
+                    ),
+                    Text(
+                      'Color: $_selectedColor',
                       style: TextStyle(
                         fontSize: 16,
                         color: Colors.grey[700],
