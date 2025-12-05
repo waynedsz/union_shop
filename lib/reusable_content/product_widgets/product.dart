@@ -9,12 +9,14 @@ class Product {
   final bool isOnSale;
   final double? discountPercent;
   final DateTime? createdAt;
+  final String category;
 
   Product({
     required this.name,
     required this.imagePath,
     required this.price,
     required this.description,
+    required this.category,
     this.isOnSale = false,
     this.discountPercent,
     DateTime? createdAt,
@@ -45,6 +47,7 @@ class Product {
       isOnSale: map['isOnSale'] as bool? ?? false,
       discountPercent: (map['discountPercent'] as num?)?.toDouble(),
       createdAt: parseCreatedAt(map['createdAt']),
+      category: map['category'] as String? ?? '',
     );
   }
 }
