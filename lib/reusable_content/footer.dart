@@ -47,6 +47,20 @@ class Footer extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 16),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.camera_alt_outlined,
+                      size: 20, color: Colors.grey[700]),
+                  const SizedBox(width: 16),
+                  Icon(Icons.alternate_email,
+                      size: 20, color: Colors.grey[700]),
+                  const SizedBox(width: 16),
+                  Icon(Icons.facebook_outlined,
+                      size: 20, color: Colors.grey[700]),
+                ],
+              ),
+              const SizedBox(height: 16),
               Text(
                 '© 2025 Union Shop — All rights reserved',
                 textAlign: TextAlign.center,
