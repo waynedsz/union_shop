@@ -29,6 +29,13 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   int _quantity = 1;
 
+  List<Product> _getRelatedProducts(Product product) {
+    return allProductsList
+        .where((p) => p.category == product.category && p.name != product.name)
+        .take(4)
+        .toList();
+  }
+
   void navigateToHome(BuildContext context) {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
   }
@@ -78,7 +85,7 @@ class _ProductPageState extends State<ProductPage> {
                         const Text('  >  ',
                             style: TextStyle(color: Colors.black54)),
                         Text(
-                          widget.product.category ?? 'Collection',
+                          widget.product.category,
                           style: const TextStyle(
                             fontWeight: FontWeight.w600,
                             color: Colors.black87,
@@ -94,6 +101,89 @@ class _ProductPageState extends State<ProductPage> {
                           ),
                         ),
                       ],
+                    ),
+                    const SizedBox(height: 32),
+                    const Text(
+                      'Related Products',
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    const SizedBox(height: 16),
+                    SizedBox(
+                      height: 260,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: _getRelatedProducts(product).length,
+                        itemBuilder: (context, index) {
+                          final related = _getRelatedProducts(product)[index];
+                          return GestureDetector(
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                '/product',
+                                arguments: related,
+                              );
+                            },
+                            child: Container(
+                              width: 160,
+                              margin: const EdgeInsets.only(right: 16),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: Colors.black.withOpacity(0.05),
+                                    blurRadius: 6,
+                                    offset: const Offset(0, 3),
+                                  ),
+                                ],
+                              ),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.stretch,
+                                children: [
+                                  Expanded(
+                                    child: ClipRRect(
+                                      borderRadius: const BorderRadius.vertical(
+                                        top: Radius.circular(12),
+                                      ),
+                                      child: Image.asset(
+                                        related.imagePath,
+                                        fit: BoxFit.cover,
+                                      ),
+                                    ),
+                                  ),
+                                  Padding(
+                                    padding: const EdgeInsets.all(8),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        Text(
+                                          related.name,
+                                          maxLines: 1,
+                                          overflow: TextOverflow.ellipsis,
+                                          style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                          ),
+                                        ),
+                                        Text(
+                                          '£${related.price.toStringAsFixed(2)}',
+                                          style: const TextStyle(
+                                            color: Color(0xFF4d2963),
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          );
+                        },
+                      ),
                     ),
                     const SizedBox(height: 16),
                     Center(
