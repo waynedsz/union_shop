@@ -12,7 +12,6 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
-
   final TextEditingController _passwordController = TextEditingController();
 
   @override
@@ -54,6 +53,17 @@ class _RegisterPageState extends State<RegisterPage> {
                               fontSize: 22,
                               fontWeight: FontWeight.w700,
                             ),
+                          ),
+                          const SizedBox(height: 6),
+                          Text(
+                            'Join the Union Shop community.',
+                            style: Theme.of(context)
+                                .textTheme
+                                .bodyMedium
+                                ?.copyWith(
+                                  fontSize: 14,
+                                  color: Colors.grey[700],
+                                ),
                           ),
                           const SizedBox(height: 28),
                           TextFormField(
